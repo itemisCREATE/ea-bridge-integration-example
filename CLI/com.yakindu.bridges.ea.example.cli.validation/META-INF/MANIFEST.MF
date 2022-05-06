@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Example CLI Validation
+Bundle-SymbolicName: com.yakindu.bridges.ea.example.cli.validation
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: itemis AG
+Automatic-Module-Name: com.yakindu.bridges.ea.example.validation
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: com.yakindu.bridges.ea.example.cli.validation,
+ com.yakindu.bridges.ea.example.cli.validation.custom,
+ com.yakindu.bridges.ea.example.cli.validation.report,
+ com.yakindu.bridges.ea.example.cli.validation.uml
+Require-Bundle: org.eclipse.emf.ecore,
+ org.eclipse.uml2.uml,
+ com.yakindu.bridges.ea.core,
+ com.google.gson

@@ -1,0 +1,40 @@
+/*
+ * This target definition platform is created with: Target Platform Definition DSL and Generator
+ * It can be installed from: https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/
+ */
+target "com.yakindu.bridges.ea.example.target" with source requirements
+
+location "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/justj/jres/11/updates/release" {
+	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group [11.0.13,12.0.0)
+}
+
+// Esslingen mirror is much faster than eclipse.org!
+location eclipse-2021-06 "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/releases/2022-03/202203161000/" {
+	org.eclipse.emf.feature.group
+	org.eclipse.sdk.ide
+	org.eclipse.uml2.sdk.feature.group
+}
+
+location yakindu-ea_bridge "https://updates.yakindu.com/ea-bridge/updates/" {
+	com.yakindu.bridges.ea.core.feature.group lazy
+	com.yakindu.bridges.ea.core.ui.feature.group lazy
+	com.yakindu.bridges.ea.dev.feature.group lazy
+	com.yakindu.bridges.ea.uml.feature.group lazy
+	com.yakindu.bridges.ea.uml.ui.feature.group lazy
+	com.yakindu.bridges.ea.examples.feature.group lazy
+	com.yakindu.licmgmt.feature.feature.group lazy
+	com.yakindu.licmgmt.ui.feature.feature.group lazy
+	com.sun.jna.feature.feature.group lazy
+	com.yakindu.interop.enterprise.architect.feature.feature.group lazy
+}
+
+location eclipse-orbit "https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository" {
+	// let's add guava here, all other dependencies are automatically loaded via planner
+	com.google.guava
+	com.google.inject
+	com.google.gson
+}
+
+location equinoxexecutable "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/eclipse/updates/4.23/" {
+	org.eclipse.equinox.executable.feature.group
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde?>
+<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+<target name="com.yakindu.bridges.ea.example.target" sequenceNumber="1650958234">
+  <locations>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="11.0.14.v20220314-1349"/>
+      <repository location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/justj/jres/11/updates/release"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.feature.group" version="2.29.0.v20220226-1304"/>
+      <unit id="org.eclipse.sdk.ide" version="4.23.0.I20220308-0310"/>
+      <unit id="org.eclipse.uml2.sdk.feature.group" version="5.5.2.v20210228-1829"/>
+      <repository id="eclipse-2021-06" location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/releases/2022-03/202203161000/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="com.yakindu.bridges.ea.core.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.core.ui.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.dev.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.uml.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.uml.ui.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.examples.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.licmgmt.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.licmgmt.ui.feature.feature.group" version="0.0.0"/>
+      <unit id="com.sun.jna.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.interop.enterprise.architect.feature.feature.group" version="0.0.0"/>
+      <repository id="yakindu-ea_bridge" location="https://updates.yakindu.com/ea-bridge/updates/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="com.google.guava" version="30.1.0.v20210127-2300"/>
+      <unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
+      <unit id="com.google.gson" version="2.8.9.v20220111-1409"/>
+      <repository id="eclipse-orbit" location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.1500.v20220210-1108"/>
+      <repository id="equinoxexecutable" location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/eclipse/updates/4.23/"/>
+    </location>
+  </locations>
+</target>

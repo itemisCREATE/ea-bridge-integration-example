@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="ExampleCLI"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.yakindu.bridges.ea.example.cli.ExampleCLI">
+         </run>
+      </application>
+   </extension>
+   <extension
+         id="ExampleCLI"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.yakindu.bridges.ea.example.cli.ExampleCLI"
+            name="Example validation CLI">
+         <property
+               name="appName"
+               value="Example validation CLI">
+         </property>
+      </product>
+   </extension>
+
+</plugin>

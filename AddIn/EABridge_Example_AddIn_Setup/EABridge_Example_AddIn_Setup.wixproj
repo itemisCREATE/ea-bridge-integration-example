@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>788cc963-0bea-4cc6-826c-589aea2ad2db</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>EABridge_Example_AddIn_Setup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Name>EABridge_Example_AddIn_Setup</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+    <Compile Include="EABridge_Example_AddIn.generated.wxs" />
+    <Compile Include="AddInDependency.generated.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dialog.wxi" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EABridge_Example_AddIn\EABridge_Example_AddIn.csproj">
+      <Name>EABridge_Example_AddIn</Name>
+      <Project>{9865eccc-f07b-447a-bd11-c75b081eeba4}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+    <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
+  </Target>
+  <Target Name="BeforeBuild">
+
+    <HeatFile RunAsSeparateProcess="true" ComponentGroupName="EABridgeAddInGroup" DirectoryRefId="INSTALLFOLDER" OutputFile="EABridge_Example_AddIn.generated.wxs" VerboseOutput="true" ToolPath="$(WixToolPath)" File="$(SolutionDir)EABridge_Example_AddIn\bin\$(Configuration)\EABridge_Example_AddIn.dll" AutogenerateGuids="true" SuppressRootDirectory="true" PreprocessorVariable="var.EABridge_Example_AddIn.TargetDir" />
+    
+    <HeatFile RunAsSeparateProcess="true" ComponentGroupName="DependencyDllComponentGroup" DirectoryRefId="INSTALLFOLDER" OutputFile="
+    AddInDependency.generated.wxs" VerboseOutput="true" ToolPath="$(WixToolPath)" File="$(SolutionDir)EABridge_Example_AddIn\bin\$(Configuration)\Newtonsoft.Json.dll" AutogenerateGuids="true" SuppressRootDirectory="true" PreprocessorVariable="var.EABridge_Example_AddIn.TargetDir" />
+  </Target>
+
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets'))" />
+  </Target>
+</Project>

@@ -61,5 +61,5 @@ We are always happy to see suggestions, bug reports, feature requests as well as
 
 # Further information
 
-The [YAKINDU EA-Bridge|https://www.itemis.com/en/yakindu/ea-bridge/] has a free 30-day trial period which can be used with models containing up to 1000 elements.<br/>
+The [YAKINDU EA-Bridge](https://www.itemis.com/en/yakindu/ea-bridge/) has a free 30-day trial period which can be used with models containing up to 1000 elements.<br/>
 For a (free) unlimited evaluation license, please contact us via the website or e-mail: bridges @ yakindu.com

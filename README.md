@@ -25,8 +25,8 @@ This repository consists of two codebases:
 * The EA Add-in allows the user to validate the model using a UI integrated in Enterprise Architect; it further lists the validation results in a custom view inside EA without the need to use the command line. A *double click* on a validation result in EA selects the corresponding element in the Project Browser and opens the diagram containing that element (if such a diagram exists).
 
 Please follow these steps to try out the pre-built example on your local machine:
-1. Download the [zip-package]() and extract it to some location on your hard-drive.
-2. Download the [Add-in installer]() and install it (EA must not be running).
+1. Download the [zip-package](https://github.com/Yakindu/ea-bridge-integration-example/releases/latest) and extract it to some location on your hard-drive.
+2. Download the [Add-in installer](https://github.com/Yakindu/ea-bridge-integration-example/releases/latest) and install it (EA must not be running).
 3. Start EA, go to *Specialize* &rarr; *YAKINDU EA-Bridge Integration* &rarr; *Configure CLI Path* &rarr; and set the path to the folder into which you extracted the zip-package.
 4. Validate your model via the context-menu on a package in the Project Browser and select *Specialize* %rarr; *YAKINDU EA-Bridge Integration* &rarr; *Example Model Validation* &rarr; it will take a few seconds, then check the Add-in window for the result.
 

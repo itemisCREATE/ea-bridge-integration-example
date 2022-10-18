@@ -6,22 +6,22 @@
     <Fragment>
         <ComponentGroup Id="EABridgeAddInGroup">
             <Component Id="cmpA09A218E932F0167A0FD94C8ACEA11B5" Directory="INSTALLFOLDER" Guid="*">
-                <Class Id="{95251B40-21BA-449B-8E51-0745339E755F}" Context="InprocServer32" Description="EABridge_Example_AddIn.ExampleValidationAddIn" ThreadingModel="both" ForeignServer="mscoree.dll">
+                <Class Id="{0212EA66-C960-473A-B7FB-0BB36729DF25}" Context="InprocServer32" Description="EABridge_Example_AddIn.ExampleValidationAddIn" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="EABridge_Example_AddIn.ExampleValidationAddIn" Description="EABridge_Example_AddIn.ExampleValidationAddIn" />
                 </Class>
                 <Class Id="{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}" Context="InprocServer32" Description="EABridge_Example_AddIn.UI.ValidationIssuesControl" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="EABridge_Example_AddIn.UI.ValidationIssuesControl" Description="EABridge_Example_AddIn.UI.ValidationIssuesControl" />
                 </Class>
                 <File Id="filF894C7D1C89EFB33F495B6B3C20997A4" KeyPath="yes" Source="$(var.EABridge_Example_AddIn.TargetDir)\EABridge_Example_AddIn.dll" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\InprocServer32\1.0.0.0" Name="Class" Value="EABridge_Example_AddIn.ExampleValidationAddIn" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\InprocServer32\1.0.0.0" Name="Assembly" Value="EABridge_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#filF894C7D1C89EFB33F495B6B3C20997A4]" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\InprocServer32" Name="Class" Value="EABridge_Example_AddIn.ExampleValidationAddIn" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\InprocServer32" Name="Assembly" Value="EABridge_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{95251B40-21BA-449B-8E51-0745339E755F}\InprocServer32" Name="CodeBase" Value="file:///[#filF894C7D1C89EFB33F495B6B3C20997A4]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32\1.0.0.0" Name="Class" Value="EABridge_Example_AddIn.ExampleValidationAddIn" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32\1.0.0.0" Name="Assembly" Value="EABridge_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#filF894C7D1C89EFB33F495B6B3C20997A4]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32" Name="Class" Value="EABridge_Example_AddIn.ExampleValidationAddIn" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32" Name="Assembly" Value="EABridge_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32" Name="CodeBase" Value="file:///[#filF894C7D1C89EFB33F495B6B3C20997A4]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32\1.0.0.0" Name="Class" Value="EABridge_Example_AddIn.UI.ValidationIssuesControl" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32\1.0.0.0" Name="Assembly" Value="EABridge_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />

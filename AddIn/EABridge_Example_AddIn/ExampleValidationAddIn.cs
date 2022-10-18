@@ -14,7 +14,7 @@ using EABridge_Example_AddIn.ApplicationHandlers;
 
 namespace EABridge_Example_AddIn
 {
-    [Guid("95251B40-21BA-449B-8E51-0745339E755F")]
+    [Guid("0212EA66-C960-473A-B7FB-0BB36729DF25")]
     [ComVisible(true)]
     public class ExampleValidationAddIn
     {

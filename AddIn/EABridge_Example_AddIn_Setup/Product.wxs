@@ -46,7 +46,7 @@
 					<Directory Id="INSTALLFOLDER" Name="EA Add-in">
 						<!-- Registry Keys: EA Add-in -->
 						<Component Id="EABridgeExampleCLISoftwareAssistantDllEARegistryKeyComponent" KeyPath="no" Guid="00C5323F-86A5-4B66-B5AA-0B272B3F0297">
-							<RegistryKey Root="HKLM" Key="SOFTWARE\WOW6432Node\Sparx Systems\EAAddins\YAKINDU EA-Bridge Integration Add-in" ForceDeleteOnUninstall="yes">
+							<RegistryKey Root="HKLM" Key="SOFTWARE\Sparx Systems\EAAddins\YAKINDU EA-Bridge Integration Add-in" ForceDeleteOnUninstall="yes">
 								<RegistryValue Value="EABridge_Example_AddIn.ExampleValidationAddIn" Type="string" />
 							</RegistryKey>
 						</Component>

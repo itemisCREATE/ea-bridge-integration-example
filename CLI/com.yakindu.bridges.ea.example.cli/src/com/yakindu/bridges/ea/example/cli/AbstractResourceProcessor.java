@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
@@ -18,7 +19,16 @@ import com.yakindu.bridges.ea.core.EAResource;
 import com.yakindu.bridges.ea.example.cli.load.UMLElementCollector;
 
 public abstract class AbstractResourceProcessor {
+	
+	private static final String VALID_PATH_SEGMENT = "[0-9a-zA-Z._$-]+";
+	
+	private static final Pattern PATTERN_VALID_PATH_WINDOWS = Pattern
+			.compile(String.format("([a-zA-Z]:%s|%1$s%1$s?)?%s(%1$s%2$s)*%1$s?", "[\\\\/]",
+					VALID_PATH_SEGMENT + "(~\\d)?"));
 
+	private static final Pattern PATTERN_VALID_PATH_LINUX = Pattern
+			.compile("/?" + VALID_PATH_SEGMENT + "(/" + VALID_PATH_SEGMENT + ")*/?");
+	
 	public void run(String[] args) {
 		Resource resource = null;
 		try {
@@ -134,5 +144,17 @@ public abstract class AbstractResourceProcessor {
 		final String[] newArgs = new String[args.length - 1];
 		System.arraycopy(args, index, newArgs, 0, args.length - 1);
 		return newArgs;
+	}
+	
+	public static boolean isValidFolderPath(final String path) {
+		if (path == null || path.trim().isEmpty())
+			return false;
+		final Pattern pattern = isWindows() ? PATTERN_VALID_PATH_WINDOWS : PATTERN_VALID_PATH_LINUX;
+		return pattern.matcher(path).matches();
+	}
+	
+	private static boolean isWindows() {
+		final String os = System.getProperty("os.name") == null ? "" : System.getProperty("os.name");
+		return os.contains("Windows");
 	}
 }

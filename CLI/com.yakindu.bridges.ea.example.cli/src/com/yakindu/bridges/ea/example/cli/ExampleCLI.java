@@ -3,6 +3,8 @@ package com.yakindu.bridges.ea.example.cli;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
+import com.yakindu.bridges.ea.example.cli.codegen.CodeGeneratorFromUml;
+import com.yakindu.bridges.ea.example.cli.codegen.StmCodeGenerator.LANG;
 import com.yakindu.bridges.ea.example.cli.validation.ModelValidator;
 
 public class ExampleCLI implements IApplication {
@@ -11,12 +13,16 @@ public class ExampleCLI implements IApplication {
 
 	public static final String APP_VALIDATE = "validate";
 
+	public static final String APP_GEN = "codegen";
+
 	public static final String VERBOSE_OUTPUT = "-v";
 
 	public static final String HELP = "YAKINDU EA-Bridge Example Command Line Interface\n" //
 			+ "Possible options:\n" //
 			+ "  " + APP_VALIDATE + " <eap-file> <output-report-file> [<classifier-name/package-name/guid>] [-v]\n" //
-			+ VERBOSE_OUTPUT + " enables 'verbose' output" //
+			+ "  " + APP_GEN + " <language> <eap-file> <output-folder> <state-machine-name/-guid> [-v]\n" //
+			+ "Language options are: \"C\", \"C++\", \"C#\", \"Java\", \"Python\"\n" + VERBOSE_OUTPUT
+			+ " enables 'verbose' output" //
 
 	;
 
@@ -30,11 +36,11 @@ public class ExampleCLI implements IApplication {
 		if (args != null && args.length >= 3) {
 			final String[] appArgs = AbstractResourceProcessor.skip(args, 1);
 
-			final AbstractResourceProcessor processor = getProcessor(args[0]);
+			final AbstractResourceProcessor processor = getProcessor(args[0], appArgs);
 			if (processor != null) {
 				try {
-
-					processor.run(appArgs);
+					processor.run(processor instanceof CodeGeneratorFromUml ? AbstractResourceProcessor.skip(appArgs, 1)
+							: appArgs);
 					System.out.println("Validation successfully finished.");
 					return IApplication.EXIT_OK;
 
@@ -51,10 +57,29 @@ public class ExampleCLI implements IApplication {
 		return IApplication.EXIT_OK;
 	}
 
-	private AbstractResourceProcessor getProcessor(String arg) {
-		if (APP_VALIDATE.equalsIgnoreCase(arg))
+	private AbstractResourceProcessor getProcessor(String cmd, String[] appArgs) throws Exception {
+		if (APP_VALIDATE.equalsIgnoreCase(cmd))
 			return new ModelValidator();
+		if (APP_GEN.equalsIgnoreCase(cmd))
+			return new CodeGeneratorFromUml(getTargetLanguage(appArgs[0]));
 		return null;
+	}
+
+	private LANG getTargetLanguage(String languageInput) throws Exception {
+		switch (languageInput) {
+		case "C":
+			return LANG.C;
+		case "C++":
+			return LANG.CPP;
+		case "C#":
+			return LANG.CSHARP;
+		case "Java":
+			return LANG.JAVA;
+		case "Python":
+			return LANG.PYTHON;
+		default:
+			throw new Exception("The provided target language is invalid or not supported!");
+		}
 	}
 
 	private void printHelp() {

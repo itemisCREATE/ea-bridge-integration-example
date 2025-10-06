@@ -4,37 +4,62 @@
  */
 target "com.yakindu.bridges.ea.example.target" with source requirements
 
-location "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/justj/jres/11/updates/release" {
-	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group [11.0.13,12.0.0)
+location "https://download.eclipse.org/justj/jres/21/updates/release" {
+	org.eclipse.justj.openjdk.hotspot.jre.minimal.stripped.feature.group [21.0.8,22.0.0)
 }
 
-// Esslingen mirror is much faster than eclipse.org!
-location eclipse-2021-06 "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/releases/2022-03/202203161000/" {
+location eclipse-2025-09 "https://download.eclipse.org/releases/2025-09/" {
 	org.eclipse.emf.feature.group
+	org.eclipse.emf.mwe2.language.sdk.feature.group
+	org.eclipse.emf.mwe2.runtime.sdk.feature.group
 	org.eclipse.sdk.ide
 	org.eclipse.uml2.sdk.feature.group
+	org.eclipse.xtend.sdk.feature.group
 }
 
-location yakindu-ea_bridge "https://updates.yakindu.com/ea-bridge/updates/" {
+location yakindu-ea_bridge "https://artifacts.itemis.cloud/repository/p2/integrate/integrate-ea/milestones/20250611-1038" {
 	com.yakindu.bridges.ea.core.feature.group lazy
-	com.yakindu.bridges.ea.core.ui.feature.group lazy
-	com.yakindu.bridges.ea.dev.feature.group lazy
 	com.yakindu.bridges.ea.uml.feature.group lazy
-	com.yakindu.bridges.ea.uml.ui.feature.group lazy
-	com.yakindu.bridges.ea.examples.feature.group lazy
+}
+
+location yakindu-sct "https://artifacts.itemis.cloud/repository/p2/create/releases" {
+	// C / C++ Target language
+	com.yakindu.sct.domain.c.feature.feature.group lazy
+	com.yakindu.sct.generator.c.feature.feature.group lazy
+	com.yakindu.sct.product.c.feature.feature.group lazy
+	com.yakindu.sct.generator.cpp.feature.feature.group lazy
+	
+	// C# target language
+	com.itemis.create.statechart.generator.csharp.feature.feature.group lazy
+	
+	// Java target language
+	com.yakindu.sct.generator.java.feature.feature.group lazy
+	com.yakindu.sct.domain.java.feature.feature.group lazy
+	com.yakindu.sct.product.java.feature.feature.group lazy
+	
+	// Python target language
+	com.yakindu.sct.generator.python.feature.feature.group lazy
+	
+	// General
+	com.yakindu.sct.feature.feature.group lazy
+	com.yakindu.sct.generator.application.feature.feature.group lazy
+	com.yakindu.sct.generator.application.linux.feature.feature.group lazy
+	com.yakindu.sct.generator.application.win32.feature.feature.group lazy
+	com.yakindu.sct.generator.application.macos.feature.feature.group lazy	
+	com.yakindu.sct.uml2.feature.feature.group lazy
+	com.yakindu.sct.license.feature.feature.group lazy
+	com.yakindu.sct.license.pro.feature.feature.group lazy
+	com.yakindu.sct.license.standard.feature.feature.group lazy	
+	com.yakindu.sct.product.editor.feature.feature.group lazy
+	com.yakindu.sct.products.feature.feature.group lazy
+	com.yakindu.sct.types.feature.feature.group lazy
+}
+
+location yakindu-licmgmt "https://artifacts.itemis.cloud/repository/p2/licensemanagement/releases/5.0.0/" {
 	com.yakindu.licmgmt.feature.feature.group lazy
 	com.yakindu.licmgmt.ui.feature.feature.group lazy
-	com.sun.jna.feature.feature.group lazy
-	com.yakindu.interop.enterprise.architect.feature.feature.group lazy
 }
 
-location eclipse-orbit "https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository" {
-	// let's add guava here, all other dependencies are automatically loaded via planner
-	com.google.guava
-	com.google.inject
-	com.google.gson
-}
-
-location equinoxexecutable "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/eclipse/updates/4.23/" {
+location equinoxexecutable "https://download.eclipse.org/eclipse/updates/4.37/" {
 	org.eclipse.equinox.executable.feature.group
 }

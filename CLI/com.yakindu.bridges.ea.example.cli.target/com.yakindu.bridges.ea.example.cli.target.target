@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="com.yakindu.bridges.ea.example.target" sequenceNumber="1650958234">
+<target name="com.yakindu.bridges.ea.example.target" sequenceNumber="1759745328">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="11.0.14.v20220314-1349"/>
-      <repository location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/justj/jres/11/updates/release"/>
+      <unit id="org.eclipse.justj.openjdk.hotspot.jre.minimal.stripped.feature.group" version="21.0.8.v20250724-1412"/>
+      <repository location="https://download.eclipse.org/justj/jres/21/updates/release"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.feature.group" version="2.29.0.v20220226-1304"/>
-      <unit id="org.eclipse.sdk.ide" version="4.23.0.I20220308-0310"/>
-      <unit id="org.eclipse.uml2.sdk.feature.group" version="5.5.2.v20210228-1829"/>
-      <repository id="eclipse-2021-06" location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/releases/2022-03/202203161000/"/>
+      <unit id="org.eclipse.emf.feature.group" version="2.43.0.v20250825-1255"/>
+      <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.23.0.v20250823-0643"/>
+      <unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="2.23.0.v20250823-0643"/>
+      <unit id="org.eclipse.sdk.ide" version="4.37.0.I20250905-0730"/>
+      <unit id="org.eclipse.uml2.sdk.feature.group" version="5.5.3.v20221116-1811"/>
+      <unit id="org.eclipse.xtend.sdk.feature.group" version="2.40.0.v20250825-0355"/>
+      <repository id="eclipse-2025-09" location="https://download.eclipse.org/releases/2025-09/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="com.yakindu.bridges.ea.core.feature.group" version="0.0.0"/>
-      <unit id="com.yakindu.bridges.ea.core.ui.feature.group" version="0.0.0"/>
-      <unit id="com.yakindu.bridges.ea.dev.feature.group" version="0.0.0"/>
       <unit id="com.yakindu.bridges.ea.uml.feature.group" version="0.0.0"/>
-      <unit id="com.yakindu.bridges.ea.uml.ui.feature.group" version="0.0.0"/>
-      <unit id="com.yakindu.bridges.ea.examples.feature.group" version="0.0.0"/>
+      <repository id="yakindu-ea_bridge" location="https://artifacts.itemis.cloud/repository/p2/integrate/integrate-ea/milestones/20250611-1038"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="com.yakindu.sct.domain.c.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.generator.c.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.product.c.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.generator.cpp.feature.feature.group" version="0.0.0"/>
+      <unit id="com.itemis.create.statechart.generator.csharp.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.generator.java.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.domain.java.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.product.java.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.generator.python.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.generator.application.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.generator.application.linux.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.generator.application.win32.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.generator.application.macos.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.uml2.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.license.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.license.pro.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.license.standard.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.product.editor.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.products.feature.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.sct.types.feature.feature.group" version="0.0.0"/>
+      <repository id="yakindu-sct" location="https://artifacts.itemis.cloud/repository/p2/create/releases"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="com.yakindu.licmgmt.feature.feature.group" version="0.0.0"/>
       <unit id="com.yakindu.licmgmt.ui.feature.feature.group" version="0.0.0"/>
-      <unit id="com.sun.jna.feature.feature.group" version="0.0.0"/>
-      <unit id="com.yakindu.interop.enterprise.architect.feature.feature.group" version="0.0.0"/>
-      <repository id="yakindu-ea_bridge" location="https://updates.yakindu.com/ea-bridge/updates/"/>
+      <repository id="yakindu-licmgmt" location="https://artifacts.itemis.cloud/repository/p2/licensemanagement/releases/5.0.0/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="com.google.guava" version="30.1.0.v20210127-2300"/>
-      <unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
-      <unit id="com.google.gson" version="2.8.9.v20220111-1409"/>
-      <repository id="eclipse-orbit" location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220302172233/repository"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.1500.v20220210-1108"/>
-      <repository id="equinoxexecutable" location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/eclipse/updates/4.23/"/>
+      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.3000.v20250801-0854"/>
+      <repository id="equinoxexecutable" location="https://download.eclipse.org/eclipse/updates/4.37/"/>
     </location>
   </locations>
 </target>

@@ -66,16 +66,16 @@ public class ExampleCLI implements IApplication {
 	}
 
 	private LANG getTargetLanguage(String languageInput) throws Exception {
-		switch (languageInput) {
-		case "C":
+		switch (languageInput.toLowerCase()) {
+		case "c":
 			return LANG.C;
-		case "C++":
+		case "c++":
 			return LANG.CPP;
-		case "C#":
+		case "c#":
 			return LANG.CSHARP;
-		case "Java":
+		case "java":
 			return LANG.JAVA;
-		case "Python":
+		case "python":
 			return LANG.PYTHON;
 		default:
 			throw new Exception("The provided target language is invalid or not supported!");

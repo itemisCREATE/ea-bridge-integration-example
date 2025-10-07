@@ -1,7 +1,6 @@
 package com.yakindu.bridges.ea.example.cli;
 
 import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +8,14 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
+import org.eclipse.uml2.uml.TimeEvent;
 
 import com.yakindu.bridges.ea.core.EAResource;
 import com.yakindu.bridges.ea.example.cli.load.UMLElementCollector;
@@ -102,7 +104,23 @@ public abstract class AbstractResourceProcessor {
 			loadOptions.put(EAResource.OPTION_REPORT_TO_ERROR_LOG, false);
 			loadOptions.put(EAResource.OPTION_REPORT_AS_RESOURCE_MARKERS, false);
 		}
-		return set.getResource(uri, true);
+		final Resource res = set.getResource(uri, true);
+		fixModel(res);
+		return res;
+	}
+	
+	private void fixModel(Resource resource) {
+		final TreeIterator<EObject> iter = resource.getAllContents();
+		while (iter.hasNext()) {
+			final EObject obj = iter.next();
+			if (obj instanceof TimeEvent) {
+				/*
+				 * Needed for UML2SCT transformation
+				 */
+				((EObject) obj).eSetDeliver(false);
+				((TimeEvent) obj).setIsRelative(true);
+			}
+		}
 	}
 
 	protected List<Element> loadElements(Resource resource, String nameOrGuid, boolean verbose) throws Exception {

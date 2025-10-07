@@ -1,0 +1,3 @@
+# Ignore everything inside testModels except Library.eap
+testModels/*
+!testModels/Library.eap

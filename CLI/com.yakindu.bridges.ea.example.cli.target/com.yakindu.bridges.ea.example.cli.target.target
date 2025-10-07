@@ -9,16 +9,35 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.feature.group" version="2.43.0.v20250825-1255"/>
+      <unit id="org.eclipse.emf.sdk.feature.group" version="2.43.0.v20250825-1255"/>
+      <unit id="org.eclipse.emf.common.source.feature.group" version="2.36.0.v20250629-1403"/>
+      <unit id="org.eclipse.emf.ecore.source.feature.group" version="2.41.0.v20250803-1633"/>
+      <unit id="org.eclipse.emf.ecore.xcore.lib.feature.group" version="1.10.0.v20250415-0903"/>
       <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.23.0.v20250823-0643"/>
       <unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="2.23.0.v20250823-0643"/>
+      <unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.14.0.202408231629"/>
+      <unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.14.1.202409160716"/>
+      <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.17.0.v20250823-0643"/>
+      <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.13.1.202211151334"/>
+      <unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.16.7.202508120942"/>
       <unit id="org.eclipse.sdk.ide" version="4.37.0.I20250905-0730"/>
       <unit id="org.eclipse.uml2.sdk.feature.group" version="5.5.3.v20221116-1811"/>
+      <unit id="org.eclipse.xsd.sdk.feature.group" version="2.39.0.v20250812-0843"/>
       <unit id="org.eclipse.xtend.sdk.feature.group" version="2.40.0.v20250825-0355"/>
+      <unit id="org.eclipse.xtext.sdk.feature.group" version="2.40.0.v20250825-0355"/>
+      <unit id="org.apache.log4j" version="1.2.26"/>
       <repository id="eclipse-2025-09" location="https://download.eclipse.org/releases/2025-09/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="com.yakindu.bridges.ea.core.feature.group" version="0.0.0"/>
       <unit id="com.yakindu.bridges.ea.uml.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.test.utils" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.core.ui.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.dev.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.uml.ui.feature.group" version="0.0.0"/>
+      <unit id="com.yakindu.bridges.ea.examples.feature.group" version="0.0.0"/>
+      <unit id="com.sun.jna" version="0.0.0"/>
+      <unit id="com.yakindu.interop.enterprise.architect.feature.feature.group" version="0.0.0"/>
       <repository id="yakindu-ea_bridge" location="https://artifacts.itemis.cloud/repository/p2/integrate/integrate-ea/milestones/20250611-1038"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">

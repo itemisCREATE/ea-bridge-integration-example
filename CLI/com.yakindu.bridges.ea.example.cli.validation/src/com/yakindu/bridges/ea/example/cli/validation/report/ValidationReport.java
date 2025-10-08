@@ -37,11 +37,14 @@ public class ValidationReport {
 
 			List<ValidationIssueJsonContainer> umlErrors = createValidationIssuesForElement(result.getUmlErrors(),
 					result.getUmlWarnings());
+			
+			List<ValidationIssueJsonContainer> sctIssues = createValidationIssuesForElement(result.getSctErrors(),
+					result.getSctWarnings());
 
 			List<ValidationIssueJsonContainer> resourceIssues = appendResourceIssues();
 
 			ValidationResultsJsonContainer serializableResult = new ValidationResultsJsonContainer(resourceIssues,
-					loadIssues, umlErrors, customIssues);
+					loadIssues, umlErrors, sctIssues, customIssues);
 
 			// create Json serializer
 			Gson jsonHandler = new Gson();

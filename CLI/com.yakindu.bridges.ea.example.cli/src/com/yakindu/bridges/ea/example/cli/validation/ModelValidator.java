@@ -37,8 +37,8 @@ public class ModelValidator extends AbstractResourceProcessor {
 			return issues.size();
 		});
 		if (count > 0) {
-			report(String.format("Writing report (%d issue%s)", count, count == 1 ? "" : "s"),
-					validation::createReport);
+			report(String.format("Writing report (%d issue%s) ", count, count == 1 ? "" : "s"),
+					() -> validation.createReport(verbose));
 
 			return String.format("%d issue%s found.", count, count == 1 ? "" : "s");
 		} else {

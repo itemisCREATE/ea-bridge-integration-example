@@ -68,7 +68,7 @@ public class ModelValidation {
 		return result.asList();
 	}
 
-	public void createReport() {
+	public void createReport(final boolean verbose) {
 		if (result == null)
 			throw new IllegalStateException("Please call 'validate()' first");
 
@@ -78,6 +78,7 @@ public class ModelValidation {
 			try (final Writer bw = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8))) {
 				bw.write(content);
 			}
+		System.out.println("Saved to file: " + reportFile);
 		} catch (final IOException e) {
 			throw new RuntimeException("Failed to create report", e);
 		}

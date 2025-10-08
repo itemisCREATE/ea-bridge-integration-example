@@ -41,7 +41,7 @@ public class CodeGeneratorFromUml extends AbstractResourceProcessor{
 	}
 
 	@Override
-	protected String run(Resource resource, String[] args) throws Exception {
+	public String run(Resource resource, String[] args) throws Exception {
 		if (args == null || args[0].isBlank())
 			throw new Exception("Mandatory argument <output-folder> is missing.");
 		final String outputFolder = getAndValidateOutputFolder(args);

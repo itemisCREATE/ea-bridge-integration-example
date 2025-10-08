@@ -36,6 +36,9 @@ import com.yakindu.sct.uml2.transformation.IStatemachineTransformation;
 import com.yakindu.sct.uml2.transformation.module.TransformationModule;
 
 public class SCTValidation {
+	
+	private static final List<String> IGNORED_MESSAGES = List.of("Domain 'com.yakindu.domain.c' is not available.");	
+	
 	@Inject
 	private IStatemachineTransformation trafo;
 
@@ -43,7 +46,7 @@ public class SCTValidation {
 	// equivalent in the EA model
 	private Collection<StateMachine> stms;
 	@Inject
-	private StatechartUtil statechartApi;
+	private StatechartUtil statechartUtil;
 	@Inject
 	private SCTResourceValidatorImpl validator;
 
@@ -51,9 +54,9 @@ public class SCTValidation {
 		this.stms = stms != null ? stms : new ArrayList<>();
 	}
 
-	private void initialize() {
+	public void initialize() {
 		trafo = null;
-		// Only for C Domain now
+		// Only for Generic and C Domain now
 		Guice.createInjector(Modules.override(new TransformationModule()).with(new CSTextRuntimeModule()))
 				.injectMembers(this);
 	}
@@ -65,9 +68,9 @@ public class SCTValidation {
 	private void validateStatechart(ValidationResult result, StateMachine stateMachine, boolean verbose,
 			boolean isTest) {
 		initialize();
-		final StextResource res = statechartApi.createResource(stateMachine.getName());
+		final StextResource res = statechartUtil.createResource(stateMachine.getName());
 		final Statechart statechart = trafo.transformStatemachine(stateMachine, res);
-		statechartApi.makeCStatechart(statechart);
+		statechartUtil.makeCStatechart(statechart);
 		validateStatechart(result, res, statechart, stateMachine, verbose, isTest);
 	}
 
@@ -106,7 +109,8 @@ public class SCTValidation {
 		final Multimap<SpecificationElement, Diagnostic> syntaxDiagnostics = resource.getSyntaxDiagnostics();
 
 		validatorResult.stream()
-				.filter(issue -> requiredSeverityLevels.contains(issue.getSeverity()))
+				.filter(issue -> requiredSeverityLevels.contains(issue.getSeverity())
+						&& !skipValidationIssue(issue.getMessage()))
 				.forEach(issue -> MapUtils.addToMapMap(result, getUMLElementForIssue(resource, issue),
 						issue.getMessage(), issue.getSeverity()));
 
@@ -117,6 +121,16 @@ public class SCTValidation {
 					getUMLElementFromSctElement(e.getKey()), e.getValue().getMessage(), Severity.ERROR));
 		}
 		return result;
+	}
+	
+	private boolean skipValidationIssue(String issue) {
+		if (issue == null || issue.isBlank())
+			return true; 
+		for (String msg : IGNORED_MESSAGES) {
+			if (issue.contains(msg))
+				return true;
+		}
+		return false;
 	}
 	
 	public EObject getUMLElementFromSctElement(EObject sctElement) {
@@ -172,9 +186,9 @@ public class SCTValidation {
 
 	public Resource getSCTStatechartResource(StateMachine stm) {
 		initialize();
-		final Resource res = statechartApi.createResource(stm.getName());
+		final Resource res = statechartUtil.createResource(stm.getName());
 		final Statechart statechart = trafo.transformStatemachine(stm, res);
-		statechartApi.makeCStatechart(statechart);
+		statechartUtil.makeCStatechart(statechart);
 		return res;
 	}
 }

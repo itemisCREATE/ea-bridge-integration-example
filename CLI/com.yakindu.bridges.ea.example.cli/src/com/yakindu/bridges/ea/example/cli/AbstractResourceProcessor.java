@@ -109,7 +109,7 @@ public abstract class AbstractResourceProcessor {
 		return res;
 	}
 	
-	private void fixModel(Resource resource) {
+	public static void fixModel(Resource resource) {
 		final TreeIterator<EObject> iter = resource.getAllContents();
 		while (iter.hasNext()) {
 			final EObject obj = iter.next();

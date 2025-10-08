@@ -2,7 +2,9 @@ package com.yakindu.bridges.ea.example.cli.codegen.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -108,6 +110,19 @@ public class StatechartUtil {
 		}
 
 		return sctFilePath;
+	}
+	
+	public Resource loadResource(URI uri) {
+		final Resource stextResource = resourceProvider.get();
+		final ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResources().add(stextResource);
+		stextResource.setURI(uri);
+		try {
+			stextResource.load(Collections.EMPTY_MAP);
+			return stextResource;
+		} catch (IOException e) {
+			throw new IllegalStateException("Error loading resource", e);
+		}
 	}
 
 }

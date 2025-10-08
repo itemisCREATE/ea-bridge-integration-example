@@ -65,15 +65,7 @@ public class CodeGeneratorFromUml extends AbstractResourceProcessor{
 	
 	protected void genStms(Resource resource, final String outputFolder, final String nameOrGuid, final boolean verbose,
 			final Set<String> stateMachinesFailed, final Set<String> stateMachinesSuccess) throws Exception {
-		List<StateMachine> loadedStatemachines;
-		try {
-			loadedStatemachines = loadElements(resource, nameOrGuid, verbose).stream()
-			        .map(o -> (StateMachine) o)
-			        .toList();
-		} catch (Exception e) {
-			throw new Exception("Provided element is not a statemachine: " + nameOrGuid);
-		}
-
+		final List<StateMachine> loadedStatemachines = loadedStatemachines(resource,nameOrGuid,verbose);
 		for (StateMachine stateMachine : loadedStatemachines) {
 			final boolean successfulGeneration = generateStm(stateMachine, outputFolder, verbose);
 			if (successfulGeneration) {
@@ -82,6 +74,16 @@ public class CodeGeneratorFromUml extends AbstractResourceProcessor{
 				stateMachinesFailed.add(stateMachine.getName());
 			}
 		}
+	}
+	
+	public static List<StateMachine> loadedStatemachines(Resource resource,final String nameOrGuid,final boolean verbose) throws Exception{
+		 try {
+			return loadElements(resource, nameOrGuid, verbose).stream()
+			    .map(o -> (StateMachine) o)
+			    .toList();
+		 } catch (Exception e) {
+			 throw new Exception("Provided element is not a statemachine: " + nameOrGuid);
+		 }
 	}
 	
 	private boolean generateStm(StateMachine stateMachine, final String outputFolder, final boolean verbose) {
@@ -132,7 +134,7 @@ public class CodeGeneratorFromUml extends AbstractResourceProcessor{
 		Guice.createInjector(Modules.combine(transformationModule, new StmCodeGenerator())).injectMembers(this);
 	}
 	
-	private Module targetLanguageSpecificModule(LANG language) {
+	public static Module targetLanguageSpecificModule(LANG language) {
 		switch (language) {
 			case C:
 				return Modules.override(new TransformationModule()).with(new CSTextRuntimeModule());

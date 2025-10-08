@@ -123,7 +123,7 @@ public abstract class AbstractResourceProcessor {
 		}
 	}
 
-	protected List<Element> loadElements(Resource resource, String nameOrGuid, boolean verbose) throws Exception {
+	protected static List<Element> loadElements(Resource resource, String nameOrGuid, boolean verbose) throws Exception {
 		final List<Element> elements = new UMLElementCollector().loadElements(resource, nameOrGuid);
 
 		if (verbose) {

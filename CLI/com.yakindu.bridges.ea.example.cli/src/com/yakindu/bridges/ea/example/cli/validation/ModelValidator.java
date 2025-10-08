@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.StateMachine;
 
 import com.yakindu.bridges.ea.example.cli.AbstractResourceProcessor;
+import com.yakindu.bridges.ea.example.cli.codegen.CodeGeneratorFromUml;
 
 public class ModelValidator extends AbstractResourceProcessor {
 
@@ -23,11 +25,13 @@ public class ModelValidator extends AbstractResourceProcessor {
 			}
 			return null;
 		});
+		
+		final List<StateMachine> stms = CodeGeneratorFromUml.loadedStatemachines(resource, nameOrGuid, verbose);
 
-		final ModelValidation validation = new ModelValidation(resource, loadedElements, reportFile);
+		final ModelValidation validation = new ModelValidation(resource, loadedElements,stms, reportFile);
 
 		final int count = report("Validating", () -> {
-			final List<String> issues = validation.validate();
+			final List<String> issues = validation.validate(false);
 			if (verbose)
 				issues.forEach(System.out::println);
 			return issues.size();

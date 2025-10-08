@@ -21,4 +21,5 @@ Require-Bundle: org.eclipse.equinox.app,
  com.yakindu.sct.model.stext,
  com.yakindu.sct.domain.java
 Export-Package: com.yakindu.bridges.ea.example.cli;uses:="org.eclipse.equinox.app,org.eclipse.emf.ecore.resource",
+ com.yakindu.bridges.ea.example.cli.codegen,
  com.yakindu.bridges.ea.example.cli.validation;uses:="org.eclipse.emf.ecore.resource,com.yakindu.bridges.ea.example.cli"

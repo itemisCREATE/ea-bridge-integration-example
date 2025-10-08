@@ -63,15 +63,15 @@ public class ValidationReportTest {
 		anotherChildClass.createGeneralization(abstractClass);
 
 		// when
-		ModelValidation validation = new ModelValidation(resource, Arrays.asList(abstractClass),
+		ModelValidation validation = new ModelValidation(resource, Arrays.asList(abstractClass), null,
 				File.createTempFile(getClass().getName(), ".json").getAbsolutePath());
 
-		validation.validate();
+		validation.validate(false);
 		ValidationResult validationResult = validation.getValidationResult();
 
-		validation = new ModelValidation(resource, Arrays.asList(pack2),
+		validation = new ModelValidation(resource, Arrays.asList(pack2), null,
 				File.createTempFile(getClass().getName(), ".json").getAbsolutePath());
-		validation.validate();
+		validation.validate(false);
 		validationResult = validation.getValidationResult();
 		String report = new ValidationReport(validationResult).create();
 

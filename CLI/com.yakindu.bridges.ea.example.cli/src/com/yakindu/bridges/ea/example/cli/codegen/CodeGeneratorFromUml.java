@@ -17,7 +17,6 @@ import com.yakindu.bridges.ea.example.cli.ExampleCLI;
 import com.yakindu.bridges.ea.example.cli.codegen.StmCodeGenerator.LANG;
 import com.yakindu.bridges.ea.example.cli.codegen.util.StatechartUtil;
 import com.yakindu.sct.domain.c.runtime.CSTextRuntimeModule;
-import com.yakindu.sct.domain.java.modules.JavaDomainRuntimeModule;
 import com.yakindu.sct.model.sgraph.Statechart;
 import com.yakindu.sct.model.stext.STextRuntimeModule;
 import com.yakindu.sct.uml2.transformation.IStatemachineTransformation;
@@ -135,20 +134,10 @@ public class CodeGeneratorFromUml extends AbstractResourceProcessor{
 	}
 	
 	public static Module targetLanguageSpecificModule(LANG language) {
-		switch (language) {
-			case C:
-				return Modules.override(new TransformationModule()).with(new CSTextRuntimeModule());
-			case CPP:
-				return Modules.override(new TransformationModule()).with(new CSTextRuntimeModule());
-			case CSHARP:
-				return Modules.override(new TransformationModule()).with(new STextRuntimeModule());
-			case JAVA:
-				return Modules.override(new TransformationModule()).with(new JavaDomainRuntimeModule());
-			case PYTHON:
-				return Modules.override(new TransformationModule()).with(new STextRuntimeModule());
-			default:
-				throw new IllegalArgumentException("Unexpected language: " + language);
-		}
+		if(language == LANG.C || language == LANG.CPP)
+			return Modules.override(new TransformationModule()).with(new CSTextRuntimeModule());
+		else
+			return Modules.override(new TransformationModule()).with(new STextRuntimeModule());
 	}
 	
 	private String getAndValidateOutputFolder(String[] args) throws Exception {

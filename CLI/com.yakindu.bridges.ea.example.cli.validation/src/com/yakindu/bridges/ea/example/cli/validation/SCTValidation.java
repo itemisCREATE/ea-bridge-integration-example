@@ -56,7 +56,6 @@ public class SCTValidation {
 
 	public void initialize() {
 		trafo = null;
-		// Only for Generic and C Domain now
 		Guice.createInjector(Modules.override(new TransformationModule()).with(new CSTextRuntimeModule()))
 				.injectMembers(this);
 	}

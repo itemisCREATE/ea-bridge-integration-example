@@ -12,7 +12,6 @@ import com.itemis.create.statechart.generator.csharp.CsharpCodeGeneratorModule;
 import com.yakindu.base.types.typesystem.ITypeValueProvider;
 import com.yakindu.bridges.ea.example.cli.codegen.StmCodeGenerator.LANG;
 import com.yakindu.sct.domain.c.runtime.CSTextRuntimeModule;
-import com.yakindu.sct.domain.java.modules.JavaDomainRuntimeModule;
 import com.yakindu.sct.domain.java.typesystem.JavaTypeValueProvider;
 import com.yakindu.sct.generator.c.CCodeGeneratorModule;
 import com.yakindu.sct.generator.c.typesystem.CTypeValueProvider;
@@ -131,9 +130,6 @@ public class Generator {
 
 		if (language == LANG.CPP || language == LANG.C) {
 			Guice.createInjector(Modules.override(new CSTextRuntimeModule()).with(getGeneratorModule(entry)))
-					.injectMembers(this);
-		} else if(language == LANG.JAVA) {
-			Guice.createInjector(Modules.override(new JavaDomainRuntimeModule()).with(getGeneratorModule(entry)))
 					.injectMembers(this);
 		} else {
 			Guice.createInjector(Modules.override(new STextRuntimeModule()).with(getGeneratorModule(entry)))

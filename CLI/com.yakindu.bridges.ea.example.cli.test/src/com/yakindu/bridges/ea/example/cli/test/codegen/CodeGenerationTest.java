@@ -55,8 +55,7 @@ public class CodeGenerationTest {
 
 	@Parameters(name = "{0}")
 	public static Iterable<? extends Object> testParameterGenLanguages() {
-		// Java is not supported right now
-		return List.of(LANG.C, LANG.CPP, LANG.CSHARP, LANG.PYTHON);
+		return List.of(LANG.C, LANG.CPP, LANG.JAVA, LANG.CSHARP, LANG.PYTHON);
 	}
 
 	@Parameter(0)

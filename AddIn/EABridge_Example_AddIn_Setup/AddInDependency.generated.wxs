@@ -1,11 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDER" />
     </Fragment>
     <Fragment>
         <ComponentGroup Id="DependencyDllComponentGroup">
-            <Component Id="cmp015C9F01D17673DB565ECACC713C809E" Directory="INSTALLFOLDER" Guid="*">
+            <Component Id="cmp015C9F01D17673DB565ECACC713C809E" Directory="INSTALLFOLDER">
                 <File Id="fil791A4935275DD7F9FFA25E91E02327B4" KeyPath="yes" Source="$(var.EABridge_Example_AddIn.TargetDir)\Newtonsoft.Json.dll" />
             </Component>
         </ComponentGroup>

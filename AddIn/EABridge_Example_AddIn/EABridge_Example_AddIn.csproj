@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>EABridge_Example_AddIn</RootNamespace>
     <AssemblyName>EABridge_Example_AddIn</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -64,6 +64,12 @@
   <ItemGroup>
     <Compile Include="ApplicationHandlers\ExampleHeadlessApplicationHandler.cs" />
     <Compile Include="ExampleValidationAddIn.cs" />
+    <Compile Include="UI\GenerateCodeDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\GenerateCodeDialog.Designer.cs">
+      <DependentUpon>GenerateCodeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\HeadlessApplicationUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\SerializableValidationResult.cs" />
@@ -93,17 +99,23 @@
     <EmbeddedResource Include="UI\CLIPathForm.resx">
       <DependentUpon>CLIPathForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\GenerateCodeDialog.resx">
+      <DependentUpon>GenerateCodeDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ValidationIssuesControl.resx">
       <DependentUpon>ValidationIssuesControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>6.0.4</Version>
+      <Version>13.0.4</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
-      <Version>6.0.2</Version>
+      <Version>9.0.9</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\create.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

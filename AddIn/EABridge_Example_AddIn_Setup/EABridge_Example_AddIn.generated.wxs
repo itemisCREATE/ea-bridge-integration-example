@@ -1,11 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDER" />
     </Fragment>
     <Fragment>
         <ComponentGroup Id="EABridgeAddInGroup">
-            <Component Id="cmpA09A218E932F0167A0FD94C8ACEA11B5" Directory="INSTALLFOLDER" Guid="*">
+            <Component Id="cmpA09A218E932F0167A0FD94C8ACEA11B5" Directory="INSTALLFOLDER">
                 <Class Id="{0212EA66-C960-473A-B7FB-0BB36729DF25}" Context="InprocServer32" Description="EABridge_Example_AddIn.ExampleValidationAddIn" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="EABridge_Example_AddIn.ExampleValidationAddIn" Description="EABridge_Example_AddIn.ExampleValidationAddIn" />
                 </Class>

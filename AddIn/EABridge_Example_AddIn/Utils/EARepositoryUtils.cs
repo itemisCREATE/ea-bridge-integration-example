@@ -81,9 +81,29 @@ namespace EABridge_Example_AddIn.Utils
                 return false;
             }
         }
-        
 
-        
+        public static bool IsCodeGenForContextObjectAllowed(object cxt)
+        {
+            if (cxt is Element)
+            {
+                Element cxtCast = (Element)cxt;
+                if (cxtCast.Type == "StateMachine")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
         public static string GetAllRootPackageNames(this Repository repository)
         {
             var models = repository.Models;

@@ -59,24 +59,24 @@ namespace EABridge_Example_AddIn_Tests.ReportsTest
         public void ValidationResult_Should_HandleEmptyStrings()
         {
             SerializableValidationResult validationReport = JsonConvert.DeserializeObject<SerializableValidationResult>(EmptyJson);
-            Assert.IsNotNull(validationReport);
-            Assert.IsTrue(validationReport.GetAllValidationIssues().Count == 0, "Validation result of an empty string is not empty!");
+            Assert.That(validationReport, Is.Not.Null);
+            Assert.That(validationReport.GetAllValidationIssues().Count == 0, Is.True, "Validation result of an empty string is not empty!");
         }
 
         [Test]
         public void ValidationResult_Should_DeserializeStrings()
         {
             SerializableValidationResult validationReport = JsonConvert.DeserializeObject<SerializableValidationResult>(ExampeleJson);
-            Assert.IsNotNull(validationReport);
-            Assert.IsTrue(validationReport.GetAllValidationIssues().Count == 4, "Desrialization result of test json is incorrect!");
-            Assert.IsTrue(validationReport.umlIssues.Count == 4, "Desrialization result of test json is incorrect!");
+            Assert.That(validationReport, Is.Not.Null);
+            Assert.That(validationReport.GetAllValidationIssues().Count == 4, Is.True, "Desrialization result of test json is incorrect!");
+            Assert.That(validationReport.umlIssues.Count == 4, Is.True, "Desrialization result of test json is incorrect!");
         }
 
         [Test]
         public void ValidationResult_Should_HandleMalformedStrings()
         {
             SerializableValidationResult validationReport = JsonConvert.DeserializeObject<SerializableValidationResult>("");
-            Assert.IsNull(validationReport);
+            Assert.That(validationReport, Is.Null);
         }
     }
 }

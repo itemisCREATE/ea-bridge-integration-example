@@ -21,7 +21,7 @@ namespace EABridge_Example_AddIn_Tests.TestUtils
 
         public static string BackupFile(string testModelFilePath, string targetPath)
         {
-            Assert.IsFalse(string.IsNullOrEmpty(testModelFilePath), "File to backup not defined.");
+            Assert.That(string.IsNullOrEmpty(testModelFilePath), Is.False, "File to backup not defined.");
             if (testModelFilePath.StartsWith(Path.DirectorySeparatorChar + ""))
             {
                 testModelFilePath = testModelFilePath.Substring(1);
@@ -30,7 +30,7 @@ namespace EABridge_Example_AddIn_Tests.TestUtils
             string sourcePath = Path.Combine(assemblyFolder, testModelFilePath);
             try
             {
-                Assert.IsTrue(File.Exists(sourcePath), "File '" + sourcePath + "' does not exist.");
+                Assert.That(File.Exists(sourcePath), Is.True, "File '" + sourcePath + "' does not exist.");
                 File.Copy(sourcePath, targetPath, true);
             }
             catch (Exception e)

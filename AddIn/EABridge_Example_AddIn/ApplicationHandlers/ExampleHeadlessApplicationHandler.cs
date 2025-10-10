@@ -23,6 +23,35 @@ namespace EABridge_Example_AddIn.ApplicationHandlers
             return thread != null;
         }
 
+        public void StartExternGenerationOperationAsync(string guid, string modelPath, string outputPath, string language)
+        {
+            string[] arguments = ComputeGenerationArguments(guid, modelPath, outputPath, language);
+            StartExternApplicationAsync(arguments, null);
+        }
+
+        private string[] ComputeGenerationArguments(string guid, string modelPath, string outputPath, string language)
+        {
+            string[] arguments = new string[6];
+
+            arguments[0] = "codegen";
+            arguments[1] = @"""" + language + @"""";       // target language
+            arguments[2] = @"""" + modelPath + @"""";      // input model path
+            arguments[3] = @"""" + outputPath + @"""";     // target folder
+            arguments[4] = @"""" + guid + @"""";           // EA element GUID
+            arguments[5] = "-v";                           // verbose flag
+
+            string executablePath = HeadlessApplicationUtils.FindExecutable();
+
+            if (!File.Exists(executablePath))
+            {
+                Debug.WriteLine("Error: " + executablePath + " not found.");
+                throw new FileNotFoundException("Error: " + executablePath + " not found.");
+            }
+
+            return arguments;
+        }
+
+
         public void StartExternValidationOperationAsync(string guid, string path)
         {
             string reportFile = ExampleHeadlessApplicationHandler.GetReportFilePath();
@@ -114,7 +143,10 @@ namespace EABridge_Example_AddIn.ApplicationHandlers
                 
 
                 ExternApplicationEventArgs eventArgs = new ExternApplicationEventArgs();
-                eventArgs.ReportFile = reportFile;
+                if(reportFile != null)
+                {
+                    eventArgs.ReportFile = reportFile;
+                }
                 eventArgs.ReturnCode = p.ExitCode;
                 eventArgs.Duration = DateTimeUtils.GetTimeDifferenceInMilisec(startTime, endTime);
 

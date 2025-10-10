@@ -4,6 +4,7 @@
     {
         Load,
         UML,
+        SCT,
         Resource,
         Custom,
     }

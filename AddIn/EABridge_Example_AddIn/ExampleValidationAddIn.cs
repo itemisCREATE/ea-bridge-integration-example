@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.IO;
-using System.Threading;
-using System.Windows.Forms;
-using File = System.IO.File;
-using EA;
+﻿using EA;
+using EABridge_Example_AddIn.ApplicationHandlers;
+using EABridge_Example_AddIn.Reports;
 using EABridge_Example_AddIn.UI;
 using EABridge_Example_AddIn.Utils;
-using EABridge_Example_AddIn.Reports;
 using Newtonsoft.Json;
-using EABridge_Example_AddIn.ApplicationHandlers;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using File = System.IO.File;
 
 namespace EABridge_Example_AddIn
 {
@@ -20,6 +23,7 @@ namespace EABridge_Example_AddIn
     {
         const string AddInHeader = "-&YAKINDU EA-Bridge Integration";
         const string ValidationMenuEntry = "&Model Validation";
+        const string CodeGenMenuEntry = "&Generate Code...";
         const string ConfigurationMenuEntry = "&Configure CLI Path.. ";
         public const string RESULTS_TAB = "Results";
         public const string VALIDATION_TAB = "Model Validation Results";
@@ -51,14 +55,14 @@ namespace EABridge_Example_AddIn
         {
             if (MenuName == "")
             {
-                    return AddInHeader;
+                return AddInHeader;
             }
-            if ("MainMenu" == Location)
+            else if ("MainMenu" == Location)
             {
-                return new string[] {ValidationMenuEntry, ConfigurationMenuEntry};
+                return new string[] {ValidationMenuEntry, ConfigurationMenuEntry, CodeGenMenuEntry };
             } else
             {
-                return new string[] { ValidationMenuEntry};
+                return new string[] { ValidationMenuEntry, CodeGenMenuEntry };
             }
 
         }
@@ -78,32 +82,36 @@ namespace EABridge_Example_AddIn
 
         public void EA_GetMenuState(Repository Repository, string Location, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked)
         {
-            if (IsProjectOpen(Repository))
+            IsEnabled = false;
+            IsChecked = false;
+
+            if (!IsProjectOpen(Repository))
+                return;
+
+            switch (ItemName)
             {
-                if ("MainMenu" == Location || EARepositoryUtils.IsCLIOperationForContextObjectAllowed(Repository.GetContextObject()))
-                {
-                    IsChecked = false;
-                    switch (ItemName)
-                    {
-                        case ValidationMenuEntry:
-                            IsEnabled = true;
-                            break;
-                        default:
-                            IsEnabled = true;
-                            break;
-                    }
-                } else
-                {
-                    // not a valid choice for operations
+                case ValidationMenuEntry:
+                    // Always enabled if project open
+                    IsEnabled = true;
+                    break;
+
+                case ConfigurationMenuEntry:
+                    // Always enable CLI configuration (doesn't depend on selection)
+                    IsEnabled = true;
+                    break;
+
+                case CodeGenMenuEntry:
+                    // Enable only if context object allows code generation
+                    var ctx = Repository.GetContextObject();
+                    IsEnabled = EARepositoryUtils.IsCodeGenForContextObjectAllowed(ctx);
+                    break;
+
+                default:
                     IsEnabled = false;
-                }
-            }
-            else
-            {
-                // If no open project, disable all menu options
-                IsEnabled = false;
+                    break;
             }
         }
+
 
         public void EA_MenuClick(Repository Repository, string Location, string MenuName, string ItemName)
         {
@@ -126,23 +134,67 @@ namespace EABridge_Example_AddIn
             } else
             {
                 isValidationOperation = true;
-            } 
-            if ("MainMenu" != Location)
-            {
-                // get the context element
-                object cxt = repository.GetContextObject();
-                operationGuid = EARepositoryUtils.GetGuidOfPackageOrElementOrDiagram(cxt);
             }
-            try
+            if (ItemName == CodeGenMenuEntry)
             {
-                PerformOperation(operationGuid, isValidationOperation);
-            } catch (FileNotFoundException)
+                object cxt = repository.GetContextObject();
+                ShowGenerateCodeDialog(repository, EARepositoryUtils.GetGuidOfPackageOrElementOrDiagram(cxt));   
+            }
+            else
             {
-                MessageBox.Show(Win32Window.GetMainWindowHandle(),
-                            string.Format("The CLI application could not be found at the expected location '{0}'. ", HeadlessApplicationUtils.FindExecutable()),
-                            "CLI application not found",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
+                if ("MainMenu" != Location)
+                {
+                    // get the context element
+                    object cxt = repository.GetContextObject();
+                    operationGuid = EARepositoryUtils.GetGuidOfPackageOrElementOrDiagram(cxt);
+                }
+
+                try
+                {
+                    PerformOperation(operationGuid, isValidationOperation);
+                }
+                catch (FileNotFoundException)
+                {
+                    MessageBox.Show(Win32Window.GetMainWindowHandle(),
+                                string.Format("The CLI application could not be found at the expected location '{0}'. ", HeadlessApplicationUtils.FindExecutable()),
+                                "CLI application not found",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                }
+            }            
+        }
+
+        private void ShowGenerateCodeDialog(EA.Repository repository, String elementGUID)
+        {
+            var control = new GenerateCodeDialog
+            {
+                Dock = DockStyle.Fill,
+                EARepositoryPath = repository.ConnectionString,
+                SelectedElementGuid = elementGUID
+            };
+            control.SetSelectedStateMachineName(EARepositoryUtils.GetEAObjectSimpleNameFromGuid(repository,elementGUID));
+
+            using (var form = new Form())
+            {
+                form.Text = "Generate Code";
+                form.FormBorderStyle = FormBorderStyle.FixedDialog;
+                form.StartPosition = FormStartPosition.CenterParent;
+                form.AutoSize = true;
+                form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                form.MinimizeBox = false;
+                form.MaximizeBox = false;
+                form.Controls.Add(control);
+
+                form.Padding = new Padding(10);
+
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                using (var stream = assembly.GetManifestResourceStream("EABridge_Example_AddIn.Resources.create.ico"))
+                {
+                    if (stream != null)
+                        form.Icon = new System.Drawing.Icon(stream);
+                }
+
+                form.ShowDialog();
             }
         }
 
@@ -251,7 +303,7 @@ namespace EABridge_Example_AddIn
                 ExternRefreshValidationViewArgs validationViewEventArgs = new ExternRefreshValidationViewArgs();
                 ShowValidationView(Thread.CurrentContext, validationViewEventArgs);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (!string.IsNullOrEmpty(logFilePath))
                 {

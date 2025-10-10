@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Include>
+﻿<Include xmlns="http://wixtoolset.org/schemas/v4/wxs">
 	<!-- TODO: Put your code here. -->
 	<UI Id="WixUI_MondoNoLicense">
 		<TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
@@ -19,28 +18,23 @@
 		<DialogRef Id="UserExit" />
 
 
-		<Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+		<Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999" />
 
-		<Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">1</Publish>
+		<Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2" />
 
-		<Publish Dialog="CustomizeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="2">1</Publish>
+		<Publish Dialog="CustomizeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="2" />
 
-		<Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg">1</Publish>
+		<Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg" />
 
 
-		<Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomizeDlg" Order="1">1</Publish>
+		<Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="CustomizeDlg" Order="1" />
 
-		<Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog"
-				 Value="MaintenanceTypeDlg">1</Publish>
+		<Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg" />
 
-		<Publish Dialog="MaintenanceTypeDlg" Control="ChangeButton" Event="NewDialog"
-				 Value="VerifyReadyDlg">1</Publish>
-		<Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog"
-				 Value="VerifyReadyDlg">1</Publish>
-		<Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog"
-				 Value="VerifyReadyDlg">1</Publish>
-		<Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog"
-				 Value="MaintenanceWelcomeDlg">1</Publish>
+		<Publish Dialog="MaintenanceTypeDlg" Control="ChangeButton" Event="NewDialog" Value="VerifyReadyDlg" />
+		<Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg" />
+		<Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg" />
+		<Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg" />
 	</UI>
 
 	<UIRef Id="WixUI_Common" />

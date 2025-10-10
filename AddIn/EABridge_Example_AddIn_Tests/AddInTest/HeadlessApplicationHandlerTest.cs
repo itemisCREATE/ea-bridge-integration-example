@@ -17,7 +17,7 @@ namespace EABridge_Example_AddIn_Tests.AddInTest
         {
             ExampleHeadlessApplicationHandler applicationHandler = new ExampleHeadlessApplicationHandler();
             applicationHandler.StartExternValidationOperationAsync("", Repository.ConnectionString);
-            Assert.IsTrue(applicationHandler.IsThreadRunning(), "Thread could not be started");
+            Assert.That(applicationHandler.IsThreadRunning(), Is.True, "Thread could not be started");
         }
 
         [Test]
@@ -25,9 +25,9 @@ namespace EABridge_Example_AddIn_Tests.AddInTest
         {
             ExampleHeadlessApplicationHandler applicationHandler = new ExampleHeadlessApplicationHandler();
             applicationHandler.StartExternValidationOperationAsync("", Repository.ConnectionString);
-            Assert.IsTrue(applicationHandler.IsThreadRunning(), "Thread could not be started");
+            Assert.That(applicationHandler.IsThreadRunning(), Is.True, "Thread could not be started");
             applicationHandler.KillProcess();
-            Assert.IsFalse(applicationHandler.IsThreadRunning(), "Thread did not terminate successfully");
+            Assert.That(applicationHandler.IsThreadRunning(), Is.False, "Thread did not terminate successfully");
         }
 
         [Test]
@@ -36,14 +36,14 @@ namespace EABridge_Example_AddIn_Tests.AddInTest
             ExampleHeadlessApplicationHandler applicationHandler = new ExampleHeadlessApplicationHandler();
             applicationHandler.OperationComplete += AssertHeadlessOperationOutcome; 
             applicationHandler.StartExternValidationOperationAsync("", Repository.ConnectionString);
-            Assert.IsTrue(applicationHandler.IsThreadRunning(), "Thread could not be started");
+            Assert.That(applicationHandler.IsThreadRunning(), Is.True, "Thread could not be started");
         }
 
         private void AssertHeadlessOperationOutcome(ExampleHeadlessApplicationHandler sender, ExternApplicationEventArgs e)
         {
             string reportFilePath = e.ReportFile;
-            Assert.IsTrue(e.ReturnCode == 0, "Return code of the CLI application is not successful");
-            Assert.IsTrue(File.Exists(reportFilePath), "Report file path does not exist");
+            Assert.That(e.ReturnCode == 0, Is.True,  "Return code of the CLI application is not successful");
+            Assert.That(File.Exists(reportFilePath), Is.True, "Report file path does not exist");
             try
             {
                 SerializableValidationResult ValidationReport = JsonConvert.DeserializeObject<SerializableValidationResult>(File.ReadAllText(reportFilePath));

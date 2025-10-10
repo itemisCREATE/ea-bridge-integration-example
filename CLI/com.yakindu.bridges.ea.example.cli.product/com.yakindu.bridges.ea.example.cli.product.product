@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="YAKINDU EA-Bridge Example CLI" uid="ExampleCLI" id="org.eclipse.equinox.p2.director.product" application="com.yakindu.bridges.ea.example.cli.ExampleCLI" version="1.0" useFeatures="true" includeLaunchers="true">
+<product name="YAKINDU EA-Bridge Example CLI" uid="ExampleCLI" id="org.eclipse.equinox.p2.director.product" application="com.yakindu.bridges.ea.example.cli.ExampleCLI" version="1.0" type="features" includeLaunchers="true" autoIncludeRequirements="true">
 
    <configIni use="default">
    </configIni>
@@ -14,7 +14,6 @@
    </launcherArgs>
 
    <windowImages/>
-
 
    <launcher name="ExampleCLI">
       <win useIco="false">
@@ -30,10 +29,10 @@
    </plugins>
 
    <features>
-      <feature id="org.eclipse.justj.openjdk.hotspot.jre.full" installMode="root"/>
       <feature id="com.yakindu.bridges.ea.example.cli.feature" installMode="root"/>
       <feature id="com.yakindu.licmgmt.feature" installMode="root"/>
       <feature id="org.eclipse.platform" installMode="root"/>
+      <feature id="org.eclipse.justj.openjdk.hotspot.jre.minimal.stripped" installMode="root"/>
    </features>
 
    <configurations>

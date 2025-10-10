@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Codegen
+Bundle-Name: Example CLI Codegen
 Bundle-SymbolicName: com.yakindu.bridges.ea.example.cli.codegen
 Bundle-Version: 1.0.0.qualifier
 Export-Package: com.yakindu.bridges.ea.example.cli.codegen,

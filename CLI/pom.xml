@@ -11,8 +11,8 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho.version>2.6.0</tycho.version>
-		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+		<tycho.version>4.0.13</tycho.version>
+		<maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>

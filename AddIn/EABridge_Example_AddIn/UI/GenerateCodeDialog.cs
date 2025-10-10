@@ -3,6 +3,7 @@ using EABridge_Example_AddIn.ApplicationHandlers;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EABridge_Example_AddIn.UI
 {
@@ -19,7 +20,7 @@ namespace EABridge_Example_AddIn.UI
         private void InitializeUi()
         {
             // Populate language dropdown
-            cmbLanguage.Items.AddRange(new string[] { "C", "C++", "Csharp", "Java", "Python" });
+            cmbLanguage.Items.AddRange(new string[] { "C", "C++", "C#", "Java", "Python" });
             cmbLanguage.SelectedIndex = 0;
 
             lblStatus.Text = string.Empty;
@@ -67,9 +68,17 @@ namespace EABridge_Example_AddIn.UI
             _handler = new ExampleHeadlessApplicationHandler();
             _handler.OperationComplete += Handler_OperationComplete;
 
+            // Show progress bar and disable button **before** starting
+            codegenProgressBar.Visible = true;
+            btnGenerate.Enabled = false;
+            btnBrowse.Enabled = false;
+            cmbLanguage.Enabled = false;
+
+            lblStatus.Text = "Generating code, please wait...";
+            Application.DoEvents(); // force the UI to repaint
+
             try
             {
-                lblStatus.Text = "Generating code, please wait...";
                 _handler.StartExternGenerationOperationAsync(
                     SelectedElementGuid,
                     EARepositoryPath,
@@ -80,10 +89,16 @@ namespace EABridge_Example_AddIn.UI
             catch (Exception ex)
             {
                 lblStatus.Text = "";
+                codegenProgressBar.Visible = false;
+                btnGenerate.Enabled = true;
+                btnBrowse.Enabled = true;
+                cmbLanguage.Enabled = true;
+
                 MessageBox.Show("Error starting code generation: " + ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void Handler_OperationComplete(ExampleHeadlessApplicationHandler sender, ExternApplicationEventArgs e)
         {
@@ -93,15 +108,21 @@ namespace EABridge_Example_AddIn.UI
                 return;
             }
 
-            lblStatus.Text = "";
+            codegenProgressBar.Visible = false;
+            btnGenerate.Enabled = true;
+            btnBrowse.Enabled = true;
+            cmbLanguage.Enabled = true;
+
+            lblStatus.Text = e.ReturnCode == 0 ? "Code generation completed successfully."
+                                               : "Code generation failed. See logs for details.";
 
             string message = e.ReturnCode == 0
                 ? $"Code generation completed successfully!\nReport: {e.ReportFile}"
                 : $"Code generation failed (exit code {e.ReturnCode})\nCheck log: {e.LogFile}";
 
-            MessageBox.Show(message, "Code Generation Finished",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(message, "Code Generation Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         // These are set externally before displaying the dialog
         public string SelectedElementGuid { get; set; }

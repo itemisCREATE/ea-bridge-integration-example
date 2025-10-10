@@ -1,4 +1,6 @@
-﻿namespace EABridge_Example_AddIn.UI
+﻿using System.Windows.Forms;
+
+namespace EABridge_Example_AddIn.UI
 {
     partial class GenerateCodeDialog
     {
@@ -31,6 +33,7 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.codegenProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // lblStateMachine
@@ -105,11 +108,21 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(30, 225);
+            this.lblStatus.Location = new System.Drawing.Point(200, 195);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(0, 25);
             this.lblStatus.TabIndex = 7;
+            // 
+            // codegenProgressBar
+            // 
+            this.codegenProgressBar.Location = new System.Drawing.Point(30, 241);
+            this.codegenProgressBar.Name = "codegenProgressBar";
+            this.codegenProgressBar.Style = ProgressBarStyle.Marquee;
+            this.codegenProgressBar.MarqueeAnimationSpeed = 30; // 30ms per "tick"
+            this.codegenProgressBar.Size = new System.Drawing.Size(598, 23);
+            this.codegenProgressBar.TabIndex = 8;
+            this.codegenProgressBar.Visible = false;
             // 
             // GenerateCodeDialog
             // 
@@ -117,6 +130,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.codegenProgressBar);
             this.Controls.Add(this.lblStateMachine);
             this.Controls.Add(this.lblLanguage);
             this.Controls.Add(this.cmbLanguage);
@@ -127,10 +141,12 @@
             this.Controls.Add(this.lblStatus);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "GenerateCodeDialog";
-            this.Size = new System.Drawing.Size(1500, 500);
+            this.Size = new System.Drawing.Size(761, 267);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+        private System.Windows.Forms.ProgressBar codegenProgressBar;
     }
 }

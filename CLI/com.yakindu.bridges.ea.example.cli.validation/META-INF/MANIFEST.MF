@@ -12,9 +12,9 @@ Export-Package: com.yakindu.bridges.ea.example.cli.validation,
  com.yakindu.bridges.ea.example.cli.validation.uml
 Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.uml2.uml,
- com.yakindu.bridges.ea.core,
  com.google.gson,
+ com.yakindu.bridges.ea.core,
+ com.yakindu.bridges.ea.example.cli.codegen,
  com.yakindu.sct.model.stext,
  com.yakindu.sct.uml2.transformation,
  com.yakindu.sct.domain.c.runtime
-Import-Package: com.yakindu.bridges.ea.example.cli.codegen.util

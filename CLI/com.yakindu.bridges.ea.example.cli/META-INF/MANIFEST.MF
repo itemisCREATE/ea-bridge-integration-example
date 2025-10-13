@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Example validation CLI
+Bundle-Name: Example CLI
 Bundle-SymbolicName: com.yakindu.bridges.ea.example.cli;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG
@@ -22,4 +22,5 @@ Require-Bundle: org.eclipse.equinox.app,
  com.yakindu.sct.domain.java
 Export-Package: com.yakindu.bridges.ea.example.cli;uses:="org.eclipse.equinox.app,org.eclipse.emf.ecore.resource",
  com.yakindu.bridges.ea.example.cli.codegen,
+ com.yakindu.bridges.ea.example.cli.load,
  com.yakindu.bridges.ea.example.cli.validation;uses:="org.eclipse.emf.ecore.resource,com.yakindu.bridges.ea.example.cli"

@@ -35,7 +35,7 @@ import com.yakindu.sct.model.sgraph.Statechart;
 import com.yakindu.sct.model.stext.STextRuntimeModule;
 
 public class Generator {
-	
+
 	@Inject
 	protected IExecutionFlowGenerator generator;
 	@Inject
@@ -44,19 +44,19 @@ public class Generator {
 	private FlowOptimizerFactory optimizerFactory;
 	@Inject
 	protected DefaultFileSystemAccessFactory fsaFactory;
-	
+
 	final private LANG language;
 	final private String outputPath;
-	
+
 	public Generator(LANG language, String outputFolder) {
 		this.language = language;
 		this.outputPath = outputFolder;
 	}
-	
+
 	public void generate(Statechart statechart, GeneratorEntry entry) {
 		invokeGenerator(statechart, entry);
 	}
-	
+
 	public static Generator forLang(LANG language, String outputFolder) {
 		final File outFolderFile = new File(outputFolder);
 		if (!outFolderFile.isDirectory() && !outFolderFile.exists())
@@ -67,24 +67,24 @@ public class Generator {
 		final String absolutOutputFolder = outFolderFile.getAbsolutePath();
 		return new Generator(language, absolutOutputFolder);
 	}
-	
+
 	private IGeneratorModule createGeneratorModule() {
 		switch (language) {
-			case LANG.C:
-				return new CCodeGeneratorModule();
-			case LANG.CPP:
-				return new Cpp11CodeGeneratorModule();
-			case LANG.CSHARP:
-				return new CsharpCodeGeneratorModule();
-			case LANG.JAVA:
-				return new JavaGeneratorModule();
-			case LANG.PYTHON:
-				return new PythonCodeGeneratorModule();
-			default:
-				throw new IllegalArgumentException("Unexpected language: " + language);
+		case C:
+			return new CCodeGeneratorModule();
+		case CPP:
+			return new Cpp11CodeGeneratorModule();
+		case CSHARP:
+			return new CsharpCodeGeneratorModule();
+		case JAVA:
+			return new JavaGeneratorModule();
+		case PYTHON:
+			return new PythonCodeGeneratorModule();
+		default:
+			throw new IllegalArgumentException("Unexpected language: " + language);
 		}
 	}
-	
+
 	protected Module getGeneratorModule(GeneratorEntry entry) {
 		final IGeneratorModule module = createGeneratorModule();
 		return Modules.override(new GeneratorModuleAdapter(module, entry)).with(new Module() {
@@ -98,32 +98,32 @@ public class Generator {
 			}
 		});
 	}
-	
+
 	private void targetLanguageDependantBinding(Binder binder) {
 		switch (language) {
-			case LANG.C:
-				binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.C);
-				binder.bind(ITypeValueProvider.class).to(CTypeValueProvider.class);
-				break;
-			case LANG.CPP:
-				binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.CPP);
-				binder.bind(ITypeValueProvider.class).to(CTypeValueProvider.class);
-				break;
-			case LANG.CSHARP:
-				binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.CSHARP);
-				break;
-			case LANG.JAVA:
-				binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.JAVA);
-				binder.bind(ITypeValueProvider.class).to(JavaTypeValueProvider.class);
-				break;
-			case LANG.PYTHON:
-				binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.PYTHON);
-				break;
-			default:
-				throw new IllegalArgumentException("Unexpected language: " + language);
-			}
+		case C:
+			binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.C);
+			binder.bind(ITypeValueProvider.class).to(CTypeValueProvider.class);
+			break;
+		case CPP:
+			binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.CPP);
+			binder.bind(ITypeValueProvider.class).to(CTypeValueProvider.class);
+			break;
+		case CSHARP:
+			binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.CSHARP);
+			break;
+		case JAVA:
+			binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.JAVA);
+			binder.bind(ITypeValueProvider.class).to(JavaTypeValueProvider.class);
+			break;
+		case PYTHON:
+			binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.PYTHON);
+			break;
+		default:
+			throw new IllegalArgumentException("Unexpected language: " + language);
+		}
 	}
-	
+
 	protected void invokeGenerator(Statechart statechart, GeneratorEntry entry) {
 		System.out.println(String.format("Generating %s to folder %s\\%s ...", statechart.getName(), outputPath,
 				statechart.getName()));
@@ -138,7 +138,7 @@ public class Generator {
 		final ExecutionFlow flow = createExecutionFlow(statechart, entry);
 		generator.generate(flow, entry, fsaFactory.create(entry));
 	}
-	
+
 	protected ExecutionFlow createExecutionFlow(Statechart statechart, GeneratorEntry entry) {
 		final ExecutionFlow flow = sequencer.transform(statechart);
 		final FlowOptimizer optimizer = optimizerFactory.create(entry);

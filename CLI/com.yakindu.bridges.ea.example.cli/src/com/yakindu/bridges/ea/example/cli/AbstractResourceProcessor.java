@@ -2,35 +2,27 @@ package com.yakindu.bridges.ea.example.cli;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.uml2.uml.Element;
-import org.eclipse.uml2.uml.NamedElement;
-import org.eclipse.uml2.uml.TimeEvent;
 
 import com.yakindu.bridges.ea.core.EAResource;
-import com.yakindu.bridges.ea.example.cli.load.UMLElementCollector;
+import com.yakindu.bridges.ea.example.cli.load.UMLModelUtils;
 
 public abstract class AbstractResourceProcessor {
-	
+
 	private static final String VALID_PATH_SEGMENT = "[0-9a-zA-Z._$-]+";
-	
-	private static final Pattern PATTERN_VALID_PATH_WINDOWS = Pattern
-			.compile(String.format("([a-zA-Z]:%s|%1$s%1$s?)?%s(%1$s%2$s)*%1$s?", "[\\\\/]",
-					VALID_PATH_SEGMENT + "(~\\d)?"));
+
+	private static final Pattern PATTERN_VALID_PATH_WINDOWS = Pattern.compile(
+			String.format("([a-zA-Z]:%s|%1$s%1$s?)?%s(%1$s%2$s)*%1$s?", "[\\\\/]", VALID_PATH_SEGMENT + "(~\\d)?"));
 
 	private static final Pattern PATTERN_VALID_PATH_LINUX = Pattern
 			.compile("/?" + VALID_PATH_SEGMENT + "(/" + VALID_PATH_SEGMENT + ")*/?");
-	
+
 	public void run(String[] args) {
 		Resource resource = null;
 		try {
@@ -56,7 +48,7 @@ public abstract class AbstractResourceProcessor {
 		}
 	}
 
-	protected abstract String run(Resource resource, String[] args) throws Exception;
+	protected abstract String run(Resource resource, String[] args);
 
 	protected void report(String task, Runnable runnable) {
 		report(task, () -> {
@@ -105,39 +97,8 @@ public abstract class AbstractResourceProcessor {
 			loadOptions.put(EAResource.OPTION_REPORT_AS_RESOURCE_MARKERS, false);
 		}
 		final Resource res = set.getResource(uri, true);
-		fixModel(res);
+		UMLModelUtils.adjustTimeEventsInModel(res);
 		return res;
-	}
-	
-	public static void fixModel(Resource resource) {
-		final TreeIterator<EObject> iter = resource.getAllContents();
-		while (iter.hasNext()) {
-			final EObject obj = iter.next();
-			if (obj instanceof TimeEvent) {
-				/*
-				 * Needed for UML2SCT transformation
-				 */
-				((EObject) obj).eSetDeliver(false);
-				((TimeEvent) obj).setIsRelative(true);
-			}
-		}
-	}
-
-	protected static List<Element> loadElements(Resource resource, String nameOrGuid, boolean verbose) throws Exception {
-		final List<Element> elements = new UMLElementCollector().loadElements(resource, nameOrGuid);
-
-		if (verbose) {
-			if (elements.isEmpty()) {
-				System.out.println("No UML elements loaded");
-			} else {
-				System.out.println(String.format("%d element%s found: %s", //
-						elements.size(), elements.size() == 1 ? "" : "s",
-						elements.stream().filter(element -> element instanceof NamedElement)
-								.map(e -> ((NamedElement) e).getName()).filter(name -> name != null).sorted()
-								.collect(Collectors.joining(", "))));
-			}
-		}
-		return elements;
 	}
 
 	protected String getNameOrGuidFromArguments(String[] args) {
@@ -163,14 +124,14 @@ public abstract class AbstractResourceProcessor {
 		System.arraycopy(args, index, newArgs, 0, args.length - 1);
 		return newArgs;
 	}
-	
+
 	public static boolean isValidFolderPath(final String path) {
 		if (path == null || path.trim().isEmpty())
 			return false;
 		final Pattern pattern = isWindows() ? PATTERN_VALID_PATH_WINDOWS : PATTERN_VALID_PATH_LINUX;
 		return pattern.matcher(path).matches();
 	}
-	
+
 	private static boolean isWindows() {
 		final String os = System.getProperty("os.name") == null ? "" : System.getProperty("os.name");
 		return os.contains("Windows");

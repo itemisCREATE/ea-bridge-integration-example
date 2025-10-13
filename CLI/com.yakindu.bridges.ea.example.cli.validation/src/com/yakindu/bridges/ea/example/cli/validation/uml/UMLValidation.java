@@ -8,11 +8,15 @@ import com.yakindu.bridges.ea.example.cli.validation.ValidationResult;
 
 public class UMLValidation {
 
-	private UMLValidation() {
-		throw new IllegalStateException("Static Class");
+	private final Resource resource;
+	private final UMLNameBeautifier nameBeautifier;
+
+	public UMLValidation(Resource resource) {
+		this.resource = resource;
+		this.nameBeautifier = new UMLNameBeautifier(resource);
 	}
 
-	public static void validate(Resource resource, ValidationResult result) {
+	public void validate(ValidationResult result) {
 		final Diagnostic diagnostics = UMLDiagnostician.INSTANCE.validate(resource);
 
 		if (diagnostics != null && diagnostics.getSeverity() >= Diagnostic.WARNING) {
@@ -20,16 +24,16 @@ public class UMLValidation {
 		}
 	}
 
-	private static void collectErrorsAndWarnings(Diagnostic diagnostic, ValidationResult result) {
+	private void collectErrorsAndWarnings(Diagnostic diagnostic, ValidationResult result) {
 		if (diagnostic.getSeverity() >= Diagnostic.WARNING) {
 
 			// check current message
 			final EObject object = getModelElement(diagnostic.getData());
-			if (isRelevantIssue(object, diagnostic.getMessage())) {
+			if (isRelevantIssue(object, diagnostic)) {
 				if (diagnostic.getSeverity() == Diagnostic.WARNING) {
-					result.addUmlWarning(object, diagnostic.getMessage());
+					result.addUmlWarning(object, formatMessage(diagnostic));
 				} else {
-					result.addUmlError(object, diagnostic.getMessage());
+					result.addUmlError(object, formatMessage(diagnostic));
 				}
 			}
 
@@ -40,7 +44,11 @@ public class UMLValidation {
 		} // else: only ok / info
 	}
 
-	private static EObject getModelElement(Object data) {
+	private String formatMessage(Diagnostic diagnostic) {
+		return nameBeautifier.format(diagnostic.getMessage());
+	}
+
+	private EObject getModelElement(Object data) {
 		if (data == null || data instanceof EObject)
 			return (EObject) data;
 		if (data instanceof Iterable<?>) {
@@ -53,9 +61,15 @@ public class UMLValidation {
 		return null;
 	}
 
-	private static boolean isRelevantIssue(final EObject object, final String message) {
+	private boolean isRelevantIssue(final EObject object, final Diagnostic diagnostic) {
+		final String message = formatMessage(diagnostic);
+
 		if (message == null || message.isEmpty())
 			return false; // no message - nothing reasonable to report
+
+		if (!diagnostic.getChildren().isEmpty() && message.startsWith("Diagnosis of "))
+			return false; // skip 'container' diagnostics objects without actual issues
+
 		return true; // good location for a break point
 	}
 }

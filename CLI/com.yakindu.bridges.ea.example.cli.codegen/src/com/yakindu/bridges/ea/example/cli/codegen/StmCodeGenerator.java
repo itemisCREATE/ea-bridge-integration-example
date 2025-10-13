@@ -12,24 +12,24 @@ import com.yakindu.bridges.ea.example.cli.codegen.builders.GeneratorEntryFactory
 import com.yakindu.sct.model.sgen.GeneratorEntry;
 import com.yakindu.sct.model.sgraph.Statechart;
 
-public class StmCodeGenerator extends AbstractGenericModule{
-	
+public class StmCodeGenerator extends AbstractGenericModule {
+
 	private static final String OPTION_OUTLET = "Outlet";
 	private static final String OPTION_TARGET_PROJECT = "targetProject";
 	private static final String OPTION_TARGET_FOLDER = "targetFolder";
-	
+
 	@Inject
 	private GeneratorEntryFactory factory;
 
 	public static enum LANG {
 		C, CPP, CSHARP, JAVA, PYTHON
 	};
-	
-	public void codeGen(Statechart statechart, String outputFolder, LANG language) throws Exception {
+
+	public void codeGen(Statechart statechart, String outputFolder, LANG language) {
 		if (outputFolder.isBlank())
-			throw new Exception("No output folder was given");
+			throw new IllegalArgumentException("No output folder was given");
 		if (statechart == null)
-			throw new Exception("Can't perform code generation beacuse resource is empty");
+			throw new IllegalArgumentException("Can't perform code generation beacuse resource is empty");
 
 		final Map<String, List<Pair<String, Object>>> genOpt = new HashMap<String, List<Pair<String, Object>>>();
 
@@ -38,7 +38,7 @@ public class StmCodeGenerator extends AbstractGenericModule{
 
 		generate(statechart, genOpt, outputFolder, language);
 	}
-	
+
 	private void generate(Statechart statechart, Map<String, List<Pair<String, Object>>> generatorOptions,
 			String outputFolder, LANG language) {
 		final GeneratorEntry entry = factory.create(generatorOptions, statechart);

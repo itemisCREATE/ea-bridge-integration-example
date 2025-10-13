@@ -27,7 +27,7 @@ public class ExampleCLI implements IApplication {
 	;
 
 	@Override
-	public Object start(IApplicationContext context) throws Exception {
+	public Object start(IApplicationContext context) {
 		// set up the exit data property in the case of errors
 		// c.f. javadoc of IApplicationContext
 		System.setProperty(IApplicationContext.EXIT_DATA_PROPERTY, "");
@@ -57,7 +57,7 @@ public class ExampleCLI implements IApplication {
 		return IApplication.EXIT_OK;
 	}
 
-	private AbstractResourceProcessor getProcessor(String cmd, String[] appArgs) throws Exception {
+	private AbstractResourceProcessor getProcessor(String cmd, String[] appArgs) {
 		if (APP_VALIDATE.equalsIgnoreCase(cmd))
 			return new ModelValidator();
 		if (APP_GEN.equalsIgnoreCase(cmd))
@@ -65,7 +65,7 @@ public class ExampleCLI implements IApplication {
 		return null;
 	}
 
-	private LANG getTargetLanguage(String languageInput) throws Exception {
+	private LANG getTargetLanguage(String languageInput) {
 		switch (languageInput.toLowerCase()) {
 		case "c":
 			return LANG.C;
@@ -78,7 +78,7 @@ public class ExampleCLI implements IApplication {
 		case "python":
 			return LANG.PYTHON;
 		default:
-			throw new Exception("The provided target language is invalid or not supported!");
+			throw new IllegalArgumentException("The provided target language is invalid or not supported!");
 		}
 	}
 

@@ -36,7 +36,7 @@ public class ValidationReportTest {
 		final String report = new ValidationReport(result).create();
 		// then
 		assertEquals("unexpected empty report",
-				"{\"resourceIssues\":[],\"loadIssues\":[],\"umlIssues\":[],\"customIssues\":[]}", report);
+				"{\"resourceIssues\":[],\"loadIssues\":[],\"umlIssues\":[],\"sctIssues\":[],\"customIssues\":[]}", report);
 
 	}
 

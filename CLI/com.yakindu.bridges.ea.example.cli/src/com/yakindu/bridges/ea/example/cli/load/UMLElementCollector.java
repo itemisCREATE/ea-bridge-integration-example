@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -15,6 +17,8 @@ import org.eclipse.uml2.uml.Comment;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.PackageableElement;
+import org.eclipse.uml2.uml.StateMachine;
 import org.eclipse.uml2.uml.util.UMLUtil;
 
 import com.yakindu.bridges.ea.core.EAResource;
@@ -22,16 +26,43 @@ import com.yakindu.bridges.ea.core.utils.EAResourceUtils;
 
 public class UMLElementCollector {
 
-	public List<Element> loadElements(Resource resource, String nameOrGuid) throws Exception {
+	/**
+	 * From the given <code>resource</code>, load all elements that are given by the comma-separated list of names
+	 * and/or guids.
+	 * 
+	 * @param resource   A UML/EA resource
+	 * @param nameOrGuid a comma-separated list of names and/or guids
+	 * @param verbose    whether or not console output should be printed about the found elements
+	 * @return a list of UML elements matching the given names/guids
+	 * @throws IllegalArgumentException in case the given names/guids cannot be found
+	 */
+	public static List<Element> loadElements(Resource resource, String nameOrGuid, boolean verbose) {
+		final List<Element> elements = loadElements(resource, nameOrGuid);
+
+		if (verbose) {
+			if (elements.isEmpty()) {
+				System.out.println("No UML elements loaded");
+			} else {
+				System.out.println(String.format("%d element%s found: %s", //
+						elements.size(), elements.size() == 1 ? "" : "s",
+						elements.stream().filter(element -> element instanceof NamedElement)
+								.map(e -> ((NamedElement) e).getName()).filter(name -> name != null).sorted()
+								.collect(Collectors.joining(", "))));
+			}
+		}
+		return elements;
+	}
+
+	private static List<Element> loadElements(Resource resource, String nameOrGuid) {
 		if (resource == null)
-			throw new Exception("Resource is empty");
+			throw new NullPointerException("Resource is null");
 
 		final List<Element> elements = new ArrayList<>();
 		if (nameOrGuid != null && !nameOrGuid.isEmpty()) {
 			String[] namesOrGuids = nameOrGuid.split(",");
 			if (EAResource.PATTERN_GUID.matcher(namesOrGuids[0]).matches()) {
 				if (!(resource instanceof EAResource))
-					throw new Exception("GUIDs are only valid for eap-files");
+					throw new IllegalArgumentException("GUIDs are only valid for eap-files");
 				elements.addAll(getElementsByGuids(resource, Arrays.asList(namesOrGuids)));
 			} else {
 				elements.addAll(getElementsByNames(resource, Arrays.asList(namesOrGuids)));
@@ -46,7 +77,7 @@ public class UMLElementCollector {
 		return elements;
 	}
 
-	private Set<Element> getElementsByNames(Resource resource, List<String> names) throws Exception {
+	private static Set<Element> getElementsByNames(Resource resource, List<String> names) {
 		final Map<String, NamedElement> objectsByName = new HashMap<>();
 		final TreeIterator<EObject> contents = resource.getAllContents();
 		while (contents.hasNext()) {
@@ -55,7 +86,7 @@ public class UMLElementCollector {
 				final String objName = ((NamedElement) obj).getName();
 				if (names.contains(objName)) {
 					if (objectsByName.containsKey(objName)) {
-						throw new Exception(
+						throw new IllegalArgumentException(
 								String.format("Name '%s' is not unique; it resolves at least to:%n- %s%n- %s", objName,
 										getText(obj), getText(objectsByName.get(objName))));
 					}
@@ -76,21 +107,26 @@ public class UMLElementCollector {
 				if (!objectsByName.containsKey(unresolvableName))
 					unresolvableNames.add(unresolvableName);
 			}
-			throw new Exception("Could not find names " + unresolvableNames + " in the model");
+			throw new IllegalArgumentException("Could not find names " + unresolvableNames + " in the model");
 		}
 		final Set<Element> foundElements = new HashSet<>();
-		for (NamedElement obj : objectsByName.values()) {
+		for (Entry<String, NamedElement> entry : objectsByName.entrySet()) {
+			final NamedElement obj = entry.getValue();
 			if (obj instanceof Element) {
 				foundElements.add(obj);
 			} else if (obj instanceof Package) {
 				foundElements.addAll(collectElements((Package) obj));
-			} else
-				throw new Exception("Gathered objects contains invalid model element");
+			} else if (obj != null) {
+				throw new IllegalArgumentException(
+						"Unexpected model element for '" + entry.getKey() + "': " + obj.eClass().getName());
+			} else {
+				throw new IllegalArgumentException("Could not find model element with name '" + entry.getKey() + "'");
+			}
 		}
 		return foundElements;
 	}
 
-	private Object getText(EObject obj) {
+	private static Object getText(EObject obj) {
 		if (obj == null)
 			return "<null>";
 		final String clazz = obj.eClass().getName();
@@ -99,7 +135,25 @@ public class UMLElementCollector {
 		return String.format("<%s> %s%s", clazz, fqn, guid == null ? "" : "  GUID = " + guid);
 	}
 
-	private Set<Element> collectElements(Package pack) {
+	private static Set<Element> getElementsByGuids(Resource resource, List<String> guids) {
+		Set<Element> elements = new HashSet<>();
+		for (String guid : guids) {
+			EObject obj = EAResourceUtils.getElementForGuid(resource, guid);
+			if (obj instanceof Package) {
+				elements.addAll(collectElements((Package) obj));
+			} else if (obj instanceof Element) {
+				elements.add((Element) obj);
+			} else if (obj != null) {
+				throw new IllegalArgumentException(
+						"Unexpected model element for guid '" + guid + "': " + obj.eClass().getName());
+			} else {
+				throw new IllegalArgumentException("Could not find model element for guid '" + guid + "'");
+			}
+		}
+		return elements;
+	}
+
+	private static Set<Element> collectElements(Package pack) {
 		Set<Element> collectedElements = new HashSet<>();
 		TreeIterator<EObject> contents = ((EObject) pack).eAllContents();
 		while (contents.hasNext()) {
@@ -111,19 +165,28 @@ public class UMLElementCollector {
 		return collectedElements;
 	}
 
-	private Set<Element> getElementsByGuids(Resource resource, List<String> guids) throws Exception {
-		Set<Element> elements = new HashSet<>();
-		for (String guid : guids) {
-			EObject obj = EAResourceUtils.getElementForGuid(resource, guid);
-			if (obj instanceof Package) {
-				elements.addAll(collectElements((Package) obj));
-			} else if (obj instanceof Element) {
-				elements.add((Element) obj);
+	public static List<StateMachine> collectStatemachines(List<Element> elements) {
+		final List<StateMachine> stms = new ArrayList<>();
+		final List<Element> nonStms = new ArrayList<>();
+		for (Element element : elements) {
+			if (element instanceof StateMachine stm) {
+				stms.add(stm);
 			} else {
-				throw new Exception("GUID " + guid + " cannot be resolved to a package or element but: " + obj);
+				nonStms.add(element);
 			}
 		}
-		return elements;
-	}
 
+		for (Element element : nonStms) {
+			final TreeIterator<EObject> iter = element.eAllContents();
+			while (iter.hasNext()) {
+				final EObject obj = iter.next();
+				if (obj instanceof StateMachine stm) {
+					stms.add(stm);
+				} else if (!(obj instanceof PackageableElement)) {
+					iter.prune(); // skip sub-trees of non-package elements
+				}
+			}
+		}
+		return stms;
+	}
 }

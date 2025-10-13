@@ -57,7 +57,7 @@ public class ModelValidation {
 		result = new ValidationResult(resource);
 
 		// add uml issues
-		UMLValidation.validate(resource, result);
+		new UMLValidation(resource).validate(result);
 		
 		// add sct validation issues
 		new SCTValidation(stms).validateStatechartsForResource(result, verbose, false);

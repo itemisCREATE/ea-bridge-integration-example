@@ -1,0 +1,12 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER" />
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="DependencyDllComponentGroup">
+            <Component Id="cmpKhVrPoOs9Mgt63nm2LwE.0nr.YA" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filhvQxxQhfaPiywdo22Pf.7ojBM48" KeyPath="yes" Source="$(var.Itemis_Integrate_EA_Example_AddIn.TargetDir)\Newtonsoft.Json.dll" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

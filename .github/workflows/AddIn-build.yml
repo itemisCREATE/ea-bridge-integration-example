@@ -101,7 +101,7 @@ jobs:
       run: |
         cd AddIn
         dir
-        msbuild EABridge_Example_AddIn.sln /p:Configuration=Release /p:Platform="Any CPU" /detailedsummary /v:detailed'
+        msbuild EABridge_Example_AddIn.sln /p:Configuration=Release /p:Platform="Any CPU" /detailedsummary /v:detailed
 #        msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Configuration: ${{ matrix.configuration }}

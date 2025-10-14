@@ -26,9 +26,8 @@
 
 	<ItemGroup>
 		<Reference Include="Interop.EA">
-			<HintPath>C:\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
-			<EmbedInteropTypes>True</EmbedInteropTypes>
-			<Private>True</Private>
+			<HintPath>$(MSBuildThisFileDirectory)..\Lib\Interop.EA.dll</HintPath>
+			<EmbedInteropTypes>False</EmbedInteropTypes>
 		</Reference>
 	</ItemGroup>
 

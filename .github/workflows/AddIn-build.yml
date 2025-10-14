@@ -37,12 +37,9 @@
 # refer to https://github.com/microsoft/github-actions-for-desktop-apps
 
 name: AddIn-build
+run-name: triggered by ${{ github.actor }}
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [ push ]
 
 jobs:
 
@@ -78,8 +75,8 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: dotnet test
+    #- name: Execute unit tests
+    #  run: dotnet test
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application

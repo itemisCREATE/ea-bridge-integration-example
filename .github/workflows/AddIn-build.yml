@@ -47,7 +47,8 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [Release]
+        #configuration: [Debug, Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -83,7 +84,7 @@ jobs:
       run: |
         cd AddIn
         dir
-        msbuild /t:restore .\BBraun_CLI_AddIn.sln /p:Configuration=Release'
+        msbuild /t:restore .\BBraun_CLI_AddIn.sln /p:Configuration=Release
 #        msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}

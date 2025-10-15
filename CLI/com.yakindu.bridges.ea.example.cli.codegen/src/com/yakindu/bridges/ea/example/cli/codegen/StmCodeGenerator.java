@@ -1,11 +1,12 @@
 package com.yakindu.bridges.ea.example.cli.codegen;
 
+import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.inject.Inject;
 import com.yakindu.bridges.ea.example.cli.codegen.builders.GeneratorEntryFactory;
@@ -31,15 +32,15 @@ public class StmCodeGenerator extends AbstractGenericModule {
 		if (statechart == null)
 			throw new IllegalArgumentException("Can't perform code generation beacuse resource is empty");
 
-		final Map<String, List<Pair<String, Object>>> genOpt = new HashMap<String, List<Pair<String, Object>>>();
+		final Map<String, List<Entry<String, Object>>> genOpt = new HashMap<String, List<Entry<String, Object>>>();
 
-		genOpt.put(OPTION_OUTLET, List.of(Pair.of(OPTION_TARGET_PROJECT, ""), //
-				Pair.of(OPTION_TARGET_FOLDER, statechart.getName())));
+		genOpt.put(OPTION_OUTLET, List.of(new SimpleImmutableEntry<>(OPTION_TARGET_PROJECT, ""), //
+				new SimpleImmutableEntry<>(OPTION_TARGET_FOLDER, statechart.getName())));
 
 		generate(statechart, genOpt, outputFolder, language);
 	}
 
-	private void generate(Statechart statechart, Map<String, List<Pair<String, Object>>> generatorOptions,
+	private void generate(Statechart statechart, Map<String, List<Entry<String, Object>>> generatorOptions,
 			String outputFolder, LANG language) {
 		final GeneratorEntry entry = factory.create(generatorOptions, statechart);
 		final Generator generator = Generator.forLang(language, outputFolder);

@@ -70,6 +70,7 @@ namespace ItemisIntegrateEA_Example_AddIn.UI
 
             // Show progress bar and disable button **before** starting
             codegenProgressBar.Visible = true;
+            txtOutputPath.Enabled = false;
             btnGenerate.Enabled = false;
             btnBrowse.Enabled = false;
             cmbLanguage.Enabled = false;

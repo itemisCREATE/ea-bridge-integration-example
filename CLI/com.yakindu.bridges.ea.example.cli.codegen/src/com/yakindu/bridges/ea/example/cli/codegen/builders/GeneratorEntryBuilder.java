@@ -57,21 +57,6 @@ public class GeneratorEntryBuilder {
 			}
 		}
 		return entry;
-		
-//		createGeneratorEntry => [ entry |
-//			entry.elementRef = statechart
-//			features.forEach [ typeName, configs |
-//				entry.features += createFeatureConfiguration => [
-//					type = createFeatureType => [name = typeName]
-//					parameterValues += configs.map [ config |
-//						createFeatureParameterValue => [
-//							parameter = createFeatureParameter => [name = config.key]
-//							value = config.value
-//						]
-//					]
-//				]
-//			]
-//		]
 	}
 
 	private void setValue(FeatureParameterValue paramValue, Object value) {

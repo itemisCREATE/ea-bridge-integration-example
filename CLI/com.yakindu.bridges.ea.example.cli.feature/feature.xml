@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.yakindu.bridges.ea.example.cli.feature"
-      label="YAKINDU EA-Bridge Example CLI"
+      label="Itemis INTEGRATE-EA and CREATE Example CLI"
       version="1.0.0.qualifier"
       provider-name="itemis AG">
 
    <description>
-      YAKINDU EA-Bridge example CLI application.
+      Itemis INTEGRATE-EA and CREATE example CLI application.
    </description>
 
    <copyright>
@@ -19,16 +19,10 @@
 
    <plugin
          id="com.yakindu.bridges.ea.example.cli"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="com.yakindu.bridges.ea.example.cli.validation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>

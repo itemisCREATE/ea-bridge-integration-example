@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         id="ExampleCLI"
+         id="ItemisIntegrateEAExampleCLI"
          point="org.eclipse.core.runtime.applications">
       <application
             cardinality="singleton-global"
@@ -14,14 +14,14 @@
       </application>
    </extension>
    <extension
-         id="ExampleCLI"
+         id="ItemisIntegrateEAExampleCLI"
          point="org.eclipse.core.runtime.products">
       <product
             application="com.yakindu.bridges.ea.example.cli.ExampleCLI"
-            name="Example validation CLI">
+            name="Itemis INTEGRATE-EA Example validation CLI">
          <property
                name="appName"
-               value="Example validation CLI">
+               value="Itemis INTEGRATE-EA Example validation CLI">
          </property>
       </product>
    </extension>

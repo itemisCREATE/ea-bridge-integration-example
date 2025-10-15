@@ -17,7 +17,7 @@ public class ExampleCLI implements IApplication {
 
 	public static final String VERBOSE_OUTPUT = "-v";
 
-	public static final String HELP = "YAKINDU EA-Bridge Example Command Line Interface\n" //
+	public static final String HELP = "Itemis INTEGRATE-EA and CREATE Example Command Line Interface\n" //
 			+ "Possible options:\n" //
 			+ "  " + APP_VALIDATE + " <eap-file> <output-report-file> [<classifier-name/package-name/guid>] [-v]\n" //
 			+ "  " + APP_GEN + " <language> <eap-file> <output-folder> <state-machine-name/-guid> [-v]\n" //

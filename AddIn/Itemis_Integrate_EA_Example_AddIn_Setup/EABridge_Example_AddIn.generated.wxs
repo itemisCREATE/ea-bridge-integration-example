@@ -3,7 +3,7 @@
         <DirectoryRef Id="INSTALLFOLDER" />
     </Fragment>
     <Fragment>
-        <ComponentGroup Id="ItemisIntegrateEAAddInGroup">
+        <ComponentGroup Id="ItemisIntegrateEAAddIn">
             <Component Id="cmpo_VXzeh2.UpQac.Y4KR_Vac.pBw" Directory="INSTALLFOLDER" Guid="*">
                 <Class Id="{0212EA66-C960-473A-B7FB-0BB36729DF25}" Context="InprocServer32" Description="Itemis_Integrate_EA_Example_AddIn.ExampleValidationAddIn" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="Itemis_Integrate_EA_Example_AddIn.ExampleValidationAddIn" Description="Itemis_Integrate_EA_Example_AddIn.ExampleValidationAddIn" />

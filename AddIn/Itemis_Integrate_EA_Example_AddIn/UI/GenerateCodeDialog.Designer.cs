@@ -117,10 +117,10 @@ namespace ItemisIntegrateEA_Example_AddIn.UI
             // codegenProgressBar
             // 
             this.codegenProgressBar.Location = new System.Drawing.Point(30, 241);
+            this.codegenProgressBar.MarqueeAnimationSpeed = 30;
             this.codegenProgressBar.Name = "codegenProgressBar";
-            this.codegenProgressBar.Style = ProgressBarStyle.Marquee;
-            this.codegenProgressBar.MarqueeAnimationSpeed = 30; // 30ms per "tick"
             this.codegenProgressBar.Size = new System.Drawing.Size(598, 23);
+            this.codegenProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.codegenProgressBar.TabIndex = 8;
             this.codegenProgressBar.Visible = false;
             // 

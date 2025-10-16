@@ -91,6 +91,7 @@ namespace ItemisIntegrateEA_Example_AddIn.UI
             {
                 lblStatus.Text = "";
                 codegenProgressBar.Visible = false;
+                txtOutputPath.Enabled = true;
                 btnGenerate.Enabled = true;
                 btnBrowse.Enabled = true;
                 cmbLanguage.Enabled = true;
@@ -121,7 +122,6 @@ namespace ItemisIntegrateEA_Example_AddIn.UI
                 ? $"Code generation completed successfully!"
                 : $"Code generation failed (exit code {e.ReturnCode})";
 
-            MessageBox.Show(message, "Code Generation Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 

@@ -188,7 +188,7 @@ namespace ItemisIntegrateEA_Example_AddIn
                 form.Padding = new Padding(10);
 
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                using (var stream = assembly.GetManifestResourceStream("ItemisIntegrateEA_Example_AddIn.Resources.create.ico"))
+                using (var stream = assembly.GetManifestResourceStream("Itemis_Integrate_EA_Example_AddIn.Resources.create.ico"))
                 {
                     if (stream != null)
                         form.Icon = new System.Drawing.Icon(stream);

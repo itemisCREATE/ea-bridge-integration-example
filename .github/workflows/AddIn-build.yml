@@ -83,7 +83,6 @@ jobs:
         cd AddIn
         dir
         msbuild /t:restore .\EABridge_Example_AddIn.sln /p:Configuration=Release
-#        msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
 

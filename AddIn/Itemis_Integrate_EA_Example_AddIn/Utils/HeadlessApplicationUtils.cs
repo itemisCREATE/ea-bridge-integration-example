@@ -10,9 +10,9 @@ namespace ItemisIntegrateEA_Example_AddIn.Utils
     public static class HeadlessApplicationUtils
     {
 
-        public const string INI_FILE_NAME = "ExampleCLI.ini";
-        public const string EXECUTABLE_FILE_NAME = "ExampleCLI.exe";
-        public const string CONSOLE_EXECUTABLE_FILE_NAME = "ExampleCLIc.exe";
+        public const string INI_FILE_NAME = "IntegrateEAExampleCLI.ini";
+        public const string EXECUTABLE_FILE_NAME = "IntegrateEAExampleCLI.exe";
+        public const string CONSOLE_EXECUTABLE_FILE_NAME = "IntegrateEAExampleCLIc.exe";
 
         public static string GetExecuableInIArguments()
         {

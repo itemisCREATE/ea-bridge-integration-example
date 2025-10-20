@@ -11,12 +11,12 @@ public class UMLModelUtils {
 		final TreeIterator<EObject> iter = resource.getAllContents();
 		while (iter.hasNext()) {
 			final EObject obj = iter.next();
-			if (obj instanceof TimeEvent) {
+			if (obj instanceof TimeEvent timeEvent) {
 				/*
 				 * Needed for UML2SCT transformation
 				 */
-				((EObject) obj).eSetDeliver(false);
-				((TimeEvent) obj).setIsRelative(true);
+				timeEvent.eSetDeliver(false);
+				timeEvent.setIsRelative(true);
 			}
 		}
 	}

@@ -25,4 +25,8 @@
          id="com.yakindu.bridges.ea.example.cli.validation"
          version="0.0.0"/>
 
+   <plugin
+         id="com.yakindu.bridges.ea.example.cli.codegen"
+         version="0.0.0"/>
+
 </feature>

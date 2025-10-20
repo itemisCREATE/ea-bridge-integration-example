@@ -2,6 +2,7 @@
 <launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
     <setAttribute key="additional_plugins"/>
     <booleanAttribute key="append.args" value="true"/>
+    <stringAttribute key="application" value="com.yakindu.bridges.ea.example.cli.ItemisIntegrateEAExampleCLI"/>
     <booleanAttribute key="askclear" value="true"/>
     <booleanAttribute key="automaticAdd" value="false"/>
     <booleanAttribute key="automaticValidate" value="true"/>
@@ -26,7 +27,7 @@
     <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dorg.eclipse.swt.graphics.Resource.reportNonDisposed=true"/>
     <stringAttribute key="pde.version" value="3.3"/>
-    <stringAttribute key="product" value="com.yakindu.bridges.ea.example.cli.ExampleCLI"/>
+    <stringAttribute key="product" value="com.yakindu.bridges.ea.example.cli.ItemisIntegrateEAExampleCLI"/>
     <setAttribute key="selected_features">
         <setEntry value="com.sun.jna.feature:default"/>
         <setEntry value="com.yakindu.bridges.ea.core.ui:default"/>
@@ -536,5 +537,5 @@
     <booleanAttribute key="useCustomFeatures" value="false"/>
     <booleanAttribute key="useDefaultConfig" value="true"/>
     <booleanAttribute key="useDefaultConfigArea" value="true"/>
-    <booleanAttribute key="useProduct" value="true"/>
+    <booleanAttribute key="useProduct" value="false"/>
 </launchConfiguration>

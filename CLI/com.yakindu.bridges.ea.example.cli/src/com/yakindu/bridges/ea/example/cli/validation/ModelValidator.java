@@ -1,6 +1,7 @@
 package com.yakindu.bridges.ea.example.cli.validation;
 
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,7 +28,7 @@ public class ModelValidator extends AbstractResourceProcessor {
 			return null;
 		});
 
-		final List<StateMachine> stms = UMLElementCollector.collectStatemachines(loadedElements);
+		final Collection<StateMachine> stms = UMLElementCollector.collectStatemachines(loadedElements);
 
 		final ModelValidation validation;
 		try {

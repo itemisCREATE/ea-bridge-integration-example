@@ -1,6 +1,7 @@
 package com.yakindu.bridges.ea.example.cli.codegen;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -67,7 +68,7 @@ public class CodeGeneratorFromUml extends AbstractResourceProcessor {
 	protected void genStms(Resource resource, final String outputFolder, final String nameOrGuid, final boolean verbose,
 			final Set<String> stateMachinesFailed, final Set<String> stateMachinesSuccess) {
 		final List<Element> elements = UMLElementCollector.loadElements(resource, nameOrGuid, verbose);
-		final List<StateMachine> loadedStatemachines = UMLElementCollector.collectStatemachines(elements);
+		final Collection<StateMachine> loadedStatemachines = UMLElementCollector.collectStatemachines(elements);
 		if (loadedStatemachines.isEmpty() && !elements.isEmpty())
 			throw new IllegalArgumentException(
 					"The names/guids '" + nameOrGuid + "' do not resolve any state machines");

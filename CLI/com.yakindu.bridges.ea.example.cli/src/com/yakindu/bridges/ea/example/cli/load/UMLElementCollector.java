@@ -2,18 +2,17 @@ package com.yakindu.bridges.ea.example.cli.load;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.uml2.uml.Comment;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
@@ -69,34 +68,34 @@ public class UMLElementCollector {
 			}
 		} else {
 			for (EObject obj : resource.getContents()) {
-				if (obj instanceof Package)
-					elements.addAll(collectElements((Package) obj));
+				if (obj instanceof Package pack)
+					elements.add(pack);
 			}
 		}
 
 		return elements;
 	}
 
-	private static Set<Element> getElementsByNames(Resource resource, List<String> names) {
-		final Map<String, NamedElement> objectsByName = new HashMap<>();
+	private static Collection<PackageableElement> getElementsByNames(Resource resource, List<String> names) {
+		final Map<String, PackageableElement> objectsByName = new HashMap<>();
 		final TreeIterator<EObject> contents = resource.getAllContents();
 		while (contents.hasNext()) {
 			final EObject obj = contents.next();
-			if ((obj instanceof NamedElement || obj instanceof Package) && !(obj instanceof Comment)) {
-				final String objName = ((NamedElement) obj).getName();
+			if (obj instanceof PackageableElement element) {
+				final String objName = element.getName();
 				if (names.contains(objName)) {
 					if (objectsByName.containsKey(objName)) {
 						throw new IllegalArgumentException(
 								String.format("Name '%s' is not unique; it resolves at least to:%n- %s%n- %s", objName,
 										getText(obj), getText(objectsByName.get(objName))));
 					}
-					objectsByName.put(objName, (NamedElement) obj);
+					objectsByName.put(objName, element);
 				} else {
-					// check for fully qualified names case-insensitive (issue #40)
+					// check for fully qualified names case-insensitive
 					final String fqn = UMLUtil.getQualifiedText(obj);
 					if (names.stream().anyMatch(fqn::equalsIgnoreCase)) {
 						// fqn should be unique, no need to check for collisions
-						objectsByName.put(fqn, (NamedElement) obj);
+						objectsByName.put(fqn, element);
 					}
 				}
 			}
@@ -109,21 +108,7 @@ public class UMLElementCollector {
 			}
 			throw new IllegalArgumentException("Could not find names " + unresolvableNames + " in the model");
 		}
-		final Set<Element> foundElements = new HashSet<>();
-		for (Entry<String, NamedElement> entry : objectsByName.entrySet()) {
-			final NamedElement obj = entry.getValue();
-			if (obj instanceof Element) {
-				foundElements.add(obj);
-			} else if (obj instanceof Package) {
-				foundElements.addAll(collectElements((Package) obj));
-			} else if (obj != null) {
-				throw new IllegalArgumentException(
-						"Unexpected model element for '" + entry.getKey() + "': " + obj.eClass().getName());
-			} else {
-				throw new IllegalArgumentException("Could not find model element with name '" + entry.getKey() + "'");
-			}
-		}
-		return foundElements;
+		return objectsByName.values();
 	}
 
 	private static Object getText(EObject obj) {
@@ -136,16 +121,14 @@ public class UMLElementCollector {
 	}
 
 	private static Set<Element> getElementsByGuids(Resource resource, List<String> guids) {
-		Set<Element> elements = new HashSet<>();
+		final Set<Element> elements = new HashSet<>();
 		for (String guid : guids) {
 			EObject obj = EAResourceUtils.getElementForGuid(resource, guid);
-			if (obj instanceof Package) {
-				elements.addAll(collectElements((Package) obj));
-			} else if (obj instanceof Element) {
-				elements.add((Element) obj);
+			if (obj instanceof PackageableElement element) {
+				elements.add(element);
 			} else if (obj != null) {
 				throw new IllegalArgumentException(
-						"Unexpected model element for guid '" + guid + "': " + obj.eClass().getName());
+						"Unsupported model element class for guid '" + guid + "': " + obj.eClass().getName());
 			} else {
 				throw new IllegalArgumentException("Could not find model element for guid '" + guid + "'");
 			}
@@ -153,25 +136,13 @@ public class UMLElementCollector {
 		return elements;
 	}
 
-	private static Set<Element> collectElements(Package pack) {
-		Set<Element> collectedElements = new HashSet<>();
-		TreeIterator<EObject> contents = ((EObject) pack).eAllContents();
-		while (contents.hasNext()) {
-			EObject eObject = contents.next();
-			if (eObject instanceof Element) {
-				collectedElements.add((Element) eObject);
-			}
-		}
-		return collectedElements;
-	}
-
-	public static List<StateMachine> collectStatemachines(List<Element> elements) {
-		final List<StateMachine> stms = new ArrayList<>();
+	public static Collection<StateMachine> collectStatemachines(Collection<Element> elements) {
+		final Set<StateMachine> stms = new HashSet<>();
 		final List<Element> nonStms = new ArrayList<>();
 		for (Element element : elements) {
 			if (element instanceof StateMachine stm) {
 				stms.add(stm);
-			} else {
+			} else if (element instanceof PackageableElement) {
 				nonStms.add(element);
 			}
 		}

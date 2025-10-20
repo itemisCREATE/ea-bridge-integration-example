@@ -53,7 +53,7 @@ Please follow these steps to try out the pre-built example on your local machine
     The UI extensions are simple Windows controls and forms. The entire Add-in is a .NET-based COM application.
     To build the Add-in you need the following tools:
     * Visual Studio 2022 or newer. In the IDE, the following extensions are required:
-        * NUnit 3 Test Adapter: required to build and run tests. It can be installed using the extension manager in Visual Studio.
+        * NUnit 4 Test Adapter: required to build and run tests. It can be installed using the extension manager in Visual Studio.
         * Wix Toolkit Visual Studio 2022 extensions: The Wix toolset is required to build the Add-in installer package. It can be installed using the extension manager in Visual Studio. However, it must be accompanied by the installation of the Wix tool which can be downloaded [here](https://wixtoolset.org/releases/).
     * [Enterprise Architect version 15.2](https://sparxsystems.com/products/ea/downloads.html) (or newer)
 

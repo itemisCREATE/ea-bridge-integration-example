@@ -24,10 +24,13 @@
     <ProjectReference Include="..\Itemis_Integrate_EA_Example_AddIn\Itemis_Integrate_EA_Example_AddIn.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Interop.EA">
-		<HintPath>$(ProgramFiles(x86))\Sparx Systems\EA\Interop.EA.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="Interop.EA">
+			<HintPath>C:\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
+			<EmbedInteropTypes>True</EmbedInteropTypes>
+			<Private>True</Private>
+		</Reference>
+	</ItemGroup>
+
 
 </Project>

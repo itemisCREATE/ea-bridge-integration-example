@@ -63,9 +63,6 @@ jobs:
       with:
         lfs: true
         fetch-depth: 0
-    
-    - name: Verify interop dll
-      run: dir AddIn\Lib
 
     # Install the .NET Core workload
     - name: Install .NET Core

@@ -27,8 +27,7 @@
 	<ItemGroup>
 		<Reference Include="Interop.EA">
 			<HintPath>$(ProjectDir)..\Lib\Interop.EA.dll</HintPath>
-			<EmbedInteropTypes>True</EmbedInteropTypes>
-			<Private>True</Private>
+			<EmbedInteropTypes>False</EmbedInteropTypes>
 		</Reference>
 	</ItemGroup>
 

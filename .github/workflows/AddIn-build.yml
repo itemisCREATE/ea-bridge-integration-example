@@ -73,6 +73,11 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
+    - name: Install Enterprise Architect
+      run: |
+        curl -L -o EA.msi "https://sparxsystems.com/bin/ea_demo.msi"
+        msiexec /i EA.msi /quiet /norestart
+
     # Execute all unit tests in the solution
     #- name: Execute unit tests
     #  run: dotnet test

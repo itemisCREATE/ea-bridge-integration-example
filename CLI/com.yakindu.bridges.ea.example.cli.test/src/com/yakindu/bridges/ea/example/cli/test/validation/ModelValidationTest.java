@@ -34,7 +34,7 @@ public class ModelValidationTest {
 		final Resource resource = new ResourceSetImpl().createResource(URI.createURI("mem:/test.uml"));
 		try {
 			// when
-			new ModelValidation(resource, Collections.emptyList(), " ");
+			new ModelValidation(resource, null, Collections.emptyList(), " ");
 			fail("exception expected about missing report file argument");
 		} catch (Exception e) {
 			// then
@@ -65,10 +65,10 @@ public class ModelValidationTest {
 
 		// when
 
-		ModelValidation validation = new ModelValidation(resource, Arrays.asList(abstractClass),
+		ModelValidation validation = new ModelValidation(resource, Arrays.asList(abstractClass), null,
 				File.createTempFile(getClass().getName(), ".json").getAbsolutePath());
 
-		validation.validate();
+		validation.validate(false);
 		ValidationResult validationResult = validation.getValidationResult();
 
 		// then
@@ -82,9 +82,9 @@ public class ModelValidationTest {
 
 		// when
 
-		validation = new ModelValidation(resource, Arrays.asList(childClass, anotherChildClass),
+		validation = new ModelValidation(resource, Arrays.asList(childClass, anotherChildClass), null,
 				File.createTempFile(getClass().getName(), ".json").getAbsolutePath());
-		validation.validate();
+		validation.validate(false);
 		validationResult = validation.getValidationResult();
 
 		// then
@@ -100,9 +100,9 @@ public class ModelValidationTest {
 
 		Package pack2 = model.createNestedPackage("pack2");
 		pack2.createOwnedClass("someClass", false);
-		validation = new ModelValidation(resource, Arrays.asList(pack2),
+		validation = new ModelValidation(resource, Arrays.asList(pack2), null,
 				File.createTempFile(getClass().getName(), ".json").getAbsolutePath());
-		validation.validate();
+		validation.validate(false);
 		validationResult = validation.getValidationResult();
 
 		// then

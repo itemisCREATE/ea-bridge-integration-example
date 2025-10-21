@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Function;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
@@ -15,6 +16,7 @@ import org.eclipse.uml2.uml.util.UMLUtil;
 
 import com.yakindu.bridges.ea.core.EAModelError;
 import com.yakindu.bridges.ea.core.utils.MapUtils;
+import com.yakindu.sct.model.stext.resource.StextResource;
 
 public class ValidationResult {
 
@@ -31,6 +33,9 @@ public class ValidationResult {
 
 	private final Map<EObject, List<String>> customWarnings = new HashMap<>();
 	private final Map<EObject, List<String>> customErrors = new HashMap<>();
+	
+	private final Map<EObject, List<String>> sctWarnings = new HashMap<>();
+	private final Map<EObject, List<String>> sctErrors = new HashMap<>();
 
 	public ValidationResult(Resource resource) {
 		resource.getErrors().forEach(error -> addIssue(loadErrors, error));
@@ -76,6 +81,15 @@ public class ValidationResult {
 	public void addCustomWarning(EObject object, String message) {
 		MapUtils.addToListMap(customWarnings, object, DEFAULT_LIST_SIZE, message);
 	}
+	
+	public void addSctError(EObject object, String message, StextResource resource, Function<EObject, EObject> sctToUml) {
+		MapUtils.addToListMap(sctErrors, object, DEFAULT_LIST_SIZE, message);
+	}
+	
+	public void addSctWarning(EObject object, String message, StextResource resource,
+			Function<EObject, EObject> sctToUml) {
+			MapUtils.addToListMap(sctWarnings, object, DEFAULT_LIST_SIZE, message);
+	}
 
 	public int count() {
 		return resourceWarnings.size() + resourceErrors.size() //
@@ -94,6 +108,8 @@ public class ValidationResult {
 		umlErrors.entrySet().forEach(issues -> list.addAll(asString("[E:UML]", issues)));
 		customWarnings.entrySet().forEach(issues -> list.addAll(asString("[W:Custom]", issues)));
 		customErrors.entrySet().forEach(issues -> list.addAll(asString("[E:Custom]", issues)));
+		sctWarnings.entrySet().forEach(issues -> list.addAll(asString("[W:SCT]", issues)));
+		sctErrors.entrySet().forEach(issues -> list.addAll(asString("[E:SCT]", issues)));
 		Collections.sort(list);
 		return list;
 	}
@@ -137,6 +153,14 @@ public class ValidationResult {
 
 	public Map<EObject, List<String>> getCustomErrors() {
 		return Collections.unmodifiableMap(customErrors);
+	}
+	
+	public Map<EObject, List<String>> getSctWarnings() {
+		return Collections.unmodifiableMap(sctWarnings);
+	}
+
+	public Map<EObject, List<String>> getSctErrors() {
+		return Collections.unmodifiableMap(sctErrors);
 	}
 
 }

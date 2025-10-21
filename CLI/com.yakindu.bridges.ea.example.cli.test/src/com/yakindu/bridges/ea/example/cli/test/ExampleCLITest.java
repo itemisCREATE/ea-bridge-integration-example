@@ -1,66 +1,86 @@
 package com.yakindu.bridges.ea.example.cli.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.equinox.app.IApplication;
-//import org.junit.jupiter.api.Test;
 import org.junit.Test;
 
+import com.yakindu.bridges.ea.core.utils.JoinStr;
 import com.yakindu.bridges.ea.core.utils.URIToOSPathConverter;
 import com.yakindu.bridges.ea.example.cli.ExampleCLI;
 
 public class ExampleCLITest {
 
-	String PLUGIN_ID = "com.yakindu.bridges.ea.example.cli.test";
+	private static final String PLUGIN_ID = "com.yakindu.bridges.ea.example.cli.test";
 
-	URI TEST_MODEL = URI.createPlatformPluginURI(PLUGIN_ID + "/testModels/Example.eap", true);
+	private static final URI TEST_MODEL = URI.createPlatformPluginURI(PLUGIN_ID + "/testModels/Example.eap", true);
 
 	@Test
 	public void helpOutput() throws Exception {
-		final String output = run(IApplication.EXIT_OK);
+		final String output = CliTestRunner.run(IApplication.EXIT_OK);
 		assertEquals(ExampleCLI.HELP, output);
-
-	}
-
-	private String run(Integer expectedExitCode, String... args) throws Exception {
-		// redirect System output (redirect error output if needed, too)
-		final PrintStream defaultOutStream = System.out;
-		try {
-			final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			System.setOut(new PrintStream(outputStream));
-
-			final ExampleCLI cli = new ExampleCLI();
-			final Object code = cli.start(new ApplicationTestContext(args));
-			assertEquals(expectedExitCode, code);
-			return outputStream.toString().trim();
-		} finally {
-			System.setOut(defaultOutStream);
-		}
 	}
 
 	@Test
-	public void noValidationIssueInRefModel() throws Exception {
+	public void validation_LightSwitchModel() throws Exception {
+		assertNoIssueInModel("LightSwitchStateMachine");
+	}
+
+	@Test
+	public void validation_LibraryModel() throws Exception {
+		assertIssuesInModel("{E7FBC00B-5294-4dd0-AC3D-ABC22537573D}", // package "Library"
+				"[W:Custom] 'LibraryModel::Library::Media': Abstract class 'Media' should start with 'Abstract'.");
+	}
+
+	@Test
+	public void validation_StateMachineWithIssues() throws Exception {
+		assertIssuesInModel("StateMachineWithIssues",
+				"[E:SCT] 'LibraryModel::StateMachineWithIssues::FaultyStateMachine::{region [0] Region}::Unreachable': Node is not reachable.",
+				"[W:SCT] 'LibraryModel::StateMachineWithIssues::FaultyStateMachine::{region [0] Region}::{transition [2] Transition}': Dead transition from state 'SomeState'. This transition is never taken due to the precedence of completion transition.");
+	}
+
+	private void assertNoIssueInModel(String elementToValidate) throws Exception {
+		assertIssuesInModel(elementToValidate); // no expected issues
+	}
+
+	private List<String> assertIssuesInModel(String elementToValidate, String... expectedIssues) throws Exception {
 		// given
 		final String eapFile = URIToOSPathConverter.getFileFromURI(TEST_MODEL);
 		final File tmpFile = File.createTempFile(getClass().getName(), ".json");
 		tmpFile.deleteOnExit();
-		final String elementToValidate = "LibraryModel";
 		final String[] args = { ExampleCLI.APP_VALIDATE, eapFile, tmpFile.getAbsolutePath(), elementToValidate,
 				ExampleCLI.VERBOSE_OUTPUT };
+
 		// when
-		final String output = run(IApplication.EXIT_OK, args);
+		final String output = CliTestRunner.run(IApplication.EXIT_OK, args);
+		// System.out.println("\n\n" + output); // useful for debugging
+
 		// then
-		for (String segment : List.of(">> Collecting UML Elements DONE.", ">> Validating DONE.", ">> Writing report")) {
+		for (String segment : List.of(">> Loading '", ">> Collecting UML Elements DONE.", ">> Validating DONE.",
+				"Validation successfully finished.")) {
 			assertTrue("Missing in console output: \"" + segment + "\"\n\n" + output, output.contains(segment));
 		}
+
+		if (expectedIssues != null && expectedIssues.length > 0) {
+			final List<String> missingIssues = new ArrayList<>(List.of(expectedIssues));
+			missingIssues.removeIf(issue -> output.contains(issue));
+			assertTrue(
+					missingIssues.size() + " expected issue(s) not reported:\n- " + JoinStr.join("\n- ", missingIssues),
+					missingIssues.isEmpty());
+
+			assertTrue("Unexpected number of issues written to report:\n" + output,
+					output.contains(">> Writing report (" + expectedIssues.length + " issue"));
+		} else {
+			assertFalse("No issues expected but validation report was created\n" + output,
+					output.contains(">> Writing report ("));
+		}
+		return null;
 	}
 }

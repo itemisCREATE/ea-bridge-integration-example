@@ -13,7 +13,6 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.junit.Test;
 
 import com.yakindu.bridges.ea.example.cli.validation.ValidationResult;
-import com.yakindu.bridges.ea.example.cli.validation.report.ValidationReport;
 import com.yakindu.bridges.ea.example.cli.validation.uml.UMLValidation;
 
 public class UMLValidationTest {
@@ -27,9 +26,11 @@ public class UMLValidationTest {
 		final URI uri = URI.createURI("mem:/test.uml");
 		final Resource resource = new ResourceSetImpl().createResource(uri);
 		resource.getContents().add(model);
+
 		// when
 		final ValidationResult result = new ValidationResult(resource);
-		UMLValidation.validate(resource, result);
+		new UMLValidation(resource).validate(result);
+
 		// then
 		assertEquals("unexpected validation results: " + result, 0, result.count());
 	}
@@ -45,13 +46,14 @@ public class UMLValidationTest {
 		final URI uri = URI.createURI("mem:/test.uml");
 		final Resource resource = new ResourceSetImpl().createResource(uri);
 		resource.getContents().add(model);
+
 		// when
 		final ValidationResult result = new ValidationResult(resource);
-		UMLValidation.validate(resource, result);
-		ValidationReport report = new ValidationReport(result);
-		System.out.println(report.create());
+		new UMLValidation(resource).validate(result);
+		// System.out.println(new ValidationReport(result).create()); // useful for debugging
+
 		// then
-		assertEquals("unexpected validation results: " + result, 4,
+		assertEquals("unexpected validation results: " + result, 3,
 				result.getUmlErrors().size() + result.getUmlWarnings().size());
 	}
 

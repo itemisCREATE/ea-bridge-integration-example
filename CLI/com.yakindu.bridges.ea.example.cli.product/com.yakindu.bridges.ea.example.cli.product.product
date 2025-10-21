@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="YAKINDU EA-Bridge Example CLI" uid="ExampleCLI" id="org.eclipse.equinox.p2.director.product" application="com.yakindu.bridges.ea.example.cli.ExampleCLI" version="1.0" useFeatures="true" includeLaunchers="true">
+<product name="Itemis INTEGRATE-EA and CREATE Example CLI" uid="IntegrateEAExampleCLI" id="org.eclipse.equinox.p2.director.product" application="com.yakindu.bridges.ea.example.cli.ItemisIntegrateEAExampleCLI" version="1.0" type="features" includeLaunchers="true" autoIncludeRequirements="true">
 
    <configIni use="default">
    </configIni>
@@ -15,25 +15,24 @@
 
    <windowImages/>
 
-
-   <launcher name="ExampleCLI">
+   <launcher name="IntegrateEAExampleCLI">
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
 
    <vm>
-      <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11</windows>
+      <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21</windows>
    </vm>
 
    <plugins>
    </plugins>
 
    <features>
-      <feature id="org.eclipse.justj.openjdk.hotspot.jre.full" installMode="root"/>
       <feature id="com.yakindu.bridges.ea.example.cli.feature" installMode="root"/>
       <feature id="com.yakindu.licmgmt.feature" installMode="root"/>
       <feature id="org.eclipse.platform" installMode="root"/>
+      <feature id="org.eclipse.justj.openjdk.hotspot.jre.minimal.stripped" installMode="root"/>
    </features>
 
    <configurations>

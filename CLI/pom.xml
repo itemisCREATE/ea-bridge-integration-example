@@ -2,7 +2,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>YAKINDU EA-Bridge Example CLI</name>
+	<name>Itemis INTEGRATE-EA and CREATE Example CLI</name>
 
 	<groupId>com.yakindu.bridges.ea.example.cli</groupId>
 	<artifactId>root</artifactId>
@@ -11,16 +11,17 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho.version>2.6.0</tycho.version>
-		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+		<tycho.version>4.0.13</tycho.version>
+		<maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 	</properties>
 
 	<modules>
 		<module>com.yakindu.bridges.ea.example.cli</module>
+		<module>com.yakindu.bridges.ea.example.cli.codegen</module>
 		<module>com.yakindu.bridges.ea.example.cli.target</module>
 		<module>com.yakindu.bridges.ea.example.cli.validation</module>
 		<module>com.yakindu.bridges.ea.example.cli.feature</module>
@@ -111,7 +112,7 @@
 						<environment>
 							<os>macosx</os>
 							<ws>cocoa</ws>
-							<arch>x86_64</arch>
+							<arch>aarch64</arch>
 						</environment>
 					</environments>
 					<dependency-resolution>

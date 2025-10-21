@@ -5,7 +5,7 @@ Bundle-SymbolicName: com.yakindu.bridges.ea.example.cli.test
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG
 Automatic-Module-Name: com.yakindu.bridges.ea.example.cli.test
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.junit,
  org.eclipse.equinox.app,
  org.eclipse.osgi,
@@ -18,4 +18,7 @@ Require-Bundle: org.junit,
  org.eclipse.xtext,
  com.yakindu.bridges.ea.example.cli,
  com.yakindu.bridges.ea.example.cli.validation,
- com.google.gson
+ com.google.gson,
+ com.yakindu.sct.uml2.transformation,
+ com.yakindu.bridges.ea.example.cli.codegen,
+ com.yakindu.sct.model.stext

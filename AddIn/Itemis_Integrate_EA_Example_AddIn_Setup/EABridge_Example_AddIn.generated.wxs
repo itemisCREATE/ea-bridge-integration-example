@@ -1,0 +1,36 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER" />
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="ItemisIntegrateEAAddIn">
+            <Component Id="cmpo_VXzeh2.UpQac.Y4KR_Vac.pBw" Directory="INSTALLFOLDER" Guid="*">
+                <Class Id="{0212EA66-C960-473A-B7FB-0BB36729DF25}" Context="InprocServer32" Description="Itemis_Integrate_EA_Example_AddIn.ExampleValidationAddIn" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Itemis_Integrate_EA_Example_AddIn.ExampleValidationAddIn" Description="Itemis_Integrate_EA_Example_AddIn.ExampleValidationAddIn" />
+                </Class>
+                <Class Id="{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}" Context="InprocServer32" Description="Itemis_Integrate_EA_Example_AddIn.UI.ValidationIssuesControl" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Itemis_Integrate_EA_Example_AddIn.UI.ValidationIssuesControl" Description="Itemis_Integrate_EA_Example_AddIn.UI.ValidationIssuesControl" />
+                </Class>
+                <File Id="filZH_Ak6_WfjvQczBHCADH3uZ1GQk" KeyPath="yes" Source="$(var.Itemis_Integrate_EA_Example_AddIn.TargetDir)\Itemis_Integrate_EA_Example_AddIn.dll" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32\1.0.0.0" Name="Class" Value="Itemis_Integrate_EA_Example_AddIn.ExampleValidationAddIn" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32\1.0.0.0" Name="Assembly" Value="Itemis_Integrate_EA_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#filZH_Ak6_WfjvQczBHCADH3uZ1GQk]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32" Name="Class" Value="Itemis_Integrate_EA_Example_AddIn.ExampleValidationAddIn" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32" Name="Assembly" Value="Itemis_Integrate_EA_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{0212EA66-C960-473A-B7FB-0BB36729DF25}\InprocServer32" Name="CodeBase" Value="file:///[#filZH_Ak6_WfjvQczBHCADH3uZ1GQk]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32\1.0.0.0" Name="Class" Value="Itemis_Integrate_EA_Example_AddIn.UI.ValidationIssuesControl" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32\1.0.0.0" Name="Assembly" Value="Itemis_Integrate_EA_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#filZH_Ak6_WfjvQczBHCADH3uZ1GQk]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32" Name="Class" Value="Itemis_Integrate_EA_Example_AddIn.UI.ValidationIssuesControl" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32" Name="Assembly" Value="Itemis_Integrate_EA_Example_AddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E4F9A26A-5EDF-44BE-98A0-015E3D7C6E7A}\InprocServer32" Name="CodeBase" Value="file:///[#filZH_Ak6_WfjvQczBHCADH3uZ1GQk]" Type="string" Action="write" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

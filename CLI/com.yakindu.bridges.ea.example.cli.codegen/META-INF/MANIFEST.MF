@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Itemis CREATE Example CLI Codegen
+Bundle-SymbolicName: com.yakindu.bridges.ea.example.cli.codegen
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.yakindu.bridges.ea.example.cli.codegen,
+ com.yakindu.bridges.ea.example.cli.codegen.util
+Require-Bundle: com.yakindu.sct.model.sgen,
+ com.yakindu.sct.model.sgraph,
+ com.yakindu.sct.generator.core,
+ com.yakindu.sct.generator.cpp,
+ com.yakindu.sct.generator.c,
+ com.itemis.create.statechart.generator.csharp,
+ com.yakindu.sct.generator.python,
+ com.yakindu.sct.generator.java,
+ com.yakindu.sct.domain.java,
+ com.yakindu.sct.domain.c.runtime,
+ org.eclipse.gmf.runtime.notation,
+ com.yakindu.sct.ui.editor,
+ com.yakindu.sct.model.stext
+Bundle-Vendor: Itemis AG
+Automatic-Module-Name: com.yakindu.bridges.ea.example.cli.codegen
+Bundle-RequiredExecutionEnvironment: JavaSE-21

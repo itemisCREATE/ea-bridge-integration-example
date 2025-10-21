@@ -52,7 +52,7 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     #env:
-      #Solution_Name: EABridge_Example_AddIn                     # Replace with your solution name, i.e. MyWpfApp.sln.
+      #Solution_Name: Itemis_Integrate_EA_Example_AddIn          # Replace with your solution name, i.e. MyWpfApp.sln.
       #Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
       #Wap_Project_Directory: your-wap-project-directory-name    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
       #Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
@@ -82,7 +82,7 @@ jobs:
       run: |
         cd AddIn
         dir
-        msbuild /t:restore .\EABridge_Example_AddIn.sln /p:Configuration=Release
+        msbuild /t:restore .\Itemis_Integrate_EA_Example_AddIn.sln /p:Configuration=Release
       env:
         Configuration: ${{ matrix.configuration }}
 
@@ -98,7 +98,7 @@ jobs:
       run: |
         cd AddIn
         dir
-        msbuild EABridge_Example_AddIn.sln /p:Configuration=Release /p:Platform="Any CPU" /detailedsummary /v:detailed
+        msbuild Itemis_Integrate_EA_Example_AddIn.sln /p:Configuration=Release /p:Platform="Any CPU" /detailedsummary /v:detailed
 #        msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Configuration: ${{ matrix.configuration }}
@@ -115,4 +115,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Installer
-        path: AddIn/EABridge_Example_AddIn_Setup/bin/x86/Release/*.msi
+        path: AddIn/Itemis_Integrate_EA_Example_AddIn_Setup/bin/x86/Release/*.msi

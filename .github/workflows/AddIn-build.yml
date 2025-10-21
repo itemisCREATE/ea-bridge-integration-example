@@ -40,7 +40,7 @@ name: AddIn-build
 run-name: triggered by ${{ github.actor }}
 
 on: [ push ]
-
+ 
 jobs:
   build:
     strategy:

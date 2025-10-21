@@ -61,7 +61,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
+        lfs: true
         fetch-depth: 0
+    
+    - name: Verify interop dll
+      run: dir AddIn\Lib
 
     # Install the .NET Core workload
     - name: Install .NET Core

@@ -247,7 +247,7 @@ namespace ItemisIntegrateEA_Example_AddIn.UI
                 if (elementDiagrams != null && elementDiagrams.Count >= 1)
                 {
                     // we'll navigate to the first diagram for now
-                    diagram = elementDiagrams.GetAt(0);
+                    diagram = (EA.Diagram)elementDiagrams.GetAt(0);
                     Repository.OpenDiagram(diagram.DiagramID);
                     Repository.ActivateDiagram(diagram.DiagramID);
                 }

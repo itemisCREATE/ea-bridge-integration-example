@@ -35,6 +35,8 @@
 		<Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg" />
 		<Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg" />
 		<Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg" />
+		<Publish Dialog="BrowseDlg" Control="OK" Event="EndDialog" Value="Return" />
+		
 	</UI>
 
 	<UIRef Id="WixUI_Common" />

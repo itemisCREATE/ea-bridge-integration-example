@@ -3,7 +3,6 @@
   <PropertyGroup>
     <Name>Itemis_CREATE_EA_Example_AddIn_Setup</Name>
 	<OutputName>Itemis_CREATE_EA_Example_AddIn_Setup</OutputName>
-	<SuppressValidationICEs>ICE17</SuppressValidationICEs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DefineConstants>Debug</DefineConstants>
@@ -20,6 +19,9 @@
     <ProjectReference Include="..\Itemis_Integrate_EA_Example_AddIn\Itemis_Integrate_EA_Example_AddIn.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="6.0.2" />
+  <PropertyGroup>
+	<SuppressValidationICEs>ICE17</SuppressValidationICEs>
+  </PropertyGroup>
   <Target Name="BeforeBuild">
     <HeatFile ComponentGroupName="ItemisIntegrateEAAddInGroup" DirectoryRefId="INSTALLFOLDER" OutputFile="Itemis_Integrate_EA_Example_AddIn.generated.wxs" VerboseOutput="true" ToolPath="$(WixToolPath)" File="$(SolutionDir)Itemis_Integrate_EA_Example_AddIn\bin\$(Configuration)\Itemis_Integrate_EA_Example_AddIn.dll" AutogenerateGuids="true" SuppressRootDirectory="true" PreprocessorVariable="var.Itemis_Integrate_EA_Example_AddIn.TargetDir" />
     <HeatFile ComponentGroupName="DependencyDllComponentGroup" DirectoryRefId="INSTALLFOLDER" OutputFile="AddInDependency.generated.wxs" VerboseOutput="true" ToolPath="$(WixToolPath)" File="$(SolutionDir)Itemis_Integrate_EA_Example_AddIn\bin\$(Configuration)\Newtonsoft.Json.dll" AutogenerateGuids="true" SuppressRootDirectory="true" PreprocessorVariable="var.Itemis_Integrate_EA_Example_AddIn.TargetDir" />

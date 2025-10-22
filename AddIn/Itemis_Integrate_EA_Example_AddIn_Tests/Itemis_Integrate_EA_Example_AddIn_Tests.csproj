@@ -26,10 +26,8 @@
 
 	<ItemGroup>
 		<Reference Include="Interop.EA">
-			<HintPath>..\Lib\Interop.EA.dll</HintPath>
+			<HintPath>$(MSBuildThisFileDirectory)..\Lib\Interop.EA.dll</HintPath>
 			<EmbedInteropTypes>False</EmbedInteropTypes>
-			<Private>True</Private>
-			<SpecificVersion>False</SpecificVersion>
 		</Reference>
 	</ItemGroup>
 

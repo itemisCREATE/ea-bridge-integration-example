@@ -11,7 +11,7 @@
 		<!-- Upgrade: Remove previous installer -->
 		<Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
 		<Upgrade Id="A3AEAA62-10B3-482A-BB69-BE186C4BAE59">
-			<UpgradeVersion Minimum="1.0.0.0" Maximum="99.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
+			<UpgradeVersion Minimum="0.0.0.0" Maximum="1.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
 		</Upgrade>
 
 		<!-- Custom actions, see https://www.firegiant.com/wix/tutorial/events-and-actions/at-a-later-stage/) -->

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <Name>Itemis_CREATE_EA_Example_AddIn_Setup</Name>
 	<OutputName>Itemis_CREATE_EA_Example_AddIn_Setup</OutputName>
+	<SuppressValidationICEs>ICE17</SuppressValidationICEs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DefineConstants>Debug</DefineConstants>

@@ -1,16 +1,37 @@
 
-name: AddIn-build
+name: build
 run-name: triggered by ${{ github.actor }}
 
 on: [ push ]
  
 jobs:
-  build:
-    strategy:
-      matrix:
-        configuration: [Release]
-        #configuration: [Debug, Release]
 
+  cli-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build & test with Maven
+      run: |
+        cd CLI
+        mvn clean verify -B
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: CLI
+        compression-level: 0 # artifact is already compressed
+        retention-days: 2
+        path: CLI\com.yakindu.bridges.ea.example.cli.product\target\products\*.zip
+
+
+  addin-build:
     runs-on: windows-latest
 
     steps:
@@ -38,16 +59,12 @@ jobs:
       run: |
         cd AddIn
         msbuild /t:restore .\Itemis_Integrate_EA_Example_AddIn.sln /p:Configuration=Release
-      env:
-        Configuration: ${{ matrix.configuration }}
 
     # Create the app package by building and packaging the project
     - name: Create the app package
       run: |
         cd AddIn
         msbuild Itemis_Integrate_EA_Example_AddIn.sln /p:Configuration=Release /p:Platform="Any CPU" /detailedsummary /v:detailed
-      env:
-        Configuration: ${{ matrix.configuration }}
 
     # Upload the installer package
     - name: Upload build artifacts

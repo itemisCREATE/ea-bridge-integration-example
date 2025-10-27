@@ -3,6 +3,7 @@ name: build
 run-name: triggered by ${{ github.actor }}
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
  

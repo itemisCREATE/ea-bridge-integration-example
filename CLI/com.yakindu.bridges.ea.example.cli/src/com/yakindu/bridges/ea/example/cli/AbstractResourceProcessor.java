@@ -95,10 +95,18 @@ public abstract class AbstractResourceProcessor {
 			loadOptions.put(EAResource.OPTION_READONLY, true);
 			loadOptions.put(EAResource.OPTION_REPORT_TO_ERROR_LOG, false);
 			loadOptions.put(EAResource.OPTION_REPORT_AS_RESOURCE_MARKERS, false);
+			checkLInfo();
 		}
 		final Resource res = set.getResource(uri, true);
 		UMLModelUtils.adjustTimeEventsInModel(res);
 		return res;
+	}
+
+	private void checkLInfo() throws Exception {
+		@SuppressWarnings("restriction")
+		final String msg = com.yakindu.bridges.ea.core.internal.utils.LInfo.isV();
+		if (msg != null)
+			throw new Exception(msg);
 	}
 
 	protected String getNameOrGuidFromArguments(String[] args) {

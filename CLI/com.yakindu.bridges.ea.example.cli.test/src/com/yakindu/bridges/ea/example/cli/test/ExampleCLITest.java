@@ -64,7 +64,7 @@ public class ExampleCLITest {
 
 		// then
 		for (String segment : List.of(">> Loading '", ">> Collecting UML Elements DONE.", ">> Validating DONE.",
-				"Validation successfully finished.")) {
+				"CLI successfully finished.")) {
 			assertTrue("Missing in console output: \"" + segment + "\"\n\n" + output, output.contains(segment));
 		}
 

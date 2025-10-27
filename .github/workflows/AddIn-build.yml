@@ -20,7 +20,7 @@ jobs:
     - name: Build & test with Maven
       run: |
         cd CLI
-        mvn clean verify -B
+        mvn -T 2 clean verify -B
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4

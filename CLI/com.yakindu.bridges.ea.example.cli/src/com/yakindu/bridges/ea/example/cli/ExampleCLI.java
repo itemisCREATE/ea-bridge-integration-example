@@ -41,13 +41,13 @@ public class ExampleCLI implements IApplication {
 				try {
 					processor.run(processor instanceof CodeGeneratorFromUml ? AbstractResourceProcessor.skip(appArgs, 1)
 							: appArgs);
-					System.out.println("Validation successfully finished.");
+					System.out.println("CLI successfully finished.");
 					return IApplication.EXIT_OK;
 
 				} catch (Exception e) {
 
 					// unexpected error - print stack trace!
-					System.out.println("Validation failed unexpectedly:");
+					System.out.println("CLI failed unexpectedly:");
 					e.printStackTrace();
 				}
 				return EXIT_ERROR;

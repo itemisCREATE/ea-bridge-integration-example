@@ -28,7 +28,7 @@ jobs:
         name: CLI
         compression-level: 0 # artifact is already compressed
         retention-days: 2
-        path: CLI\com.yakindu.bridges.ea.example.cli.product\target\products\*.zip
+        path: CLI/com.yakindu.bridges.ea.example.cli.product/target/products/*.zip
 
 
   addin-build:

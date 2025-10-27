@@ -5,7 +5,52 @@ A simple EA Add-in calls a command-line application (CLI) which loads the `.eap/
 For the validation use-case, the Add-in displays the validation issues in a custom UI view including the possibility to navigate to the corresponding elements in the EA project browser or in existing diagrams. 
 The following diagram illustrates how this example works:
 
-![structure](./eabridge_example_uscase.png)
+```mermaid
+flowchart TB
+    user[(User)]
+    user -- - validate model<br>- generate code --> Action
+    user -- navigate to elements --> View
+
+    code[["C/C++/C#/Java/Python files"]]
+    CREATE -- generate --> code
+
+    eap[[".eap(x)/.qea(x) File"]]
+    EA -- query model --> eap
+    INTEGRATE -- load model --> eap
+
+    subgraph EA["Enterprise Architect"]
+        subgraph AddIn["EA AddIn"]
+            View["Validation View"]
+            Action["Actions"]
+            CLIHandler["CLI Handler"]
+        end
+        Browser["Project Browser"]
+        Diagram
+    end
+    Action --> CLIHandler
+    CLIHandler -- update--> View
+    View -- select element --> Browser
+    View -- select element --> Diagram
+
+    subgraph CLI["CLI Application"]
+        Logic["CLI Logic"]
+        INTEGRATE["Itemis INTEGRATE-EA"]
+        CREATE["Itemis CREATE"]
+        Validator
+        UML["UML"]
+        Rules["Custom Rules"]
+    end
+
+
+    Logic -- load UML Model --> INTEGRATE
+    Logic -- call --> Validator
+    Logic -- call --> CREATE
+    CLIHandler -- call --> Logic
+    Logic -- Validation Report (JSON) --> CLIHandler
+    Validator -- uses --> UML
+    Validator -- uses --> CREATE
+    Validator -- uses --> Rules
+```
 
 This example may also serve as a template for further use cases such as custom model validation or code generation, or any kind reporting.
 
@@ -46,7 +91,7 @@ Please follow these steps to try out the pre-built example on your local machine
 
     `cd CLI`
 
-    `mvn clean package`
+    `mvn clean verify`
 
 * EA Add-in:
     The Add-in is written in C# and uses the [automation API provided by Enterprise Architect](https://sparxsystems.com/enterprise_architect_user_guide/17.0/add-ins___scripting/addins_2.html) to access the model and add custom views to the UI.

@@ -2,7 +2,9 @@
 name: build
 run-name: triggered by ${{ github.actor }}
 
-on: [ push ]
+on:
+  push:
+    branches: [main]
  
 jobs:
 

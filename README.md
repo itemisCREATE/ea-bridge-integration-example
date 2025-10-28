@@ -1,8 +1,19 @@
-# Enterprise Architect - Itemis CREATE Integration Example
+# Enterprise Architect - powerful customization for validation & code generation
 
-The example contained in this repository demonstrate the integration of the Enterprise Architect (EA) modeling tool with a command-line Java application for **model validation** and **code-generation** for state-machines.
-A simple EA Add-in calls a command-line application (CLI) which loads the `.eap/.eapx` file, performs validation / code-generation on that model and returns the result.
-For the validation use-case, the Add-in displays the validation issues in a custom UI view including the possibility to navigate to the corresponding elements in the EA project browser or in existing diagrams. 
+The example contained in this repository demonstrates the integration of the Enterprise Architect (EA) modeling tool with a command-line Java application for **model validation** on UML models and **code-generation** specifically for state-machines.
+A simple EA Add-in calls a command-line application (CLI) which loads the `.eap(x)/.qea(x)` file, performs validation / code-generation on that model and returns the result.
+
+For the validation use-case, standardized UML checks and also custom validation rules are executed, and the Add-in displays the validation issues in a custom UI view including the possibility to navigate to the corresponding elements in the EA project browser or in existing diagrams. 
+For the code-generation use-case, UML state-machines can be generated to different target languages.
+
+Keep in mind that this demonstrator is just an example and not feature-complete. It serves as a starting point for customized model validations, code generation, or any kind of reporting.
+
+**Advantages** of this approach are:
+
+* **Performance**: the CLI application loads and processes large EA models *much faster* (up to 50x) than using EA's API.
+* **Standard compliance**: the model is loaded as a *standard UML model* and can be processed with *powerful languages* such as Java, Kotlin, or Xtend.
+* **Seamless integration**: the EA Add-in *integrates* powerful model processing into the UI of Enterprise Architect.
+
 The following diagram illustrates how this example works:
 
 ```mermaid
@@ -52,13 +63,6 @@ flowchart TB
     Validator -- uses --> Rules
 ```
 
-This example may also serve as a template for further use cases such as custom model validation or code generation, or any kind reporting.
-
-**Advantages** of this approach are:
-
-* **Performance**: the CLI application loads and processes large EA models *much faster* (up to 50x) than using EA's API.
-* **Standard compliance**: the model is loaded as a *standard UML model* and can be processed with *powerful languages* such as Java, Kotlin, or Xtend.
-* **Seamless integration**: the EA Add-in *integrates* powerful model processing into the UI of Enterprise Architect.
 
 *This example is tested with Enterprise Architect 17.*
 

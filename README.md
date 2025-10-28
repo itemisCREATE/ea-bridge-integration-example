@@ -1,4 +1,4 @@
-# Enterprise Architect - powerful customization for validation & code generation
+# Powerful customization for validation & code generation for Enterprise Architect
 
 The example contained in this repository demonstrates the integration of the Enterprise Architect (EA) modeling tool with a command-line Java application for **model validation** on UML models and **code-generation** specifically for state-machines.
 A simple EA Add-in calls a command-line application (CLI) which loads the `.eap(x)/.qea(x)` file, performs validation / code-generation on that model and returns the result.
@@ -9,8 +9,7 @@ For the code-generation use-case, UML state-machines can be generated to differe
 Keep in mind that this demonstrator is just an example and not feature-complete. It serves as a starting point for customized model validations, code generation, or any kind of reporting.
 
 **Advantages** of this approach are:
-
-* **Performance**: the CLI application loads and processes large EA models *much faster* (up to 50x) than using EA's API.
+* **Performance**: the CLI application loads and processes *large* EA models *much faster* (up to 50x) than using EA's API.
 * **Standard compliance**: the model is loaded as a *standard UML model* and can be processed with *powerful languages* such as Java, Kotlin, or Xtend.
 * **Seamless integration**: the EA Add-in *integrates* powerful model processing into the UI of Enterprise Architect.
 
@@ -52,7 +51,6 @@ flowchart TB
         Rules["Custom Rules"]
     end
 
-
     Logic -- load UML Model --> INTEGRATE
     Logic -- call --> Validator
     Logic -- call --> CREATE
@@ -63,7 +61,6 @@ flowchart TB
     Validator -- uses --> Rules
 ```
 
-
 *This example is tested with Enterprise Architect 17.*
 
 
@@ -71,11 +68,14 @@ flowchart TB
 
 This repository consists of two codebases:
     
-* The command-line interface (CLI) is a headless Java application containing an [EA-integration adapter](https://www.itemis.com/en/yakindu/ea-bridge/) for loading UML models from eap-files and [itemis CREATE](https://www.itemis.com/en/products/itemis-create/) for code-generation; it further performs UML syntax validation and runs an exemplary custom validation rule.
-The result of this validation is stored in a json-file for further use with other tools such as the EA Add-in below.
+* The command-line interface (CLI) is a headless Java Eclipse application containing an [EA-integration adapter](https://www.itemis.com/en/yakindu/ea-bridge/) for loading UML models from ea-files and [itemis CREATE](https://www.itemis.com/en/products/itemis-create/) for code-generation.<br>
+The validation performs UML syntax validation, runs an exemplary custom validation rule, and returns the result as JSON for further processing with the EA Add-in.<br>
+The code-generation collects state-machines and generates code for the selected languages (C/C++/C#/Java/Python).
 
-* The EA Add-in allows the user to validate the model using a UI integrated in Enterprise Architect; it further lists the validation results in a custom view inside EA without the need to use the command line.
+* The EA Add-in provides UI actions in EA for triggering model validation and code-generation; it further lists the validation results in a custom view inside EA without the need to use the command line.
 A *double click* on a validation result in EA selects the corresponding element in the Project Browser and opens the diagram containing that element (if such a diagram exists).
+
+ℹ️ _Both, the CLI and the Add-in, serve as starting points to add powerful building blocks into your tool-chain; i.e. they can easily be extended with further use-cases like further customized actions in EA or generation of other kinds of code like reports or component models._
 
 Please follow these steps to try out the pre-built example on your local machine:
 1. Download the [zip-package](https://github.com/itemisCREATE/ea-bridge-integration-example/releases/latest) and extract it to some location on your hard-drive.
@@ -91,7 +91,7 @@ Please follow these steps to try out the pre-built example on your local machine
 
 * CLI application:
 
-    The CLI is an OSGi application written in Java. Simply run the following maven command to build it.  
+    The CLI is an OSGi application written in Java (it requires Java 21). Simply run the following maven command to build it.  
 
     `cd CLI`
 

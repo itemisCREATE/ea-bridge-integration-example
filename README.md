@@ -17,19 +17,19 @@ The following diagram illustrates how this example works:
 
 ```mermaid
 flowchart TB
-    user[(User)]
+    user@{ shape: circle, label: "User" }
     user -- - validate model<br>- generate code --> Action
     user -- navigate to elements --> View
 
-    code[["C/C++/C#/Java/Python files"]]
-    CREATE -- generate --> code
+    code@{ shape: docs, label: "C/C++/C#/Java/Python Files" }
+    CREATE -- generates --> code
 
-    eap[[".eap(x)/.qea(x) File"]]
+    eap[(".eap(x)/.qea(x) File")]
     EA -- query model --> eap
     INTEGRATE -- load model --> eap
 
     subgraph EA["Enterprise Architect"]
-        subgraph AddIn["EA AddIn"]
+        subgraph AddIn["EA Add-in"]
             View["Validation View"]
             Action["Actions"]
             CLIHandler["CLI Handler"]
@@ -51,11 +51,11 @@ flowchart TB
         Rules["Custom Rules"]
     end
 
-    Logic -- load UML Model --> INTEGRATE
+    Logic -- load UML model --> INTEGRATE
     Logic -- call --> Validator
     Logic -- call --> CREATE
     CLIHandler -- call --> Logic
-    Logic -- Validation Report (JSON) --> CLIHandler
+    Logic -. Validation Report (JSON) .-> CLIHandler
     Validator -- uses --> UML
     Validator -- uses --> CREATE
     Validator -- uses --> Rules

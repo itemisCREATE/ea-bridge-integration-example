@@ -39,8 +39,8 @@ flowchart TB
     end
     Action --> CLIHandler
     CLIHandler -- update--> View
-    View -- select element --> Browser
-    View -- select element --> Diagram
+    View -- highlight element --> Browser
+    View -- highlight element --> Diagram
 
     subgraph CLI["CLI Application"]
         Logic["CLI Logic"]

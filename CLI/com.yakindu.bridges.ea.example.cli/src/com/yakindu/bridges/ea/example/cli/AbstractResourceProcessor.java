@@ -99,6 +99,7 @@ public abstract class AbstractResourceProcessor {
 		}
 		final Resource res = set.getResource(uri, true);
 		UMLModelUtils.adjustTimeEventsInModel(res);
+		UMLModelUtils.fixEffects(res);
 		return res;
 	}
 

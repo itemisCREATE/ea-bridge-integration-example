@@ -43,9 +43,9 @@
             this.cliPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cliPathTextBox.Location = new System.Drawing.Point(24, 73);
-            this.cliPathTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cliPathTextBox.Margin = new System.Windows.Forms.Padding(6);
             this.cliPathTextBox.Name = "cliPathTextBox";
-            this.cliPathTextBox.Size = new System.Drawing.Size(1266, 31);
+            this.cliPathTextBox.Size = new System.Drawing.Size(1292, 31);
             this.cliPathTextBox.TabIndex = 0;
             this.cliPathTextBox.TextChanged += new System.EventHandler(this.cliPathTextBox_TextChanged);
             // 
@@ -53,7 +53,7 @@
             // 
             this.browseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.browseButton.Location = new System.Drawing.Point(1328, 69);
-            this.browseButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.browseButton.Margin = new System.Windows.Forms.Padding(6);
             this.browseButton.Name = "browseButton";
             this.browseButton.Size = new System.Drawing.Size(216, 44);
             this.browseButton.TabIndex = 1;
@@ -64,8 +64,8 @@
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(1100, 225);
-            this.okButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.okButton.Location = new System.Drawing.Point(1100, 189);
+            this.okButton.Margin = new System.Windows.Forms.Padding(6);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(216, 44);
             this.okButton.TabIndex = 2;
@@ -77,8 +77,8 @@
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(1328, 225);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cancelButton.Location = new System.Drawing.Point(1328, 189);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(6);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(216, 44);
             this.cancelButton.TabIndex = 3;
@@ -123,7 +123,7 @@
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.cliPathTextBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1574, 319);
             this.MinimizeBox = false;

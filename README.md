@@ -84,9 +84,9 @@ Please follow these steps to try out the pre-built example on your local machine
 4. Validate your model via the context-menu on a package in the Project Browser and select *Specialize* %rarr; *Itemis Integrate-EA* &rarr; *Example Model Validation* &rarr; it will take a few seconds, then check the Add-in window for the result.
 5. Generate code via the context-menu on a state-machine and select *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Generate Code...* &rarr; a dialog will popup to configure and finally run the code generation.
 
-![EA demo](./EA_demo.gif)
+![EA demo](./EA-Validation-Demo.gif)
 
-![CREATE code generation demo](./CreateIntegrationDemonstrator.gif)
+![CREATE code generation demo](./EA-Codegen-Demo.gif)
 
 
 ## How to build this example

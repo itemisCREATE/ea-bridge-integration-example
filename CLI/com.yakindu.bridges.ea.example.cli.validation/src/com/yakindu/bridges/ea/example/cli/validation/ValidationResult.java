@@ -33,7 +33,7 @@ public class ValidationResult {
 
 	private final Map<EObject, List<String>> customWarnings = new HashMap<>();
 	private final Map<EObject, List<String>> customErrors = new HashMap<>();
-	
+
 	private final Map<EObject, List<String>> sctWarnings = new HashMap<>();
 	private final Map<EObject, List<String>> sctErrors = new HashMap<>();
 
@@ -58,6 +58,8 @@ public class ValidationResult {
 					MapUtils.addToListMap(loadWarnings, element, DEFAULT_LIST_SIZE, issue.getMessage());
 				}
 			}
+		} else if (issue instanceof ModelError modelError) {
+			MapUtils.addToListMap(loadErrors, modelError.getElement(), DEFAULT_LIST_SIZE, issue.getMessage());
 		} else {
 			final String msg = String.format("%s while loading '%s' (line %d, column %d): %s", //
 					issue.getClass().getSimpleName(), issue.getLocation(), issue.getLine(), issue.getColumn(),
@@ -81,14 +83,15 @@ public class ValidationResult {
 	public void addCustomWarning(EObject object, String message) {
 		MapUtils.addToListMap(customWarnings, object, DEFAULT_LIST_SIZE, message);
 	}
-	
-	public void addSctError(EObject object, String message, StextResource resource, Function<EObject, EObject> sctToUml) {
+
+	public void addSctError(EObject object, String message, StextResource resource,
+			Function<EObject, EObject> sctToUml) {
 		MapUtils.addToListMap(sctErrors, object, DEFAULT_LIST_SIZE, message);
 	}
-	
+
 	public void addSctWarning(EObject object, String message, StextResource resource,
 			Function<EObject, EObject> sctToUml) {
-			MapUtils.addToListMap(sctWarnings, object, DEFAULT_LIST_SIZE, message);
+		MapUtils.addToListMap(sctWarnings, object, DEFAULT_LIST_SIZE, message);
 	}
 
 	public int count() {
@@ -154,7 +157,7 @@ public class ValidationResult {
 	public Map<EObject, List<String>> getCustomErrors() {
 		return Collections.unmodifiableMap(customErrors);
 	}
-	
+
 	public Map<EObject, List<String>> getSctWarnings() {
 		return Collections.unmodifiableMap(sctWarnings);
 	}

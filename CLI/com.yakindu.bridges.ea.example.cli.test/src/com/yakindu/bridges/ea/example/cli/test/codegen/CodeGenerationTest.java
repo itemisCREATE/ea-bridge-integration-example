@@ -55,7 +55,7 @@ public class CodeGenerationTest {
 	private static final String PLUGIN_ID = "com.yakindu.bridges.ea.example.cli.test";
 
 	private static final URI TEST_MODEL = URI.createPlatformPluginURI(PLUGIN_ID + "/testModels/Example.eap", true);
-	private static final String[] TEST_STMS = { "Light", "Switch" };
+	private static final String[] TEST_STMS = { "DimmableLight", "Switch" };
 
 	@Parameters(name = "{0}")
 	public static Iterable<? extends Object> testParameterGenLanguages() {

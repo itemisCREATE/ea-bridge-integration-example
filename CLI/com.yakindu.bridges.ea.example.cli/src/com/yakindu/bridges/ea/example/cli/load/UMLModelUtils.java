@@ -6,19 +6,28 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.uml2.uml.CallEvent;
+import org.eclipse.uml2.uml.Event;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.OpaqueBehavior;
+import org.eclipse.uml2.uml.SignalEvent;
 import org.eclipse.uml2.uml.TimeEvent;
 
 public class UMLModelUtils {
 
-	public static void adjustTimeEventsInModel(Resource resource) {
-		collect(resource.getAllContents(), TimeEvent.class).forEach(timeEvent -> {
-			/*
-			 * Needed for UML2SCT transformation
-			 */
-			timeEvent.eSetDeliver(false);
-			timeEvent.setIsRelative(true);
+	public static void fixEvents(Resource resource) {
+		collect(resource.getAllContents(), Event.class).forEach(event -> {
+			event.eSetDeliver(false);
+			if (event instanceof TimeEvent timeEvent) {
+				/*
+				 * Needed for UML2SCT transformation
+				 */
+				timeEvent.setIsRelative(true);
+			} else if (event instanceof SignalEvent signalEvent && signalEvent.getSignal() != null) {
+				signalEvent.setName(signalEvent.getSignal().getName());
+			} else if (event instanceof CallEvent callEvent && callEvent.getOperation() != null) {
+				callEvent.setName(callEvent.getOperation().getName());
+			}
 		});
 	}
 

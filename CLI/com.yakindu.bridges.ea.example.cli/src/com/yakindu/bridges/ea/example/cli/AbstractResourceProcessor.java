@@ -98,8 +98,8 @@ public abstract class AbstractResourceProcessor {
 			checkLInfo();
 		}
 		final Resource res = set.getResource(uri, true);
-		UMLModelUtils.adjustTimeEventsInModel(res);
-		UMLModelUtils.fixEffects(res);
+		UMLModelUtils.fixModelForStateMachines(res);
+		
 		return res;
 	}
 

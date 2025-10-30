@@ -99,7 +99,7 @@ public class CodeGenerationTest {
 	public void checkGeneratedFilesForModel() {
 		final ResourceSetImpl set = new ResourceSetImpl();
 		final Resource resource = set.getResource(TEST_MODEL, true);
-		UMLModelUtils.adjustTimeEventsInModel(resource);
+		UMLModelUtils.fixModelForStateMachines(resource);
 
 		for (String stm : TEST_STMS) {
 			final List<Set<String>> validatedStatecharts = validateStatechartsForResource(resource, stm);
@@ -168,7 +168,6 @@ public class CodeGenerationTest {
 	}
 
 	private List<Set<String>> validateStatechartsForResource(Resource res, String nameOrGuid) {
-		UMLModelUtils.adjustTimeEventsInModel(res);
 		final List<Element> elements = UMLElementCollector.loadElements(res, nameOrGuid, false);
 		final Collection<StateMachine> loadedStatemachines = UMLElementCollector.collectStatemachines(elements);
 		final Set<String> stateMachinesFailed = new TreeSet<>();

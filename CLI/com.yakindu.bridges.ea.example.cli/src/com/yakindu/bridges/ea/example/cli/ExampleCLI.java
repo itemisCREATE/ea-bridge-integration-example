@@ -23,7 +23,6 @@ public class ExampleCLI implements IApplication {
 			+ "  " + APP_GEN + " <language> <eap-file> <output-folder> <state-machine-name/-guid> [-v]\n" //
 			+ "Language options are: \"C\", \"C++\", \"C#\", \"Java\", \"Python\"\n" + VERBOSE_OUTPUT
 			+ " enables 'verbose' output" //
-
 	;
 
 	@Override

@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.yakindu.bridges.ea.core.EAResource;
-import com.yakindu.bridges.ea.example.cli.load.UMLModelUtils;
 
 public abstract class AbstractResourceProcessor {
 
@@ -97,10 +96,7 @@ public abstract class AbstractResourceProcessor {
 			loadOptions.put(EAResource.OPTION_REPORT_AS_RESOURCE_MARKERS, false);
 			checkLInfo();
 		}
-		final Resource res = set.getResource(uri, true);
-		UMLModelUtils.fixModelForStateMachines(res);
-		
-		return res;
+		return set.getResource(uri, true);
 	}
 
 	private void checkLInfo() throws Exception {

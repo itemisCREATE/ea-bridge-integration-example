@@ -42,7 +42,6 @@ import com.yakindu.bridges.ea.example.cli.codegen.CodeGeneratorFromUml;
 import com.yakindu.bridges.ea.example.cli.codegen.StmCodeGenerator.LANG;
 import com.yakindu.bridges.ea.example.cli.codegen.util.StatechartUtil;
 import com.yakindu.bridges.ea.example.cli.load.UMLElementCollector;
-import com.yakindu.bridges.ea.example.cli.load.UMLModelUtils;
 import com.yakindu.bridges.ea.example.cli.test.CliTestRunner;
 import com.yakindu.bridges.ea.example.cli.validation.SCTValidation;
 import com.yakindu.sct.model.sgraph.Statechart;
@@ -99,7 +98,6 @@ public class CodeGenerationTest {
 	public void checkGeneratedFilesForModel() {
 		final ResourceSetImpl set = new ResourceSetImpl();
 		final Resource resource = set.getResource(TEST_MODEL, true);
-		UMLModelUtils.fixModelForStateMachines(resource);
 
 		for (String stm : TEST_STMS) {
 			final List<Set<String>> validatedStatecharts = validateStatechartsForResource(resource, stm);

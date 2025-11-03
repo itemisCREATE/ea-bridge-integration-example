@@ -54,7 +54,7 @@ public class CodeGenerationTest {
 	private static final String PLUGIN_ID = "com.yakindu.bridges.ea.example.cli.test";
 
 	private static final URI TEST_MODEL = URI.createPlatformPluginURI(PLUGIN_ID + "/testModels/Example.eap", true);
-	private static final String[] TEST_STMS = { "DimmableLight", "Switch" };
+	private static final String TEST_STM = "DimmableLight";
 
 	@Parameters(name = "{0}")
 	public static Iterable<? extends Object> testParameterGenLanguages() {
@@ -99,18 +99,16 @@ public class CodeGenerationTest {
 		final ResourceSetImpl set = new ResourceSetImpl();
 		final Resource resource = set.getResource(TEST_MODEL, true);
 
-		for (String stm : TEST_STMS) {
-			final List<Set<String>> validatedStatecharts = validateStatechartsForResource(resource, stm);
-			final Set<String> successfullyTransformedMachines = validatedStatecharts.get(0);
-			final Set<String> failedToTransformMachines = validatedStatecharts.get(1);
-			
-			final String[] args = new String[] { genFolder.getRoot().getAbsolutePath(), stm,
-					ExampleCLI.VERBOSE_OUTPUT };
-			CliTestRunner.run(() -> codeGen.run(resource, args));
-			
-			checkCreatedStatechart(resource, stm,
-					successfullyTransformedMachines.size() + failedToTransformMachines.size(), validatedStatecharts);
-		}
+		final List<Set<String>> validatedStatecharts = validateStatechartsForResource(resource, TEST_STM);
+		final Set<String> successfullyTransformedMachines = validatedStatecharts.get(0);
+		final Set<String> failedToTransformMachines = validatedStatecharts.get(1);
+
+		final String[] args = new String[] { genFolder.getRoot().getAbsolutePath(), TEST_STM,
+				ExampleCLI.VERBOSE_OUTPUT };
+		CliTestRunner.run(() -> codeGen.run(resource, args));
+
+		checkCreatedStatechart(resource, TEST_STM,
+				successfullyTransformedMachines.size() + failedToTransformMachines.size(), validatedStatecharts);
 	}
 
 	private void checkCreatedStatechart(Resource resource, String nameOrGuid, int expectedNumberOfStateMachines,

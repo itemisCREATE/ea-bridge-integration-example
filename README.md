@@ -24,14 +24,14 @@ It serves as a starting point for customized code generation, model validations,
 
 ## How to run this example
 
-Follow these steps to try install the example on your local machine:
+Follow these steps to try the example on your local machine:
 1. Download the [zip-package](https://github.com/itemisCREATE/ea-bridge-integration-example/releases/latest) and extract it to some location on your hard-drive.
 2. Download the [Add-in installer](https://github.com/itemisCREATE/ea-bridge-integration-example/releases/latest) and install it (EA must *not* be running).
 3. Start EA, go to *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Configure CLI Path* &rarr; and set the path to the folder into which you extracted the zip-package.
-4. To validate your model: open the context-menu on a package in the Project Browser and select *Specialize* %rarr; *Itemis Integrate-EA* &rarr; *Example Model Validation* &rarr; it will take a few seconds\*, then check the Add-in window for the result.
+4. To validate your model: open the context-menu on a package in the Project Browser and select *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Example Model Validation* &rarr; it will take a few seconds\*, then check the Add-in window for the result.
 5. To generate code: open the context-menu on a state-machine and select *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Generate Code...* &rarr; a dialog will popup to configure and finally run the code generation; it will take a few seconds\*, then check the result in the selected target folder.
 
-\* *keep in mind that a new processed is spawned in the background to perform the task; this takes a while, but processing the model is very fast. So performance only pays off with large models.*
+\* *keep in mind that a new processed is spawned in the background to perform the task; this takes a while, but processing the model is very fast. So performance first pays off with large models.*
 
 
 ## Technical details
@@ -87,6 +87,12 @@ flowchart TB
     Validator -- uses --> UML
     Validator -- uses --> CREATE
     Validator -- uses --> Rules
+
+    click CLIHandler "https://github.com/itemisCREATE/ea-bridge-integration-example/blob/main/AddIn/Itemis_Integrate_EA_Example_AddIn/ApplicationHandlers/ExampleHeadlessApplicationHandler.cs" "ExampleHeadlessApplicationHandler.cs"
+    click View "https://github.com/itemisCREATE/ea-bridge-integration-example/blob/main/AddIn/Itemis_Integrate_EA_Example_AddIn/UI/ValidationIssuesControl.cs" "ValidationIssuesControl.cs"
+    click Logic "https://github.com/itemisCREATE/ea-bridge-integration-example/blob/main/CLI/com.yakindu.bridges.ea.example.cli/src/com/yakindu/bridges/ea/example/cli/ExampleCLI.java" "ExampleCLI.java"
+    click Validator "https://github.com/itemisCREATE/ea-bridge-integration-example/blob/main/CLI/com.yakindu.bridges.ea.example.cli.validation/src/com/yakindu/bridges/ea/example/cli/validation/ModelValidation.java" "ModelValidation.java"
+    click Rules "https://github.com/itemisCREATE/ea-bridge-integration-example/blob/main/CLI/com.yakindu.bridges.ea.example.cli.validation/src/com/yakindu/bridges/ea/example/cli/validation/custom/RuleAbstractClassPrefix.java" "RuleAbstractClassPrefix.java"
 ```
 
 This repository consists of two codebases:

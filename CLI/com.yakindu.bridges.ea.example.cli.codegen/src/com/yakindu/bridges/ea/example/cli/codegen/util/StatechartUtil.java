@@ -36,10 +36,6 @@ public class StatechartUtil {
 	private static final int INITIAL_TEXT_COMPARTMENT_HEIGHT = 400;
 	private static final int INITIAL_TEXT_COMPARTMENT_WIDTH = 200;
 	
-	private static final String YAKINDU_SCT_DOMAIN_C = "com.yakindu.domain.c";
-	
-	private static final String YAKINDU_SCT_DOMAIN_JAVA = "com.yakindu.domain.java";
-	
 	@Inject
 	private Provider<StextResource> resourceProvider;
 	

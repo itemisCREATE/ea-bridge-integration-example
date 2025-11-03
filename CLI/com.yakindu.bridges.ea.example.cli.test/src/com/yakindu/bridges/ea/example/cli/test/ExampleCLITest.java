@@ -30,7 +30,9 @@ public class ExampleCLITest {
 
 	@Test
 	public void validation_LightSwitchModel() throws Exception {
-		assertNoIssueInModel("LightSwitchStateMachine");
+		assertIssuesInModel("LightSwitchStateMachine",
+				"[W:SCT] 'ExampleModel::LightSwitchStateMachine::LightSwitch::Switch::{region [0] Region}::{transition [1] Transition}': Out event 'powerButtonPressed' is never raised in this statechart. The transition trigger is therefore never active.",
+				"[W:SCT] 'ExampleModel::LightSwitchStateMachine::LightSwitch::Switch::{region [0] Region}::{transition [2] Transition}': Out event 'dimmerButtonPressed' is never raised in this statechart. The transition trigger is therefore never active.");
 	}
 
 	@Test

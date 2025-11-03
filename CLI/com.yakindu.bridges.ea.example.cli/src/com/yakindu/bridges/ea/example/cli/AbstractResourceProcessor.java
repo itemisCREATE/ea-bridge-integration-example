@@ -33,7 +33,7 @@ public abstract class AbstractResourceProcessor {
 					return null;
 				}
 			});
-			run(resource, skip(args, 1));
+			System.out.println(run(resource, skip(args, 1)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

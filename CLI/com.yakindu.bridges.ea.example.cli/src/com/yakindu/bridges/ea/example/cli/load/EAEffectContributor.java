@@ -75,6 +75,7 @@ public class EAEffectContributor implements IElementContributor {
 		 */
 		final Map<String, Signal> allSignals = collectSignals(context.getEAResource());
 		elements.forEach(stm -> convertEffects((StateMachine) stm, allSignals));
+		fixEffects(context.getEAResource());
 
 		return null;
 	}
@@ -205,4 +206,12 @@ public class EAEffectContributor implements IElementContributor {
 			List<Integer> connectorIds, IDatabaseAccess db) {
 		return 0;
 	}
+	
+	private static void fixEffects(Resource resource) {
+		collect(resource.getAllContents(), OpaqueBehavior.class).forEach(behavior -> {
+			if (behavior.getBodies().isEmpty() || behavior.getBodies().get(0).isBlank()) {
+				behavior.getBodies().add(behavior.getName());
+			}
+		});
+	} 
 }

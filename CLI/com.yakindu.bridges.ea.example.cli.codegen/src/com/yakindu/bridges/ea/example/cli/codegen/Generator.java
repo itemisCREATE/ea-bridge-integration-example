@@ -127,14 +127,14 @@ public class Generator {
 	protected void invokeGenerator(Statechart statechart, GeneratorEntry entry) {
 		System.out.println(String.format("Generating %s to folder %s\\%s ...", statechart.getName(), outputPath,
 				statechart.getName()));
-
-		if (language == LANG.CPP || language == LANG.C) {
-			Guice.createInjector(Modules.override(new CSTextRuntimeModule()).with(getGeneratorModule(entry)))
-					.injectMembers(this);
-		} else {
+		//TODO: https://github.com/itemisCREATE/ea-bridge-integration-example/issues/11
+//		if (language == LANG.CPP || language == LANG.C) {
+//			Guice.createInjector(Modules.override(new CSTextRuntimeModule()).with(getGeneratorModule(entry)))
+//					.injectMembers(this);
+//		} else {
 			Guice.createInjector(Modules.override(new STextRuntimeModule()).with(getGeneratorModule(entry)))
 					.injectMembers(this);
-		}
+//		}
 		final ExecutionFlow flow = createExecutionFlow(statechart, entry);
 		generator.generate(flow, entry, fsaFactory.create(entry));
 	}

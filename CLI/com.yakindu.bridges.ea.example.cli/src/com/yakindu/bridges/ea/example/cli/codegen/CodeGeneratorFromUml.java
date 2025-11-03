@@ -19,7 +19,6 @@ import com.yakindu.bridges.ea.example.cli.ExampleCLI;
 import com.yakindu.bridges.ea.example.cli.codegen.StmCodeGenerator.LANG;
 import com.yakindu.bridges.ea.example.cli.codegen.util.StatechartUtil;
 import com.yakindu.bridges.ea.example.cli.load.UMLElementCollector;
-import com.yakindu.sct.domain.c.runtime.CSTextRuntimeModule;
 import com.yakindu.sct.model.sgraph.Statechart;
 import com.yakindu.sct.model.stext.STextRuntimeModule;
 import com.yakindu.sct.uml2.transformation.IStatemachineTransformation;
@@ -132,9 +131,10 @@ public class CodeGeneratorFromUml extends AbstractResourceProcessor {
 	}
 
 	public static Module targetLanguageSpecificModule(LANG language) {
-		if (language == LANG.C || language == LANG.CPP)
-			return Modules.override(new TransformationModule()).with(new CSTextRuntimeModule());
-		else
+		//TODO: https://github.com/itemisCREATE/ea-bridge-integration-example/issues/11
+//		if (language == LANG.C || language == LANG.CPP)
+//			return Modules.override(new TransformationModule()).with(new CSTextRuntimeModule());
+//		else
 			return Modules.override(new TransformationModule()).with(new STextRuntimeModule());
 	}
 

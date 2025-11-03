@@ -42,7 +42,6 @@ import com.yakindu.bridges.ea.example.cli.codegen.CodeGeneratorFromUml;
 import com.yakindu.bridges.ea.example.cli.codegen.StmCodeGenerator.LANG;
 import com.yakindu.bridges.ea.example.cli.codegen.util.StatechartUtil;
 import com.yakindu.bridges.ea.example.cli.load.UMLElementCollector;
-import com.yakindu.bridges.ea.example.cli.load.UMLModelUtils;
 import com.yakindu.bridges.ea.example.cli.test.CliTestRunner;
 import com.yakindu.bridges.ea.example.cli.validation.SCTValidation;
 import com.yakindu.sct.model.sgraph.Statechart;
@@ -55,7 +54,7 @@ public class CodeGenerationTest {
 	private static final String PLUGIN_ID = "com.yakindu.bridges.ea.example.cli.test";
 
 	private static final URI TEST_MODEL = URI.createPlatformPluginURI(PLUGIN_ID + "/testModels/Example.eap", true);
-	private static final String TEST_STM = "LightSwitch";
+	private static final String TEST_STM = "DimmableLight";
 
 	@Parameters(name = "{0}")
 	public static Iterable<? extends Object> testParameterGenLanguages() {
@@ -99,7 +98,6 @@ public class CodeGenerationTest {
 	public void checkGeneratedFilesForModel() {
 		final ResourceSetImpl set = new ResourceSetImpl();
 		final Resource resource = set.getResource(TEST_MODEL, true);
-		UMLModelUtils.adjustTimeEventsInModel(resource);
 
 		final List<Set<String>> validatedStatecharts = validateStatechartsForResource(resource, TEST_STM);
 		final Set<String> successfullyTransformedMachines = validatedStatecharts.get(0);
@@ -166,7 +164,6 @@ public class CodeGenerationTest {
 	}
 
 	private List<Set<String>> validateStatechartsForResource(Resource res, String nameOrGuid) {
-		UMLModelUtils.adjustTimeEventsInModel(res);
 		final List<Element> elements = UMLElementCollector.loadElements(res, nameOrGuid, false);
 		final Collection<StateMachine> loadedStatemachines = UMLElementCollector.collectStatemachines(elements);
 		final Set<String> stateMachinesFailed = new TreeSet<>();

@@ -36,14 +36,14 @@ public class ExampleCLITest {
 	@Test
 	public void validation_LibraryModel() throws Exception {
 		assertIssuesInModel("{E7FBC00B-5294-4dd0-AC3D-ABC22537573D}", // package "Library"
-				"[W:Custom] 'LibraryModel::Library::Media': Abstract class 'Media' should start with 'Abstract'.");
+				"[W:Custom] 'ExampleModel::Library::Media': Abstract class 'Media' should start with 'Abstract'.");
 	}
 
 	@Test
 	public void validation_StateMachineWithIssues() throws Exception {
 		assertIssuesInModel("StateMachineWithIssues",
-				"[E:SCT] 'LibraryModel::StateMachineWithIssues::FaultyStateMachine::{region [0] Region}::Unreachable': Node is not reachable.",
-				"[W:SCT] 'LibraryModel::StateMachineWithIssues::FaultyStateMachine::{region [0] Region}::{transition [2] Transition}': Dead transition from state 'SomeState'. This transition is never taken due to the precedence of completion transition.");
+				"[E:SCT] 'ExampleModel::StateMachineWithIssues::FaultyStateMachine::{region [0] Region}::Unreachable': Node is not reachable.",
+				"[W:SCT] 'ExampleModel::StateMachineWithIssues::FaultyStateMachine::{region [0] Region}::{transition [2] Transition}': Dead transition from state 'SomeState'. This transition is never taken due to the precedence of completion transition.");
 	}
 
 	private void assertNoIssueInModel(String elementToValidate) throws Exception {
@@ -64,7 +64,7 @@ public class ExampleCLITest {
 
 		// then
 		for (String segment : List.of(">> Loading '", ">> Collecting UML Elements DONE.", ">> Validating DONE.",
-				"CLI successfully finished.")) {
+				"CLI successfully finished")) {
 			assertTrue("Missing in console output: \"" + segment + "\"\n\n" + output, output.contains(segment));
 		}
 

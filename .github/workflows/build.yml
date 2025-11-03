@@ -23,7 +23,7 @@ jobs:
     - name: Build & test with Maven
       run: |
         cd CLI
-        mvn -T 2 clean verify -B
+        mvn -T 2 verify -B
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -33,6 +33,11 @@ jobs:
         retention-days: 2
         path: CLI/com.yakindu.bridges.ea.example.cli.product/target/products/*.zip
 
+    - name: Publish test tesults
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: (!cancelled())
+      with:
+        files: 'CLI/**/target/surefire-reports/*.xml'
 
   addin-build:
     runs-on: windows-latest

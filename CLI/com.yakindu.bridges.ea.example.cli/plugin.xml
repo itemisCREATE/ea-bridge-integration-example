@@ -25,5 +25,13 @@
          </property>
       </product>
    </extension>
-
+   <extension
+         point="com.yakindu.bridges.ea.uml.elementContributor">
+      <elementcontributor
+            element_contributor="com.yakindu.bridges.ea.example.cli.load.EAEffectContributor">
+      </elementcontributor>
+      <elementcontributor
+            element_contributor="com.yakindu.bridges.ea.example.cli.load.EAEventContributor">
+      </elementcontributor>
+   </extension>
 </plugin>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="com.yakindu.bridges.ea.example.target" sequenceNumber="1760512036">
+<target name="com.yakindu.bridges.ea.example.target" sequenceNumber="1762239452">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.justj.openjdk.hotspot.jre.minimal.stripped.feature.group" version="21.0.8.v20250724-1412"/>
@@ -40,7 +40,7 @@
       <unit id="com.yakindu.sct.product.editor.feature.feature.group" version="0.0.0"/>
       <unit id="com.yakindu.sct.products.feature.feature.group" version="0.0.0"/>
       <unit id="com.yakindu.sct.types.feature.feature.group" version="0.0.0"/>
-      <repository id="yakindu-sct" location="https://artifacts.itemis.cloud/repository/p2/create/releases"/>
+      <repository id="yakindu-sct" location="https://artifacts.itemis.cloud/repository/p2/create/releases/5.5.0"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="com.yakindu.licmgmt.feature.feature.group" version="0.0.0"/>

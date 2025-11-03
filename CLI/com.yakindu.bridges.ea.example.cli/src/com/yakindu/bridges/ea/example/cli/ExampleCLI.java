@@ -23,7 +23,6 @@ public class ExampleCLI implements IApplication {
 			+ "  " + APP_GEN + " <language> <eap-file> <output-folder> <state-machine-name/-guid> [-v]\n" //
 			+ "Language options are: \"C\", \"C++\", \"C#\", \"Java\", \"Python\"\n" + VERBOSE_OUTPUT
 			+ " enables 'verbose' output" //
-
 	;
 
 	@Override
@@ -39,9 +38,10 @@ public class ExampleCLI implements IApplication {
 			final AbstractResourceProcessor processor = getProcessor(args[0], appArgs);
 			if (processor != null) {
 				try {
-					processor.run(processor instanceof CodeGeneratorFromUml ? AbstractResourceProcessor.skip(appArgs, 1)
-							: appArgs);
-					System.out.println("CLI successfully finished.");
+					final String result = processor
+							.run(processor instanceof CodeGeneratorFromUml ? AbstractResourceProcessor.skip(appArgs, 1)
+									: appArgs);
+					System.out.println("CLI successfully finished: " + result);
 					return IApplication.EXIT_OK;
 
 				} catch (Exception e) {

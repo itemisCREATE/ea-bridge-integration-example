@@ -54,8 +54,8 @@
         <setEntry value="com.itemis.create.base.generator.csharp@default:default"/>
         <setEntry value="com.itemis.create.statechart.generator.csharp@default:default"/>
         <setEntry value="com.jcraft.jsch@default:default"/>
-        <setEntry value="com.sun.jna*5.17.0.v20250316-1700@default:default"/>
         <setEntry value="com.sun.jna.platform@default:default"/>
+        <setEntry value="com.sun.jna@default:default"/>
         <setEntry value="com.yakindu.base.expressions.edit@default:default"/>
         <setEntry value="com.yakindu.base.expressions.ide@default:default"/>
         <setEntry value="com.yakindu.base.expressions.interpreter@default:default"/>
@@ -66,9 +66,7 @@
         <setEntry value="com.yakindu.base.types@default:default"/>
         <setEntry value="com.yakindu.base.xtext.utils.gmf@default:default"/>
         <setEntry value="com.yakindu.base.xtext.utils.jface@default:default"/>
-        <setEntry value="com.yakindu.bridges.ea.core@default:default"/>
         <setEntry value="com.yakindu.bridges.ea.uml.extensions@default:default"/>
-        <setEntry value="com.yakindu.bridges.ea.uml@default:default"/>
         <setEntry value="com.yakindu.core@default:default"/>
         <setEntry value="com.yakindu.interop.enterprise.architect.interface@default:default"/>
         <setEntry value="com.yakindu.interop.enterprise.architect@default:default"/>
@@ -91,6 +89,7 @@
         <setEntry value="com.yakindu.sct.generator.genmodel@default:default"/>
         <setEntry value="com.yakindu.sct.generator.java@default:default"/>
         <setEntry value="com.yakindu.sct.generator.python@default:default"/>
+        <setEntry value="com.yakindu.sct.license.lmx@default:default"/>
         <setEntry value="com.yakindu.sct.license@default:default"/>
         <setEntry value="com.yakindu.sct.model.sexec@default:default"/>
         <setEntry value="com.yakindu.sct.model.sgen@default:default"/>
@@ -144,7 +143,7 @@
         <setEntry value="org.apache.felix.scr@1:true"/>
         <setEntry value="org.apache.log4j@default:default"/>
         <setEntry value="org.apache.xmlgraphics@default:default"/>
-        <setEntry value="org.commonmark.ext-gfm-tables@default:default"/>
+        <setEntry value="org.commonmark-gfm-tables@default:default"/>
         <setEntry value="org.commonmark@default:default"/>
         <setEntry value="org.eclipse.ant.core@default:default"/>
         <setEntry value="org.eclipse.cdt.core.native@default:default"/>
@@ -243,12 +242,10 @@
         <setEntry value="org.eclipse.equinox.security@default:default"/>
         <setEntry value="org.eclipse.equinox.simpleconfigurator.manipulator@default:default"/>
         <setEntry value="org.eclipse.equinox.simpleconfigurator@1:true"/>
-        <setEntry value="org.eclipse.fx.osgi@default:false"/>
         <setEntry value="org.eclipse.gef@default:default"/>
         <setEntry value="org.eclipse.gmf.runtime.common.core@default:default"/>
         <setEntry value="org.eclipse.gmf.runtime.common.ui.action.ide@default:default"/>
         <setEntry value="org.eclipse.gmf.runtime.common.ui.action@default:default"/>
-        <setEntry value="org.eclipse.gmf.runtime.common.ui.printing.win32@default:false"/>
         <setEntry value="org.eclipse.gmf.runtime.common.ui.printing@default:default"/>
         <setEntry value="org.eclipse.gmf.runtime.common.ui.services.action@default:default"/>
         <setEntry value="org.eclipse.gmf.runtime.common.ui.services.properties@default:default"/>
@@ -338,7 +335,6 @@
         <setEntry value="org.eclipse.xtext.common.types@default:default"/>
         <setEntry value="org.eclipse.xtext.ecore@default:default"/>
         <setEntry value="org.eclipse.xtext.ide@default:default"/>
-        <setEntry value="org.eclipse.xtext.logging@default:false"/>
         <setEntry value="org.eclipse.xtext.smap@default:default"/>
         <setEntry value="org.eclipse.xtext.ui.codetemplates.ide@default:default"/>
         <setEntry value="org.eclipse.xtext.ui.codetemplates.ui@default:default"/>
@@ -368,10 +364,17 @@
         <setEntry value="org.tukaani.xz@default:default"/>
     </setAttribute>
     <setAttribute key="selected_workspace_bundles">
+        <setEntry value="com.yakindu.bridges.ea.core.cloud-fragment@default:false"/>
+        <setEntry value="com.yakindu.bridges.ea.core.mariadb-fragment@default:false"/>
+        <setEntry value="com.yakindu.bridges.ea.core.mssql-fragment@default:false"/>
+        <setEntry value="com.yakindu.bridges.ea.core.oracle-fragment@default:false"/>
+        <setEntry value="com.yakindu.bridges.ea.core.test-fragment@default:false"/>
+        <setEntry value="com.yakindu.bridges.ea.core@default:default"/>
         <setEntry value="com.yakindu.bridges.ea.example.cli.codegen@default:default"/>
         <setEntry value="com.yakindu.bridges.ea.example.cli.test@default:default"/>
         <setEntry value="com.yakindu.bridges.ea.example.cli.validation@default:default"/>
         <setEntry value="com.yakindu.bridges.ea.example.cli@default:default"/>
+        <setEntry value="com.yakindu.bridges.ea.uml@default:default"/>
     </setAttribute>
     <booleanAttribute key="show_selected_only" value="false"/>
     <booleanAttribute key="tracing" value="false"/>

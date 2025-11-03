@@ -19,7 +19,7 @@ location yakindu-ea_bridge "https://artifacts.itemis.cloud/repository/p2/integra
 	com.yakindu.bridges.ea.uml.feature.group lazy
 }
 
-location yakindu-sct "https://artifacts.itemis.cloud/repository/p2/create/releases" {
+location yakindu-sct "https://artifacts.itemis.cloud/repository/p2/create/releases/5.5.0" {
 	// C / C++ Target language
 	com.yakindu.sct.domain.c.feature.feature.group lazy
 	com.yakindu.sct.generator.c.feature.feature.group lazy

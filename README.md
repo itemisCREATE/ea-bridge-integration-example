@@ -1,6 +1,6 @@
 # Powerful customization for code generation & model validation for Enterprise Architect models
 
-This repository contains a *technical demonstrator* for customized **code generation** and **model validation** for Enterprise Architect models.
+This repository contains a *technical demonstrator* for customized **code generation** and **model validation** for Enterprise Architect (EA) models.
 It's an Add-in for Enterprise Architect which calls a command-line Java-application containing the actual logic.
 
 **Advantages** of this approach are:
@@ -26,10 +26,11 @@ It serves as a starting point for customized code generation, model validations,
 
 Follow these steps to try the example on your local machine:
 1. Download the [zip-package](https://github.com/itemisCREATE/ea-bridge-integration-example/releases/latest) and extract it to some location on your hard-drive.
-2. Download the [Add-in installer](https://github.com/itemisCREATE/ea-bridge-integration-example/releases/latest) and install it (EA must *not* be running).
-3. Start EA, go to *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Configure CLI Path* &rarr; and set the path to the folder into which you extracted the zip-package.
-4. To validate your model: open the context-menu on a package in the Project Browser and select *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Example Model Validation* &rarr; it will take a few seconds\*, then check the Add-in window for the result.
-5. To generate code: open the context-menu on a state-machine and select *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Generate Code...* &rarr; a dialog will popup to configure and finally run the code generation; it will take a few seconds\*, then check the result in the selected target folder.
+2. Download the [Add-in msi-installer](https://github.com/itemisCREATE/ea-bridge-integration-example/releases/latest) and install it (EA must *not* be running).
+3. Download the [Example.eap](https://github.com/itemisCREATE/ea-bridge-integration-example/releases/latest) file and open it.
+4. Go to *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Configure CLI Path* &rarr; and set the path to the folder into which you extracted the zip-package.
+5. To validate your model: open the context-menu on a package in the Project Browser and select *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Example Model Validation* &rarr; it will take a few seconds\*, then check the Add-in window for the result.
+6. To generate code: open the context-menu on a state-machine and select *Specialize* &rarr; *Itemis Integrate-EA* &rarr; *Generate Code...* &rarr; a dialog will popup to configure and finally run the code generation; it will take a few seconds\*, then check the result in the selected target folder.
 
 \* *keep in mind that a new processed is spawned in the background to perform the task; this takes a while, but processing the model is very fast. So performance first pays off with large models.*
 

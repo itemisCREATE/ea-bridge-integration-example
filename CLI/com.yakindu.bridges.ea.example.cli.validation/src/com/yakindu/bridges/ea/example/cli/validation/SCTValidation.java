@@ -27,9 +27,9 @@ import com.yakindu.base.types.adapter.OriginTraceAdapter;
 import com.yakindu.bridges.ea.core.utils.EAResourceUtils;
 import com.yakindu.bridges.ea.core.utils.MapUtils;
 import com.yakindu.bridges.ea.example.cli.codegen.util.StatechartUtil;
-import com.yakindu.sct.domain.c.runtime.CSTextRuntimeModule;
 import com.yakindu.sct.model.sgraph.SpecificationElement;
 import com.yakindu.sct.model.sgraph.Statechart;
+import com.yakindu.sct.model.stext.STextRuntimeModule;
 import com.yakindu.sct.model.stext.resource.SCTResourceValidatorImpl;
 import com.yakindu.sct.model.stext.resource.StextResource;
 import com.yakindu.sct.uml2.transformation.IStatemachineTransformation;
@@ -56,7 +56,7 @@ public class SCTValidation {
 
 	public void initialize() {
 		trafo = null;
-		Guice.createInjector(Modules.override(new TransformationModule()).with(new CSTextRuntimeModule()))
+		Guice.createInjector(Modules.override(new TransformationModule()).with(new STextRuntimeModule()))
 				.injectMembers(this);
 	}
 

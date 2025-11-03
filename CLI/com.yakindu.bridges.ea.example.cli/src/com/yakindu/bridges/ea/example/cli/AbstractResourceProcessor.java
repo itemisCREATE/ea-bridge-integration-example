@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.yakindu.bridges.ea.core.EAResource;
-import com.yakindu.bridges.ea.example.cli.load.UMLModelUtils;
 
 public abstract class AbstractResourceProcessor {
 
@@ -23,7 +22,7 @@ public abstract class AbstractResourceProcessor {
 	private static final Pattern PATTERN_VALID_PATH_LINUX = Pattern
 			.compile("/?" + VALID_PATH_SEGMENT + "(/" + VALID_PATH_SEGMENT + ")*/?");
 
-	public void run(String[] args) {
+	public String run(String[] args) {
 		Resource resource = null;
 		try {
 			resource = report("Loading '" + args[0] + "'", () -> {
@@ -34,9 +33,7 @@ public abstract class AbstractResourceProcessor {
 					return null;
 				}
 			});
-			run(resource, skip(args, 1));
-		} catch (Exception e) {
-			e.printStackTrace();
+			return run(resource, skip(args, 1));
 		} finally {
 			if (resource != null) {
 				try {
@@ -97,9 +94,7 @@ public abstract class AbstractResourceProcessor {
 			loadOptions.put(EAResource.OPTION_REPORT_AS_RESOURCE_MARKERS, false);
 			checkLInfo();
 		}
-		final Resource res = set.getResource(uri, true);
-		UMLModelUtils.adjustTimeEventsInModel(res);
-		return res;
+		return set.getResource(uri, true);
 	}
 
 	private void checkLInfo() throws Exception {

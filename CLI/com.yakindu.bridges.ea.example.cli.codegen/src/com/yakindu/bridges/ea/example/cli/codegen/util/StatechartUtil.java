@@ -36,10 +36,6 @@ public class StatechartUtil {
 	private static final int INITIAL_TEXT_COMPARTMENT_HEIGHT = 400;
 	private static final int INITIAL_TEXT_COMPARTMENT_WIDTH = 200;
 	
-	private static final String YAKINDU_SCT_DOMAIN_C = "com.yakindu.domain.c";
-	
-	private static final String YAKINDU_SCT_DOMAIN_JAVA = "com.yakindu.domain.java";
-	
 	@Inject
 	private Provider<StextResource> resourceProvider;
 	
@@ -55,11 +51,15 @@ public class StatechartUtil {
 	}
 	
 	public void makeCStatechart(Statechart sct) {
-		sct.setDomainID(YAKINDU_SCT_DOMAIN_C);
+		//TODO: Currently we do not use nor benefit from setting the C domain,
+		//thus until the UML2SCT transformation is not prepared for the target specific type transformation this should be disabled
+		//For more information see: https://github.com/itemisCREATE/ea-bridge-integration-example/issues/11
+		//sct.setDomainID(YAKINDU_SCT_DOMAIN_C);
 	}
 	
 	public void makeJavaStatechart(Statechart sct) {
-		sct.setDomainID(YAKINDU_SCT_DOMAIN_JAVA);
+		//TODO: Same as above
+		//sct.setDomainID(YAKINDU_SCT_DOMAIN_JAVA);
 	}
 	
 	private static void setTextCompartmentLayoutConstraint(Node textCompartment) {

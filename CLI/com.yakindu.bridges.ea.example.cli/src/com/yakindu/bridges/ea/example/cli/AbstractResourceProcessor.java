@@ -22,7 +22,7 @@ public abstract class AbstractResourceProcessor {
 	private static final Pattern PATTERN_VALID_PATH_LINUX = Pattern
 			.compile("/?" + VALID_PATH_SEGMENT + "(/" + VALID_PATH_SEGMENT + ")*/?");
 
-	public void run(String[] args) {
+	public String run(String[] args) {
 		Resource resource = null;
 		try {
 			resource = report("Loading '" + args[0] + "'", () -> {
@@ -33,9 +33,7 @@ public abstract class AbstractResourceProcessor {
 					return null;
 				}
 			});
-			System.out.println(run(resource, skip(args, 1)));
-		} catch (Exception e) {
-			e.printStackTrace();
+			return run(resource, skip(args, 1));
 		} finally {
 			if (resource != null) {
 				try {

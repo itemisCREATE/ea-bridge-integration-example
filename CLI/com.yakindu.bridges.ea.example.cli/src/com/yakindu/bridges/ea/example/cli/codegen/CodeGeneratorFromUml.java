@@ -19,7 +19,6 @@ import com.yakindu.bridges.ea.example.cli.ExampleCLI;
 import com.yakindu.bridges.ea.example.cli.codegen.StmCodeGenerator.LANG;
 import com.yakindu.bridges.ea.example.cli.codegen.util.StatechartUtil;
 import com.yakindu.bridges.ea.example.cli.load.UMLElementCollector;
-import com.yakindu.sct.domain.c.runtime.CSTextRuntimeModule;
 import com.yakindu.sct.model.sgraph.Statechart;
 import com.yakindu.sct.model.stext.STextRuntimeModule;
 import com.yakindu.sct.uml2.transformation.IStatemachineTransformation;

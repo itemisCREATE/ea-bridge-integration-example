@@ -113,7 +113,8 @@ public class Generator {
 			break;
 		case JAVA:
 			binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.JAVA);
-			binder.bind(ITypeValueProvider.class).to(JavaTypeValueProvider.class);
+			//TODO: Once JavaDomain is supported this should be added back
+			//binder.bind(ITypeValueProvider.class).to(JavaTypeValueProvider.class);
 			break;
 		case PYTHON:
 			binder.bind(LANG.class).annotatedWith(Names.named("Language")).toInstance(LANG.PYTHON);
